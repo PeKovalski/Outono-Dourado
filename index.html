@@ -1,15 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outono Dourado - Produtos Sustentáveis e Orgânicos</title>
+    <meta name="description" content="Produtos sustentáveis e orgânicos de qualidade em Araucária e Curitiba. Descubra nossa linha de alimentos orgânicos, verduras e legumes frescos.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Site Sustentável com E-commerce</title>
-    </head>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">Outono Dourado</div>
+            <nav class="nav">
+                <a href="#inicio">Início</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#produtos">Produtos</a>
+                <a href="#lojas">Nossas Lojas</a>
+                <a href="#contato">Contato</a>
+            </nav>
+            <button class="cart-btn" onclick="toggleCart()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m19 7 4 12.25H1L5 7h14z"/>
+                    <path d="m7.5 7c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5"/>
+                </svg>
+                <span id="cart-count">0</span>
+            </button>
+        </div>
+    </header>
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+    <!-- Hero Banner -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Bem-vindos ao Outono Dourado</h1>
+            <p>Descubra o mundo dos produtos sustentáveis e orgânicos. Transformamos a natureza em soluções ecológicas para o seu dia a dia.</p>
+            <div class="hero-buttons">
+                <a href="#produtos" class="btn btn-primary">Ver Produtos</a>
+                <a href="#sobre" class="btn btn-secondary">Sobre Nós</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sobre a Outono Dourado</h2>
+                <p>Somos uma empresa sustentável localizada em Araucária, Paraná, dedicada a oferecer produtos orgânicos e ecológicos de alta qualidade.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">🌱</div>
+                    <h3>Sustentabilidade</h3>
+                    <p>Nossos produtos são desenvolvidos com respeito ao meio ambiente e às futuras gerações.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">🥬</div>
+                    <h3>Orgânicos</h3>
+                    <p>Alimentos livres de pesticidas e químicos, cultivados de forma natural e saudável.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">❤️</div>
+                    <h3>Qualidade</h3>
+                    <p>Comprometimento com a excelência em cada produto que oferecemos aos nossos clientes.</p>
+                </div>
+            </div>
+            <div class="values">
+                <h3>Nossos Valores</h3>
+                <div class="values-grid">
+                    <div class="value-item"><span></span>Respeito ao meio ambiente</div>
+                    <div class="value-item"><span></span>Produtos de qualidade superior</div>
+                    <div class="value-item"><span></span>Preços justos e acessíveis</div>
+                    <div class="value-item"><span></span>Atendimento personalizado</div>
+                    <div class="value-item"><span></span>Compromisso com a comunidade local</div>
+                    <div class="value-item"><span></span>Inovação em sustentabilidade</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="produtos" class="section products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossos Produtos</h2>
+                <p>Descubra nossa linha completa de alimentos orgânicos, verduras e legumes frescos diretamente do produtor.</p>
+            </div>
+            <div class="categories">
+                <button class="category-btn active" data-category="all">Todos</button>
+                <button class="category-btn" data-category="alimentos">Alimentos</button>
+                <button class="category-btn" data-category="verduras">Verduras</button>
+                <button class="category-btn" data-category="legumes">Legumes</button>
+            </div>
+            <div class="products-grid" id="products-grid"></div>
+        </div>
+    </section>
+
+    <!-- Store Section -->
+    <section id="lojas" class="section store">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossas Lojas Físicas</h2>
+                <p>Venha nos visitar em Araucária ou Curitiba! Nossas lojas físicas oferecem uma experiência única com todos os nossos produtos sustentáveis.</p>
+            </div>
+            <div class="store-grid">
+                <div class="store-info">
+                    <div class="store-card">
+                        <div class="store-icon">📍</div>
+                        <div>
+                            <h3>Loja Ectares</h3>
+                            <p>R. Eng. Antônio Claret Karas<br>Araucária - PR<br>CEP: 83702-000</p>
+                            <button class="btn btn-outline" onclick="openMap('ectares')">Ver no Mapa</button>
+                        </div>
+                    </div>
+                    <div class="store-card">
+                        <div class="store-icon">📍</div>
+                        <div>
+                            <h3>Loja Seed</h3>
+                            <p>1698 Av. João Gualberto<br>Curitiba - PR<br>CEP: 80030-000</p>
+                            <button class="btn btn-outline" onclick="openMap('seed')">Ver no Mapa</button>
+                        </div>
+                    </div>
+                    <div class="store-card">
+                        <div class="store-icon">🕐</div>
+                        <div>
+                            <h3>Horário de Funcionamento</h3>
+                            <div class="hours">
+                                <div><span>Segunda a Sexta:</span><span>9h às 18h</span></div>
+                                <div><span>Sábado:</span><span>9h às 16h</span></div>
+                                <div><span>Domingo:</span><span class="closed">Fechado</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="store-card">
+                        <div class="store-icon">📞</div>
+                        <div>
+                            <h3>Contato das Lojas</h3>
+                            <p><strong>Telefone:</strong> (41) 3642-1234</p>
+                            <p><strong>WhatsApp:</strong> (41) 99999-1234</p>
+                            <button class="btn btn-primary" onclick="openWhatsApp()">Chamar no WhatsApp</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="store-images">
+                    <div class="main-image">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop" alt="Fachada da SEED">
+                        <div class="image-label">📷 Fachada da SEED</div>
+                    </div>
+                    <div class="grid-images">
+                        <div class="grid-image">
+                            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop" alt="Interior da SEED">
+                            <div class="overlay">Interior da SEED</div>
+                        </div>
+                        <div class="grid-image">
+                            <img src="https://images.unsplash.com/photo-1515378791036-0648a814c963?w=400&h=400&fit=crop" alt="Parte de trás da SEED">
+                            <div class="overlay">Parte de Trás da SEED</div>
+                        </div>
+                    </div>
+                    <div class="features">
+                        <h3>Por que visitar nossa loja?</h3>
+                        <ul>
+                            <li>Veja e toque nos produtos antes de comprar</li>
+                            <li>Consultoria personalizada com nossa equipe</li>
+                            <li>Descontos exclusivos para compras na loja</li>
+                            <li>Ambiente sustentável e acolhedor</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Entre em Contato</h2>
+                <p>Estamos aqui para ajudar! Entre em contato conosco através do formulário abaixo ou visite uma de nossas lojas físicas.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Informações de Contato</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>E-mail</h4>
+                            <p>contato@outonodourado.com.br</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h4>Telefone</h4>
+                            <p>(41) 3642-1234</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Endereço Principal</h4>
+                            <p>R. Eng. Antônio Claret Karas<br>Araucária - PR, CEP: 83702-000</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <h4>Redes Sociais</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-link">📘</a>
+                            <a href="#" class="social-link">📸</a>
+                            <a href="#" class="social-link">🐦</a>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone (opcional)</label>
+                        <input type="tel" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label>Assunto</label>
+                        <select name="subject" required>
+                            <option value="">Selecione um assunto</option>
+                            <option value="duvida-produto">Dúvida sobre produto</option>
+                            <option value="pedido">Informações sobre pedido</option>
+                            <option value="parceria">Parceria comercial</option>
+                            <option value="sugestao">Sugestões</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Outono Dourado</h3>
+                    <p>Produtos sustentáveis e orgânicos para um futuro melhor.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Links Rápidos</h4>
+                        <ul>
+                            <li><a href="#inicio">Início</a></li>
+                            <li><a href="#sobre">Sobre</a></li>
+                            <li><a href="#produtos">Produtos</a></li>
+                            <li><a href="#lojas">Nossas Lojas</a></li>
+                            <li><a href="#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Produtos</h4>
+                        <ul>
+                            <li><a href="#produtos">Alimentos Orgânicos</a></li>
+                            <li><a href="#produtos">Verduras Frescas</a></li>
+                            <li><a href="#produtos">Legumes</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Contato</h4>
+                        <ul>
+                            <li>(41) 3642-1234</li>
+                            <li>contato@outonodourado.com.br</li>
+                            <li>Araucária - PR</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Outono Dourado. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Carrinho de Compras</h3>
+            <button onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-content" id="cart-content">
+            <div class="cart-empty" id="cart-empty">
+                <p>Seu carrinho está vazio</p>
+                <p>Adicione alguns produtos para começar!</p>
+            </div>
+            <div class="cart-items" id="cart-items"></div>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display:none;">
+            <div class="cart-total">Total: <span id="cart-total">R$ 0,00</span></div>
+            <button class="btn btn-primary" onclick="checkout()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+    <!-- Mascot -->
+    <div class="mascot" id="mascot">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Milhito" id="mascot-img">
+        <div class="mascot-tooltip">Olá! Eu sou o Milhito, clique em mim!</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
