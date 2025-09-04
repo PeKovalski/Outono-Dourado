@@ -1,7 +1,7 @@
-"use client";
+""use client";
 
 import * as React from "react";
-import * as RechartsPrimitive from "recharts@2.15.2";
+import * as RechartsPrimitive from "recharts";
 
 import { cn } from "./utils";
 
@@ -9,7 +9,7 @@ import { cn } from "./utils";
 const THEMES = { light: "", dark: ".dark" } as const;
 
 export type ChartConfig = {
-  [k in string]: {
+  [k: string]: {
     label?: React.ReactNode;
     icon?: React.ComponentType;
   } & (
@@ -202,7 +202,7 @@ function ChartTooltipContent({
                     !hideIndicator && (
                       <div
                         className={cn(
-                          "shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
+                          "shrink-0 rounded-[2px]",
                           {
                             "h-2.5 w-2.5": indicator === "dot",
                             "w-1": indicator === "line",
@@ -213,8 +213,8 @@ function ChartTooltipContent({
                         )}
                         style={
                           {
-                            "--color-bg": indicatorColor,
-                            "--color-border": indicatorColor,
+                            backgroundColor: indicatorColor,
+                            borderColor: indicatorColor,
                           } as React.CSSProperties
                         }
                       />
@@ -232,7 +232,7 @@ function ChartTooltipContent({
                         {itemConfig?.label || item.name}
                       </span>
                     </div>
-                    {item.value && (
+                    {item.value !== undefined && (
                       <span className="text-foreground font-mono font-medium tabular-nums">
                         {item.value.toLocaleString()}
                       </span>
@@ -316,26 +316,24 @@ function getPayloadConfigFromPayload(
 
   const payloadPayload =
     "payload" in payload &&
-    typeof payload.payload === "object" &&
-    payload.payload !== null
-      ? payload.payload
+    typeof (payload as any).payload === "object" &&
+    (payload as any).payload !== null
+      ? (payload as any).payload
       : undefined;
 
   let configLabelKey: string = key;
 
   if (
-    key in payload &&
-    typeof payload[key as keyof typeof payload] === "string"
+    key in (payload as any) &&
+    typeof (payload as any)[key] === "string"
   ) {
-    configLabelKey = payload[key as keyof typeof payload] as string;
+    configLabelKey = (payload as any)[key] as string;
   } else if (
     payloadPayload &&
     key in payloadPayload &&
-    typeof payloadPayload[key as keyof typeof payloadPayload] === "string"
+    typeof payloadPayload[key] === "string"
   ) {
-    configLabelKey = payloadPayload[
-      key as keyof typeof payloadPayload
-    ] as string;
+    configLabelKey = payloadPayload[key] as string;
   }
 
   return configLabelKey in config
