@@ -26,7 +26,7 @@ const productsData = [
         description: 'Quinoa orgânica de alta qualidade, rica em proteínas e nutrientes essenciais.',
         price: 24.90,
         category: 'alimentos',
-        image: ''
+        image: 'tomate.png'
     },
     {
         id: '2',

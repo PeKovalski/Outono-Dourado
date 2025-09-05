@@ -175,7 +175,15 @@ function filterProducts(category) {
     renderProducts();
 }
 
-function renderProducts() {
+function renderProd
+    
+    const item = cartItems.find(item => item.id === productId);
+    if (item) {
+        item.quantity = quantity;
+        updateCartCount();
+        renderCartItems();
+    }
+}ucts() {
     const filteredProducts = currentCategory === 'all' ? products : products.filter(p => p.category === currentCategory);
     const grid = document.getElementById('products-grid');
     
