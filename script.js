@@ -214,13 +214,13 @@ function initMascot() {
         if (!mascotClicked) {
             mascotClicked = true;
             const img = document.getElementById('mascot-img');
-            img.src = 'https://images.unsplash.com/photo-1440133197387-5a6020d5ace2?w=100&h=100&fit=crop&crop=face';
+            img.src = 'milhito.png';
             img.alt = 'Milhito abraçando o Verdeco';
             showToast('Olá! Eu sou o Milhito!', 'Obrigado por clicar em mim! Agora estou abraçando meu amigo Verdeco! 🤗');
             
             setTimeout(() => {
                 mascotClicked = false;
-                img.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face';
+                img.src = 'abraço.png';
                 img.alt = 'Milhito - Mascote da Outono Dourado';
             }, 5000);
         }
@@ -261,7 +261,7 @@ function initCategoryFilters() {
         });
     });
 }
-
+possível
 // Header scroll effect
 function initHeaderScroll() {
     window.addEventListener('scroll', () => {
