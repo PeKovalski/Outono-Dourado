@@ -14,7 +14,7 @@ const cartItemsContainer = document.getElementById('cart-items');
 const cartFooter = document.getElementById('cart-footer');
 const cartTotal = document.getElementById('cart-total');
 const productsGrid = document.getElementById('products-grid');
-const contactForm = document.getElementById('contact-form');
+const contactForm = document.getElementById('contachttps://images.unsplash.com/photo-1546470427-e26264be0b0d?w=300&h=200&fit=cropt-form');
 const mascot = document.getElementById('mascot');
 const mascotImg = document.getElementById('mascot-img');
 
@@ -41,7 +41,7 @@ const productsData = [
         description: 'Tomates orgânicos suculentos, cultivados com amor e cuidado.',
         price: 8.90,
         category: 'legumes',
-        image: 'tomate.png'
+        image: 'img/tomate.png'
     },
     {
         id: '4',
@@ -49,7 +49,7 @@ const productsData = [
         description: 'Arroz integral orgânico, fonte de fibras e vitaminas do complexo B.',
         price: 12.90,
         category: 'alimentos',
-        image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&h=200&fit=crop'
+        image: 'PeKovalski/Outono-Dourado/tomate.png'
     },
     {
         id: '5',
