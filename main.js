@@ -26,7 +26,7 @@ const productsData = [
         description: 'Quinoa orgânica de alta qualidade, rica em proteínas e nutrientes essenciais.',
         price: 24.90,
         category: 'alimentos',
-        image: 'banner.png'
+        image: ''
     },
     {
         id: '2',
@@ -34,22 +34,22 @@ const productsData = [
         description: 'Alface fresca cultivada sem pesticidas, direto da horta para sua mesa.',
         price: 4.50,
         category: 'verduras',
-        image: 'alfac
+        image: 'alface.png'
     {
         id: '3',
         name: 'Tomate Orgânico',
         description: 'Tomates orgânicos suculentos, cultivados com amor e cuidado.',
         price: 8.90,
         category: 'legumes',
-        image: 'img/tomate.png'
+        image: 'image: 'tomate.png'
     },
     {
         id: '4',
         name: 'Arroz Integral Orgânico',
-        description: 'Arroz integral orgânico, fonte de fibras e vitaminas do complexo B.',
+        description: 'Milho orgãnico Premium.',
         price: 12.90,
         category: 'alimentos',
-        image: 'PeKovalski/Outono-Dourado/tomate.png'
+        image: 'milho.png'
     },
     {
         id: '5',
