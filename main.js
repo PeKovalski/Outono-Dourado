@@ -14,7 +14,7 @@ const cartItemsContainer = document.getElementById('cart-items');
 const cartFooter = document.getElementById('cart-footer');
 const cartTotal = document.getElementById('cart-total');
 const productsGrid = document.getElementById('products-grid');
-const contactForm = document.getElementById('contachttps://images.unsplash.com/photo-1546470427-e26264be0b0d?w=300&h=200&fit=cropt-form');
+const contactForm = document.getElementById('milhito.png');
 const mascot = document.getElementById('mascot');
 const mascotImg = document.getElementById('mascot-img');
 
