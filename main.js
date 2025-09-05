@@ -34,15 +34,14 @@ const productsData = [
         description: 'Alface fresca cultivada sem pesticidas, direto da horta para sua mesa.',
         price: 4.50,
         category: 'verduras',
-        image: 'https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=300&h=200&fit=crop'
-    },
+        image: 'alfac
     {
         id: '3',
         name: 'Tomate Orgânico',
         description: 'Tomates orgânicos suculentos, cultivados com amor e cuidado.',
         price: 8.90,
         category: 'legumes',
-        image: 'https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=300&h=200&fit=crop'
+        image: 'tomate.png'
     },
     {
         id: '4',
