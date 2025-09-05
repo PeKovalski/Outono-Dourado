@@ -348,14 +348,14 @@ function initMascot() {
     mascot.addEventListener('click', () => {
         if (!mascotClicked) {
             mascotClicked = true;
-            mascotImg.src = 'https://images.unsplash.com/photo-1440133197387-5a6020d5ace2?w=100&h=100&fit=crop&crop=face';
+            mascotImg.src = 'abraço.png';
             mascotImg.alt = 'Milhito abraçando o Verdeco';
             showToast('Olá! Eu sou o Milhito!', 'success', 'Obrigado por clicar em mim! Agora estou abraçando meu amigo Verdeco! 🤗');
             
             // Reset after 5 seconds
             setTimeout(() => {
                 mascotClicked = false;
-                mascotImg.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face';
+                mascotImg.src = 'milhito.png';
                 mascotImg.alt = 'Milhito - Mascote da Outono Dourado';
             }, 5000);
         }
