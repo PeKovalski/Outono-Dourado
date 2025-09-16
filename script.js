@@ -102,7 +102,7 @@ const PRODUCTS_DATABASE = [
         description: "Abobrinhas orgânicas da variedade italiana, tenras e saborosas com casca comestível. Baixas em calorias e versáteis na cozinha. Colhidas no ponto ideal.",
         price: 7.90,
         category: "legumes",
-        image: "abobora.png",
+        image: "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
         rating: 4.5,
         reviews: 118,
         inStock: true,
@@ -157,10 +157,24 @@ let detailQuantity = 1;
 let currentUser = null;
 let isLoggedIn = false;
 
+// Estado do mascote
+let mascotMessages = [
+    "Olá! Eu sou o Milhito, seu assistente da Outono Dourado! 🌽",
+    "Precisa de ajuda para escolher produtos orgânicos frescos? 🥬",
+    "Que tal experimentar nossos produtos sustentáveis hoje? 🌱",
+    "Dica do Milhito: Nossos produtos são 100% orgânicos! ✨",
+    "Posso te ajudar a encontrar algo especial? 😊"
+];
+let currentMascotMessage = 0;
+
+// Banco de dados de pedidos simulado
+let userOrders = [];
+
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
     loadProducts();
     updateCartBadge();
+    initializeMascot();
     
     // Load cart from localStorage
     const savedCart = localStorage.getItem('outono-dourado-cart');
@@ -175,6 +189,13 @@ document.addEventListener('DOMContentLoaded', function() {
         currentUser = JSON.parse(savedUser);
         isLoggedIn = true;
         updateAuthUI();
+        loadUserOrders();
+    }
+    
+    // Load user orders from localStorage
+    const savedOrders = localStorage.getItem('outono-dourado-orders');
+    if (savedOrders) {
+        userOrders = JSON.parse(savedOrders);
     }
     
     // Welcome message
@@ -186,6 +207,57 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 1000);
 });
+
+// ========================
+// MASCOT FUNCTIONALITY
+// ========================
+
+function initializeMascot() {
+    // Mascot appears with animation after page load
+    setTimeout(() => {
+        const mascot = document.getElementById('mascot');
+        mascot.style.opacity = '1';
+        mascot.style.transform = 'translateY(0)';
+    }, 2000);
+    
+    // Auto show mascot message periodically
+    setInterval(() => {
+        if (!document.getElementById('mascot-message').style.display || 
+            document.getElementById('mascot-message').style.display === 'none') {
+            showRandomMascotMessage();
+        }
+    }, 30000); // Show message every 30 seconds
+}
+
+function toggleMascotMessage() {
+    const messageDiv = document.getElementById('mascot-message');
+    if (messageDiv.style.display === 'none' || !messageDiv.style.display) {
+        showRandomMascotMessage();
+    } else {
+        closeMascotMessage();
+    }
+}
+
+function showRandomMascotMessage() {
+    const messageDiv = document.getElementById('mascot-message');
+    const textElement = document.getElementById('mascot-text');
+    
+    // Cycle through messages
+    textElement.textContent = mascotMessages[currentMascotMessage];
+    currentMascotMessage = (currentMascotMessage + 1) % mascotMessages.length;
+    
+    messageDiv.style.display = 'block';
+    
+    // Auto hide after 5 seconds
+    setTimeout(() => {
+        closeMascotMessage();
+    }, 5000);
+}
+
+function closeMascotMessage() {
+    const messageDiv = document.getElementById('mascot-message');
+    messageDiv.style.display = 'none';
+}
 
 // Utility functions
 function showToast(title, message, type = 'info') {
@@ -447,6 +519,26 @@ function removeFromCart(productId) {
 function checkout() {
     if (cart.length === 0) return;
     
+    if (!isLoggedIn) {
+        showToast('Login necessário', 'Faça login para finalizar seu pedido', 'error');
+        openLoginModal();
+        return;
+    }
+    
+    // Create order
+    const order = {
+        id: 'ORD-' + Date.now(),
+        date: new Date().toISOString(),
+        items: [...cart],
+        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+        status: 'confirmed',
+        userId: currentUser.id
+    };
+    
+    // Add to orders
+    userOrders.push(order);
+    localStorage.setItem('outono-dourado-orders', JSON.stringify(userOrders));
+    
     showToast('Redirecionando...', 'Você será direcionado para o pagamento seguro', 'info');
     
     setTimeout(() => {
@@ -454,7 +546,7 @@ function checkout() {
         updateCartBadge();
         saveCartToStorage();
         closeCart();
-        showToast('Pedido Realizado!', 'Você receberá um e-mail de confirmação em breve', 'success');
+        showToast('Pedido Realizado!', `Pedido ${order.id} confirmado com sucesso!`, 'success');
     }, 2000);
 }
 
@@ -526,43 +618,6 @@ function submitContactForm(event) {
     event.target.reset();
 }
 
-// Close modals on escape key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeCart();
-        closeProductDetail();
-        closeMobileMenu();
-    }
-});
-
-// Close mobile menu on window resize
-window.addEventListener('resize', function() {
-    if (window.innerWidth >= 768) {
-        closeMobileMenu();
-    }
-});
-
-// Smooth scroll for anchor links
-document.addEventListener('click', function(event) {
-    if (event.target.tagName === 'A' && event.target.getAttribute('href')?.startsWith('#')) {
-        event.preventDefault();
-        const targetId = event.target.getAttribute('href').substring(1);
-        scrollToSection(targetId);
-    }
-});
-
-// Add scroll effect to header
-window.addEventListener('scroll', function() {
-    const header = document.getElementById('header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.98)';
-        header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
-    }
-});
-
 // ========================
 // AUTHENTICATION SYSTEM
 // ========================
@@ -614,6 +669,7 @@ function closeForgotPasswordModal() {
 function openProfileModal() {
     closeAllModals();
     loadUserProfile();
+    switchProfileTab('profile-info');
     document.getElementById('profile-modal').style.display = 'flex';
 }
 
@@ -711,24 +767,6 @@ function updatePasswordStrength(inputId, strengthId) {
     strengthDiv.className = `password-strength ${result.strength}`;
 }
 
-// Add event listeners for password strength
-document.addEventListener('DOMContentLoaded', function() {
-    const registerPassword = document.getElementById('register-password');
-    const newPassword = document.getElementById('new-password');
-    
-    if (registerPassword) {
-        registerPassword.addEventListener('input', function() {
-            updatePasswordStrength('register-password', 'password-strength');
-        });
-    }
-    
-    if (newPassword) {
-        newPassword.addEventListener('input', function() {
-            updatePasswordStrength('new-password', 'new-password-strength');
-        });
-    }
-});
-
 // Handle login
 function handleLogin(event) {
     event.preventDefault();
@@ -763,6 +801,7 @@ function handleLogin(event) {
         
         updateAuthUI();
         closeLoginModal();
+        loadUserOrders();
         
         showToast('Login realizado!', `Bem-vindo, ${user.name}!`, 'success');
         
@@ -781,31 +820,31 @@ function handleRegister(event) {
     const phone = formData.get('phone');
     const password = formData.get('password');
     const confirmPassword = formData.get('confirmPassword');
-    const acceptTerms = document.getElementById('accept-terms').checked;
-    const newsletter = document.getElementById('newsletter').checked;
     
-    // Validation
+    // Validate passwords match
     if (password !== confirmPassword) {
         showToast('Erro', 'As senhas não coincidem', 'error');
         return;
     }
     
-    if (!acceptTerms) {
-        showToast('Erro', 'Você deve aceitar os termos de uso', 'error');
+    // Validate password strength
+    const passwordStrength = checkPasswordStrength(password);
+    if (passwordStrength.strength === 'weak') {
+        showToast('Senha muito fraca', 'Use uma senha mais forte', 'error');
         return;
     }
     
     // Simulate registration process
-    showToast('Criando conta...', 'Processando seus dados', 'info');
+    showToast('Criando conta...', 'Processando suas informações', 'info');
     
     setTimeout(() => {
+        // Simulate successful registration
         const user = {
             id: 'user_' + Date.now(),
             name: name,
             email: email,
-            phone: phone,
+            phone: phone || '',
             address: '',
-            newsletter: newsletter,
             registeredAt: new Date().toISOString()
         };
         
@@ -817,6 +856,7 @@ function handleRegister(event) {
         
         updateAuthUI();
         closeRegisterModal();
+        loadUserOrders();
         
         showToast('Conta criada!', `Bem-vindo à Outono Dourado, ${user.name}!`, 'success');
         
@@ -832,16 +872,49 @@ function handleForgotPassword(event) {
     const formData = new FormData(event.target);
     const email = formData.get('email');
     
+    // Simulate forgot password process
     showToast('Enviando e-mail...', 'Aguarde um momento', 'info');
     
     setTimeout(() => {
-        showToast('E-mail enviado!', 'Verifique sua caixa de entrada para redefinir sua senha', 'success');
+        showToast('E-mail enviado!', 'Verifique sua caixa de entrada', 'success');
         closeForgotPasswordModal();
+        event.target.reset();
+    }, 2000);
+}
+
+// Handle change password
+function handleChangePassword(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const currentPassword = formData.get('currentPassword');
+    const newPassword = formData.get('newPassword');
+    const confirmNewPassword = formData.get('confirmNewPassword');
+    
+    // Validate passwords match
+    if (newPassword !== confirmNewPassword) {
+        showToast('Erro', 'As senhas não coincidem', 'error');
+        return;
+    }
+    
+    // Validate password strength
+    const passwordStrength = checkPasswordStrength(newPassword);
+    if (passwordStrength.strength === 'weak') {
+        showToast('Senha muito fraca', 'Use uma senha mais forte', 'error');
+        return;
+    }
+    
+    // Simulate password change
+    showToast('Alterando senha...', 'Processando alteração', 'info');
+    
+    setTimeout(() => {
+        showToast('Senha alterada!', 'Sua senha foi atualizada com sucesso', 'success');
+        closeChangePasswordModal();
         event.target.reset();
     }, 1500);
 }
 
-// Load user profile
+// Profile functions
 function loadUserProfile() {
     if (!currentUser) return;
     
@@ -851,8 +924,7 @@ function loadUserProfile() {
     document.getElementById('profile-address').value = currentUser.address || '';
 }
 
-// Handle profile update
-function handleProfileUpdate(event) {
+function updateProfile(event) {
     event.preventDefault();
     
     const formData = new FormData(event.target);
@@ -870,79 +942,201 @@ function handleProfileUpdate(event) {
     // Save to localStorage
     localStorage.setItem('outono-dourado-user', JSON.stringify(currentUser));
     
+    // Update UI
     updateAuthUI();
+    
     showToast('Perfil atualizado!', 'Suas informações foram salvas', 'success');
 }
 
-// Handle change password
-function handleChangePassword(event) {
-    event.preventDefault();
+// Profile tabs
+function switchProfileTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
     
-    const formData = new FormData(event.target);
-    const currentPassword = formData.get('currentPassword');
-    const newPassword = formData.get('newPassword');
-    const confirmNewPassword = formData.get('confirmNewPassword');
+    // Remove active class from all buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
     
-    // Validation
-    if (newPassword !== confirmNewPassword) {
-        showToast('Erro', 'As novas senhas não coincidem', 'error');
+    // Show selected tab
+    document.getElementById(tabName).classList.add('active');
+    
+    // Add active class to clicked button
+    event.target.classList.add('active');
+    
+    // Load orders if order history tab is selected
+    if (tabName === 'order-history') {
+        loadOrderHistory();
+    }
+}
+
+// Order history functions
+function loadUserOrders() {
+    // Load orders from localStorage for current user
+    const savedOrders = localStorage.getItem('outono-dourado-orders');
+    if (savedOrders) {
+        const allOrders = JSON.parse(savedOrders);
+        userOrders = allOrders.filter(order => order.userId === currentUser.id);
+    }
+}
+
+function loadOrderHistory() {
+    const container = document.getElementById('orders-container');
+    
+    if (userOrders.length === 0) {
+        container.innerHTML = `
+            <div class="empty-orders">
+                <div class="empty-orders-icon">
+                    <i data-lucide="package"></i>
+                </div>
+                <h4>Nenhum pedido encontrado</h4>
+                <p>Você ainda não fez nenhum pedido. Que tal começar agora?</p>
+                <button class="btn-primary" onclick="closeProfileModal(); scrollToSection('products')">
+                    Ver Produtos
+                </button>
+            </div>
+        `;
+        lucide.createIcons();
         return;
     }
     
-    // Simulate password change
-    showToast('Alterando senha...', 'Processando solicitação', 'info');
+    // Sort orders by date (newest first)
+    userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
     
-    setTimeout(() => {
-        showToast('Senha alterada!', 'Sua senha foi atualizada com sucesso', 'success');
-        closeChangePasswordModal();
-        event.target.reset();
-    }, 1500);
+    container.innerHTML = userOrders.map(order => `
+        <div class="order-card">
+            <div class="order-header">
+                <div class="order-info">
+                    <h4>Pedido ${order.id}</h4>
+                    <p class="order-date">${formatDate(order.date)}</p>
+                </div>
+                <div class="order-status ${order.status}">
+                    <span class="status-text">${getStatusText(order.status)}</span>
+                </div>
+            </div>
+            <div class="order-items">
+                ${order.items.map(item => `
+                    <div class="order-item">
+                        <img src="${item.image}" alt="${item.name}" class="order-item-image">
+                        <div class="order-item-info">
+                            <span class="item-name">${item.name}</span>
+                            <span class="item-quantity">Qty: ${item.quantity}</span>
+                            <span class="item-price">R$ ${(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="order-footer">
+                <div class="order-total">
+                    <strong>Total: R$ ${order.total.toFixed(2)}</strong>
+                </div>
+                <button class="btn-secondary order-details-btn" onclick="viewOrderDetails('${order.id}')">
+                    Ver Detalhes
+                </button>
+            </div>
+        </div>
+    `).join('');
+    
+    lucide.createIcons();
 }
 
-// Show order history
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+function getStatusText(status) {
+    const statusMap = {
+        'confirmed': 'Confirmado',
+        'preparing': 'Preparando',
+        'shipped': 'Enviado',
+        'delivered': 'Entregue',
+        'cancelled': 'Cancelado'
+    };
+    return statusMap[status] || status;
+}
+
+function viewOrderDetails(orderId) {
+    const order = userOrders.find(o => o.id === orderId);
+    if (!order) return;
+    
+    showToast('Detalhes do Pedido', `Pedido ${orderId} - ${getStatusText(order.status)}`, 'info');
+}
+
 function showOrderHistory() {
-    showToast('Meus Pedidos', 'Funcionalidade em desenvolvimento', 'info');
-}
-
-// Logout
-function logout() {
-    showToast('Saindo...', 'Até logo!', 'info');
-    
+    openProfileModal();
     setTimeout(() => {
-        currentUser = null;
-        isLoggedIn = false;
-        
-        // Clear localStorage
-        localStorage.removeItem('outono-dourado-user');
-        localStorage.removeItem('outono-dourado-remember');
-        
-        updateAuthUI();
-        showToast('Logout realizado!', 'Volte sempre!', 'success');
-    }, 1000);
+        const orderHistoryBtn = document.querySelector('.tab-btn[onclick*="order-history"]');
+        if (orderHistoryBtn) {
+            orderHistoryBtn.click();
+        }
+    }, 100);
 }
 
-// Enhanced add to cart with login check
-function addToCartEnhanced(productId) {
-    if (!isLoggedIn) {
-        showToast('Login necessário', 'Faça login para adicionar produtos ao carrinho', 'warning');
-        setTimeout(() => {
-            openLoginModal();
-        }, 1000);
-        return;
-    }
+// Logout function
+function logout() {
+    currentUser = null;
+    isLoggedIn = false;
+    userOrders = [];
     
-    addToCart(productId);
+    // Clear localStorage
+    localStorage.removeItem('outono-dourado-user');
+    localStorage.removeItem('outono-dourado-remember');
+    localStorage.removeItem('outono-dourado-orders');
+    
+    updateAuthUI();
+    
+    showToast('Logout realizado', 'Até logo! Volte sempre.', 'success');
 }
 
-// Enhanced checkout with login check
-function checkoutEnhanced() {
-    if (!isLoggedIn) {
-        showToast('Login necessário', 'Faça login para finalizar sua compra', 'warning');
-        setTimeout(() => {
-            openLoginModal();
-        }, 1000);
-        return;
+// Close modals on escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeCart();
+        closeProductDetail();
+        closeMobileMenu();
+        closeAllModals();
+        closeMascotMessage();
     }
-    
-    checkout();
-}
+});
+
+// Close mobile menu on window resize
+window.addEventListener('resize', function() {
+    if (window.innerWidth >= 768) {
+        closeMobileMenu();
+    }
+});
+
+// Smooth scroll for anchor links
+document.addEventListener('click', function(event) {
+    if (event.target.tagName === 'A' && event.target.getAttribute('href')?.startsWith('#')) {
+        event.preventDefault();
+        const targetId = event.target.getAttribute('href').substring(1);
+        scrollToSection(targetId);
+    }
+});
+
+// Add scroll effect to header
+window.addEventListener('scroll', function() {
+    const header = document.getElementById('header');
+    if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+    } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+    }
+});
+
+// Initialize Lucide icons when DOM loads
+document.addEventListener('DOMContentLoaded', function() {
+    lucide.createIcons();
+});

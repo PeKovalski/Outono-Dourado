@@ -79,6 +79,20 @@
     <!-- Toaster Container -->
     <div id="toaster" class="toaster"></div>
 
+    <!-- Mascot Milhito -->
+    <div id="mascot" class="mascot">
+        <div class="mascot-character" onclick="toggleMascotMessage()">
+            <img src="https://images.unsplash.com/photo-1703248187873-2cbd2fc4cd56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3JuJTIwbWFzY290JTIwY2FydG9vbiUyMGNoYXJhY3RlcnxlbnwxfHx8fDE3NTc5MzM4MzF8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Milhito - Mascote Outono Dourado">
+            <div class="mascot-pulse"></div>
+        </div>
+        <div id="mascot-message" class="mascot-message" style="display: none;">
+            <div class="mascot-speech-bubble">
+                <p id="mascot-text">Olá! Eu sou o Milhito, seu assistente da Outono Dourado! 🌽</p>
+                <button class="mascot-close" onclick="closeMascotMessage()">×</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header id="header" class="header">
         <div class="header-container">
@@ -254,9 +268,9 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Valores da Empresa -->
-                <div class="values-section">
+                
+                   <!-- Valores da Empresa -->
+                   <div class="values-section">
                     <div class="values-grid">
                         <div class="value-card">
                             <div class="value-icon">
@@ -281,118 +295,79 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Processo de Plantio e Colheita -->
-                <div class="process-section">
-                    <div class="process-header">
-                        <h3>Do Plantio à Mesa</h3>
-                        <p>Conheça nosso processo cuidadoso de cultivo orgânico</p>
+               <!-- Processo de Plantio e Colheita -->
+               <div class="process-section">
+                <div class="process-header">
+                    <h3>Do Plantio à Mesa</h3>
+                    <p>Conheça nosso processo cuidadoso de cultivo orgânico</p>
+                </div>
+                
+                <div class="process-timeline">
+                    <div class="process-step">
+                        <div class="step-image">
+                            <img src="https://images.unsplash.com/photo-1669065514419-8490bf3730f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvcmdhbmljJTIwZmFybWluZyUyMHBsYW50aW5nJTIwc2VlZHN8ZW58MXx8fHwxNzU3NjgxMDcyfDA&ixlib=rb-4.1.0&q=80&w=1080" 
+                                 alt="Plantio de sementes orgânicas" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">1</div>
+                            <h4>Plantio Consciente</h4>
+                            <p>
+                                Utilizamos apenas sementes orgânicas certificadas, plantadas em solo preparado 
+                                sem agrotóxicos ou fertilizantes químicos. Cada semente é cuidadosamente 
+                                selecionada para garantir a melhor qualidade.
+                            </p>
+                        </div>
                     </div>
-                    
-                    <div class="process-timeline">
-                        <div class="process-step">
-                            <div class="step-image">
-                                <img src="https://images.unsplash.com/photo-1669065514419-8490bf3730f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvcmdhbmljJTIwZmFybWluZyUyMHBsYW50aW5nJTIwc2VlZHN8ZW58MXx8fHwxNzU3NjgxMDcyfDA&ixlib=rb-4.1.0&q=80&w=1080" 
-                                     alt="Plantio de sementes orgânicas" loading="lazy">
-                            </div>
-                            <div class="step-content">
-                                <div class="step-number">1</div>
-                                <h4>Plantio Consciente</h4>
-                                <p>
-                                    Utilizamos apenas sementes orgânicas certificadas, plantadas em solo preparado 
-                                    sem agrotóxicos ou fertilizantes químicos. Cada semente é cuidadosamente 
-                                    selecionada para garantir a melhor qualidade.
-                                </p>
-                            </div>
-                        </div>
 
-                        <div class="process-step reverse">
-                            <div class="step-image">
-                                <img src="https://images.unsplash.com/photo-1727099079513-952d40de9d78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmVlbmhvdXNlJTIwb3JnYW5pYyUyMHZlZ2V0YWJsZXMlMjBncm93aW5nfGVufDF8fHx8MTc1NzY4MTA3OXww&ixlib=rb-4.1.0&q=80&w=1080" 
-                                     alt="Cultivo em estufa sustentável" loading="lazy">
-                            </div>
-                            <div class="step-content">
-                                <div class="step-number">2</div>
-                                <h4>Cultivo Sustentável</h4>
-                                <p>
-                                    Nossas estufas utilizam técnicas de agricultura regenerativa, sistemas de 
-                                    irrigação por gotejamento e controle natural de pragas. O crescimento é 
-                                    monitorado diariamente por nossa equipe especializada.
-                                </p>
-                            </div>
+                    <div class="process-step reverse">
+                        <div class="step-image">
+                            <img src="https://images.unsplash.com/photo-1727099079513-952d40de9d78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmVlbmhvdXNlJTIwb3JnYW5pYyUyMHZlZ2V0YWJsZXMlMjBncm93aW5nfGVufDF8fHx8MTc1NzY4MTA3OXww&ixlib=rb-4.1.0&q=80&w=1080" 
+                                 alt="Cultivo em estufa sustentável" loading="lazy">
                         </div>
-
-                        <div class="process-step">
-                            <div class="step-image">
-                                <img src="https://images.unsplash.com/photo-1722810767149-4b153d88402e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0aW5nJTIwdmVnZXRhYmxlcyUyMG9yZ2FuaWMlMjBmYXJtfGVufDF8fHx8MTc1NzY4MTA3Nnww&ixlib=rb-4.1.0&q=80&w=1080" 
-                                     alt="Colheita manual de vegetais" loading="lazy">
-                            </div>
-                            <div class="step-content">
-                                <div class="step-number">3</div>
-                                <h4>Colheita no Momento Ideal</h4>
-                                <p>
-                                    A colheita é feita manualmente no ponto exato de maturação, garantindo 
-                                    máximo sabor e valor nutricional. Cada produto é cuidadosamente selecionado 
-                                    e embalado para preservar sua qualidade.
-                                </p>
-                            </div>
+                        <div class="step-content">
+                            <div class="step-number">2</div>
+                            <h4>Cultivo Sustentável</h4>
+                            <p>
+                                Nossas estufas utilizam técnicas de agricultura regenerativa, sistemas de 
+                                irrigação por gotejamento e controle natural de pragas. O crescimento é 
+                                monitorado diariamente por nossa equipe especializada.
+                            </p>
                         </div>
+                    </div>
 
-                        <div class="process-step reverse">
-                            <div class="step-image">
-                                <img src="https://images.unsplash.com/photo-1660255940824-b712b5b03caf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXJtZXJzJTIwbWFya2V0JTIwZnJlc2glMjB2ZWdldGFibGVzfGVufDF8fHx8MTc1NzY4MTA4Mnww&ixlib=rb-4.1.0&q=80&w=1080" 
-                                     alt="Produtos frescos na loja" loading="lazy">
-                            </div>
-                            <div class="step-content">
-                                <div class="step-number">4</div>
-                                <h4>Entrega Fresca</h4>
-                                <p>
-                                    Da colheita diretamente para sua mesa em menos de 24 horas. Nosso sistema 
-                                    de logística refrigerada garante que os produtos cheguen até você com 
-                                    total frescor e qualidade preservada.
-                                </p>
-                            </div>
+                    <div class="process-step">
+                        <div class="step-image">
+                            <img src="https://images.unsplash.com/photo-1722810767149-4b153d88402e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXJ2ZXN0aW5nJTIwdmVnZXRhYmxlcyUyMG9yZ2FuaWMlMjBmYXJtfGVufDF8fHx8MTc1NzY4MTA3Nnww&ixlib=rb-4.1.0&q=80&w=1080" 
+                                 alt="Colheita manual de vegetais" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">3</div>
+                            <h4>Colheita no Momento Ideal</h4>
+                            <p>
+                                A colheita é feita manualmente no ponto exato de maturação, garantindo 
+                                máximo sabor e valor nutricional. Cada produto é cuidadosamente selecionado 
+                                e embalado para preservar sua qualidade.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step reverse">
+                        <div class="step-image">
+                            <img src="https://images.unsplash.com/photo-1660255940824-b712b5b03caf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXJtZXJzJTIwbWFya2V0JTIwZnJlc2glMjB2ZWdldGFibGVzfGVufDF8fHx8MTc1NzY4MTA4Mnww&ixlib=rb-4.1.0&q=80&w=1080" 
+                                 alt="Produtos frescos na loja" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">4</div>
+                            <h4>Entrega Fresca</h4>
+                            <p>
+                                Da colheita diretamente para sua mesa em menos de 24 horas. Nosso sistema 
+                                de logística refrigerada garante que os produtos cheguen até você com 
+                                total frescor e qualidade preservada.
+                            </p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Nossa Equipe -->
-                <div class="team-section">
-                    <div class="team-content">
-                        <div class="team-image">
-                            <img src="https://images.unsplash.com/photo-1734261780213-765e29537e1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvcmdhbmljJTIwZmFybSUyMHRlYW0lMjB3b3JrZXJzfGVufDF8fHx8MTc1NzY4MTA4Nnww&ixlib=rb-4.1.0&q=80&w=1080" 
-                                 alt="Equipe Outono Dourado" loading="lazy">
-                        </div>
-                        <div class="team-text">
-                            <h3>Nossa Equipe</h3>
-                            <p>
-                                Contamos com uma equipe de especialistas em agricultura orgânica, agrônomos 
-                                certificados e trabalhadores rurais experientes que compartilham nossa paixão 
-                                pela sustentabilidade.
-                            </p>
-                            <p>
-                                Cada membro da família Outono Dourado é treinado nas melhores práticas de 
-                                cultivo orgânico e está comprometido em entregar produtos da mais alta qualidade 
-                                para nossas famílias clientes.
-                            </p>
-                            <div class="team-stats">
-                                <div class="stat">
-                                    <span class="stat-number">15+</span>
-                                    <span class="stat-label">Anos de Experiência</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">20+</span>
-                                    <span class="stat-label">Colaboradores</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">100%</span>
-                                    <span class="stat-label">Orgânico Certificado</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            </div>
                 <!-- Valores Fundamentais (Cards originais mantidos) -->
                 <div class="about-grid">
                     <div class="about-card">
@@ -516,6 +491,18 @@
                                     </p>
                                 </div>
                             </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i data-lucide="car"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <h4>Estacionamento</h4>
+                                    <p>
+                                        Estacionamento gratuito disponível<br>
+                                        Acesso facilitado para cargas
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                         <div class="store-actions">
                             <a href="https://maps.google.com/maps?q=Rua+das+Flores,+123,+Araucária,+PR" 
@@ -532,15 +519,24 @@
                             </a>
                         </div>
                     </div>
-                    <div class="store-map">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115681.36403739518!2d-49.41644385!3d-25.5881542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce4e4b8f9f4a3%3A0x5b8b5b5b5b5b5b5b!2sAraucária%2C%20PR!5e0!3m2!1spt!2sbr!4v1639590000000!5m2!1spt!2sbr"
-                            width="100%" 
-                            height="400" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy">
-                        </iframe>
+                    <div class="store-map-container">
+                        <div class="store-map">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115681.36403739518!2d-49.41644385!3d-25.5881542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce4e4b8f9f4a3%3A0x5b8b5b5b5b5b5b5b!2sAraucária%2C%20PR!5e0!3m2!1spt!2sbr!4v1639590000000!5m2!1spt!2sbr"
+                                width="100%" 
+                                height="400" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                        <div class="map-overlay">
+                            <div class="map-info">
+                                <h4>📍 Outono Dourado</h4>
+                                <p>Rua das Flores, 123</p>
+                                <span class="map-status">• Aberto agora</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -552,71 +548,50 @@
                 <div class="section-header">
                     <h2 class="section-title">Entre em Contato</h2>
                     <p class="section-subtitle">
-                        Tem alguma dúvida? Estamos aqui para ajudar!
+                        Fale conosco para esclarecer dúvidas ou fazer sugestões
                     </p>
                 </div>
                 <div class="contact-content">
-                    <div class="contact-form-wrapper">
-                        <form class="contact-form" id="contact-form" onsubmit="submitContactForm(event)">
-                            <div class="form-group">
-                                <label for="contact-name">Nome</label>
-                                <input type="text" id="contact-name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-email">E-mail</label>
-                                <input type="email" id="contact-email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-subject">Assunto</label>
-                                <select id="contact-subject" name="subject" required>
-                                    <option value="">Selecione um assunto</option>
-                                    <option value="products">Dúvidas sobre produtos</option>
-                                    <option value="orders">Pedidos e entregas</option>
-                                    <option value="partnership">Parcerias</option>
-                                    <option value="other">Outros</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-message">Mensagem</label>
-                                <textarea id="contact-message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn-primary">
-                                <i data-lucide="send"></i>
-                                <span>Enviar Mensagem</span>
-                            </button>
-                        </form>
-                    </div>
                     <div class="contact-info">
                         <div class="contact-card">
                             <div class="contact-icon">
                                 <i data-lucide="mail"></i>
                             </div>
                             <h4>E-mail</h4>
-                            <p>
-                                <a href="mailto:contato@outonodourado.com.br">contato@outonodourado.com.br</a>
-                            </p>
+                            <p>contato@outonodourado.com.br</p>
                         </div>
                         <div class="contact-card">
                             <div class="contact-icon">
                                 <i data-lucide="phone"></i>
                             </div>
                             <h4>Telefone</h4>
-                            <p>
-                                <a href="tel:+554133721234">(41) 3372-1234</a>
-                            </p>
+                            <p>(41) 3372-1234</p>
                         </div>
                         <div class="contact-card">
                             <div class="contact-icon">
                                 <i data-lucide="message-circle"></i>
                             </div>
                             <h4>WhatsApp</h4>
-                            <p>
-                                <a href="https://wa.me/5541999887766" target="_blank">
-                                    (41) 99988-7766
-                                </a>
-                            </p>
+                            <p>(41) 99988-7766</p>
                         </div>
                     </div>
+                    <form class="contact-form" onsubmit="submitContactForm(event)">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Seu e-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Assunto" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Sua mensagem" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            Enviar Mensagem
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -627,477 +602,378 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <div class="footer-brand">
+                    <div class="footer-logo">
                         <div class="logo-icon">
                             <i data-lucide="leaf"></i>
                         </div>
                         <span class="brand-name">Outono Dourado</span>
                     </div>
                     <p class="footer-description">
-                        Sua loja de produtos orgânicos e sustentáveis em Araucária, Paraná. 
-                        Qualidade, frescor e sustentabilidade em cada produto.
+                        Produtos orgânicos e sustentáveis de qualidade, cultivados com amor e respeito pela natureza.
                     </p>
                     <div class="social-links">
-                        <a href="https://facebook.com/outonodourado" target="_blank" class="social-link">
+                        <a href="#" class="social-link">
                             <i data-lucide="facebook"></i>
                         </a>
-                        <a href="https://instagram.com/outonodourado" target="_blank" class="social-link">
+                        <a href="#" class="social-link">
                             <i data-lucide="instagram"></i>
                         </a>
-                        <a href="https://wa.me/5541999887766" target="_blank" class="social-link">
-                            <i data-lucide="message-circle"></i>
-                        </a>
-                        <a href="mailto:contato@outonodourado.com.br" class="social-link">
-                            <i data-lucide="mail"></i>
+                        <a href="#" class="social-link">
+                            <i data-lucide="twitter"></i>
                         </a>
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Links Úteis</h4>
+                    <h4>Produtos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#products">Alimentos Orgânicos</a></li>
+                        <li><a href="#products">Verduras Frescas</a></li>
+                        <li><a href="#products">Legumes Naturais</a></li>
+                        <li><a href="#products">Todos os Produtos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Empresa</h4>
                     <ul class="footer-links">
                         <li><a href="#about">Sobre Nós</a></li>
-                        <li><a href="#products">Produtos</a></li>
                         <li><a href="#store">Nossa Loja</a></li>
                         <li><a href="#contact">Contato</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Categorias</h4>
-                    <ul class="footer-links">
-                        <li><a href="#products" onclick="filterProducts('alimentos')">Alimentos</a></li>
-                        <li><a href="#products" onclick="filterProducts('verduras')">Verduras</a></li>
-                        <li><a href="#products" onclick="filterProducts('legumes')">Legumes</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <div class="footer-contact">
-                        <p>
-                            <i data-lucide="map-pin"></i>
-                            <span>Rua das Flores, 123 - Araucária, PR</span>
-                        </p>
-                        <p>
-                            <i data-lucide="phone"></i>
-                            <a href="tel:+554133721234">(41) 3372-1234</a>
-                        </p>
-                        <p>
-                            <i data-lucide="mail"></i>
-                            <a href="mailto:contato@outonodourado.com.br">contato@outonodourado.com.br</a>
-                        </p>
+                    <h4>Atendimento</h4>
+                    <div class="contact-item">
+                        <i data-lucide="phone"></i>
+                        <span>(41) 3372-1234</span>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="mail"></i>
+                        <span>contato@outonodourado.com.br</span>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="map-pin"></i>
+                        <span>Araucária, PR</span>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 Outono Dourado. Todos os direitos reservados.</p>
-                <div class="footer-bottom-links">
-                    <a href="#" onclick="showToast('Política de Privacidade', 'Em desenvolvimento...', 'info')">Política de Privacidade</a>
-                    <a href="#" onclick="showToast('Termos de Uso', 'Em desenvolvimento...', 'info')">Termos de Uso</a>
-                </div>
+                <p>&copy; 2024 Outono Dourado. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Shopping Cart Modal -->
-    <div id="cart-modal" class="modal" style="display: none;">
-        <div class="modal-overlay" onclick="closeCart()"></div>
-        <div class="modal-content cart-modal-content">
-            <div class="modal-header">
-                <h3>Carrinho de Compras</h3>
-                <button class="modal-close" onclick="closeCart()">
-                    <i data-lucide="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="cart-items" id="cart-items">
-                    <div class="empty-cart">
-                        <i data-lucide="shopping-cart"></i>
-                        <p>Seu carrinho está vazio</p>
-                        <button class="btn-primary" onclick="closeCart()">
-                            Continuar Comprando
-                        </button>
-                    </div>
-                </div>
-                <div class="cart-total" id="cart-total" style="display: none;">
-                    <div class="total-row">
-                        <span>Total:</span>
-                        <span id="total-amount">R$ 0,00</span>
-                    </div>
-                    <button class="btn-primary cart-checkout" onclick="checkout()">
-                        Finalizar Compra
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Product Detail Modal -->
-    <div id="product-detail-modal" class="modal" style="display: none;">
-        <div class="modal-overlay" onclick="closeProductDetail()"></div>
-        <div class="modal-content product-detail-content">
-            <div class="modal-header">
-                <h3 id="product-detail-title">Produto</h3>
-                <button class="modal-close" onclick="closeProductDetail()">
-                    <i data-lucide="x"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="product-detail-grid">
-                    <div class="product-detail-image">
-                        <img id="product-detail-img" src="" alt="">
-                    </div>
-                    <div class="product-detail-info">
-                        <p id="product-detail-description"></p>
-                        <div class="product-detail-price">
-                            <span id="product-detail-price-value">R$ 0,00</span>
-                        </div>
-                        <div class="product-detail-quantity">
-                            <label>Quantidade:</label>
-                            <div class="quantity-controls">
-                                <button onclick="decreaseQuantity()">-</button>
-                                <span id="detail-quantity">1</span>
-                                <button onclick="increaseQuantity()">+</button>
-                            </div>
-                        </div>
-                        <button class="btn-primary" onclick="addToCartFromDetail()">
-                            Adicionar ao Carrinho
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Modals -->
+    
     <!-- Login Modal -->
-    <div id="login-modal" class="modal" style="display: none;">
+    <div id="login-modal" class="modal">
         <div class="modal-overlay" onclick="closeLoginModal()"></div>
-        <div class="modal-content auth-modal-content">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3>Entrar na Sua Conta</h3>
+                <h3>Entrar na sua conta</h3>
                 <button class="modal-close" onclick="closeLoginModal()">
                     <i data-lucide="x"></i>
                 </button>
             </div>
-            <div class="modal-body">
-                <form class="auth-form" id="login-form" onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label for="login-email">E-mail</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="mail" class="input-icon"></i>
-                            <input type="email" id="login-email" name="email" placeholder="Digite seu e-mail" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="login-password">Senha</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="lock" class="input-icon"></i>
-                            <input type="password" id="login-password" name="password" placeholder="Digite sua senha" required>
-                            <button type="button" class="password-toggle" onclick="togglePassword('login-password', this)">
-                                <i data-lucide="eye"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="form-options">
-                        <label class="checkbox-wrapper">
-                            <input type="checkbox" id="remember-me">
-                            <span class="checkmark"></span>
-                            <span>Lembrar de mim</span>
-                        </label>
-                        <button type="button" class="link-btn" onclick="openForgotPasswordModal()">
-                            Esqueci minha senha
+            <form class="auth-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">E-mail</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Senha</label>
+                    <div class="password-input">
+                        <input type="password" id="login-password" name="password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('login-password', this)">
+                            <i data-lucide="eye"></i>
                         </button>
                     </div>
-
-                    <button type="submit" class="btn-primary auth-submit">
-                        <i data-lucide="log-in"></i>
-                        <span>Entrar</span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me">
+                        <span>Lembrar-me</span>
+                    </label>
+                    <button type="button" class="forgot-password" onclick="openForgotPasswordModal()">
+                        Esqueci minha senha
                     </button>
-
-                    <div class="auth-divider">
-                        <span>ou</span>
-                    </div>
-
-                    <button type="button" class="btn-secondary" onclick="openRegisterModal()">
-                        <i data-lucide="user-plus"></i>
-                        <span>Criar Nova Conta</span>
-                    </button>
-                </form>
+                </div>
+                <button type="submit" class="btn-primary auth-btn">
+                    Entrar
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>ou</span>
             </div>
+            <button class="btn-secondary auth-btn" onclick="openRegisterModal()">
+                Criar nova conta
+            </button>
         </div>
     </div>
 
     <!-- Register Modal -->
-    <div id="register-modal" class="modal" style="display: none;">
+    <div id="register-modal" class="modal">
         <div class="modal-overlay" onclick="closeRegisterModal()"></div>
-        <div class="modal-content auth-modal-content">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3>Criar Nova Conta</h3>
+                <h3>Criar nova conta</h3>
                 <button class="modal-close" onclick="closeRegisterModal()">
                     <i data-lucide="x"></i>
                 </button>
             </div>
-            <div class="modal-body">
-                <form class="auth-form" id="register-form" onsubmit="handleRegister(event)">
-                    <div class="form-group">
-                        <label for="register-name">Nome Completo</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="user" class="input-icon"></i>
-                            <input type="text" id="register-name" name="name" placeholder="Digite seu nome completo" required>
-                        </div>
+            <form class="auth-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="register-name">Nome completo</label>
+                    <input type="text" id="register-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">E-mail</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Telefone (opcional)</label>
+                    <input type="tel" id="register-phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Senha</label>
+                    <div class="password-input">
+                        <input type="password" id="register-password" name="password" required 
+                               oninput="updatePasswordStrength('register-password', 'password-strength')">
+                        <button type="button" class="password-toggle" onclick="togglePassword('register-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="register-email">E-mail</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="mail" class="input-icon"></i>
-                            <input type="email" id="register-email" name="email" placeholder="Digite seu e-mail" required>
-                        </div>
+                    <div id="password-strength" class="password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirmar senha</label>
+                    <div class="password-input">
+                        <input type="password" id="register-confirm-password" name="confirmPassword" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('register-confirm-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="register-phone">Telefone (Opcional)</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="phone" class="input-icon"></i>
-                            <input type="tel" id="register-phone" name="phone" placeholder="(11) 99999-9999">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="register-password">Senha</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="lock" class="input-icon"></i>
-                            <input type="password" id="register-password" name="password" placeholder="Crie uma senha segura" required minlength="6">
-                            <button type="button" class="password-toggle" onclick="togglePassword('register-password', this)">
-                                <i data-lucide="eye"></i>
-                            </button>
-                        </div>
-                        <div class="password-strength" id="password-strength"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirm-password">Confirmar Senha</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="lock" class="input-icon"></i>
-                            <input type="password" id="confirm-password" name="confirmPassword" placeholder="Digite a senha novamente" required>
-                            <button type="button" class="password-toggle" onclick="togglePassword('confirm-password', this)">
-                                <i data-lucide="eye"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="form-options">
-                        <label class="checkbox-wrapper">
-                            <input type="checkbox" id="accept-terms" required>
-                            <span class="checkmark"></span>
-                            <span>Aceito os <a href="#" class="link">termos de uso</a> e <a href="#" class="link">política de privacidade</a></span>
-                        </label>
-                    </div>
-
-                    <div class="form-options">
-                        <label class="checkbox-wrapper">
-                            <input type="checkbox" id="newsletter">
-                            <span class="checkmark"></span>
-                            <span>Quero receber ofertas e novidades por e-mail</span>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn-primary auth-submit">
-                        <i data-lucide="user-plus"></i>
-                        <span>Criar Conta</span>
-                    </button>
-
-                    <div class="auth-divider">
-                        <span>ou</span>
-                    </div>
-
-                    <button type="button" class="btn-secondary" onclick="openLoginModal()">
-                        <i data-lucide="log-in"></i>
-                        <span>Já tenho uma conta</span>
-                    </button>
-                </form>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required>
+                        <span>Aceito os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a></span>
+                    </label>
+                </div>
+                <button type="submit" class="btn-primary auth-btn">
+                    Criar conta
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>ou</span>
             </div>
+            <button class="btn-secondary auth-btn" onclick="openLoginModal()">
+                Já tenho uma conta
+            </button>
         </div>
     </div>
 
     <!-- Forgot Password Modal -->
-    <div id="forgot-password-modal" class="modal" style="display: none;">
+    <div id="forgot-password-modal" class="modal">
         <div class="modal-overlay" onclick="closeForgotPasswordModal()"></div>
-        <div class="modal-content auth-modal-content">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3>Redefinir Senha</h3>
+                <h3>Recuperar senha</h3>
                 <button class="modal-close" onclick="closeForgotPasswordModal()">
                     <i data-lucide="x"></i>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="forgot-password-content">
-                    <div class="forgot-password-icon">
-                        <i data-lucide="key"></i>
-                    </div>
-                    <p class="forgot-password-text">
-                        Digite seu e-mail abaixo e enviaremos instruções para redefinir sua senha.
-                    </p>
-                    
-                    <form class="auth-form" id="forgot-password-form" onsubmit="handleForgotPassword(event)">
-                        <div class="form-group">
-                            <label for="forgot-email">E-mail</label>
-                            <div class="input-wrapper">
-                                <i data-lucide="mail" class="input-icon"></i>
-                                <input type="email" id="forgot-email" name="email" placeholder="Digite seu e-mail" required>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-primary auth-submit">
-                            <i data-lucide="send"></i>
-                            <span>Enviar Instruções</span>
-                        </button>
-
-                        <button type="button" class="btn-secondary" onclick="openLoginModal()">
-                            <i data-lucide="arrow-left"></i>
-                            <span>Voltar ao Login</span>
-                        </button>
-                    </form>
-                </div>
+            <div class="modal-description">
+                <p>Digite seu e-mail e enviaremos instruções para redefinir sua senha.</p>
             </div>
+            <form class="auth-form" onsubmit="handleForgotPassword(event)">
+                <div class="form-group">
+                    <label for="forgot-email">E-mail</label>
+                    <input type="email" id="forgot-email" name="email" required>
+                </div>
+                <button type="submit" class="btn-primary auth-btn">
+                    Enviar instruções
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>ou</span>
+            </div>
+            <button class="btn-secondary auth-btn" onclick="openLoginModal()">
+                Voltar ao login
+            </button>
         </div>
     </div>
 
-    <!-- User Profile Modal -->
-    <div id="profile-modal" class="modal" style="display: none;">
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal">
         <div class="modal-overlay" onclick="closeProfileModal()"></div>
-        <div class="modal-content profile-modal-content">
+        <div class="modal-content profile-modal">
             <div class="modal-header">
                 <h3>Meu Perfil</h3>
                 <button class="modal-close" onclick="closeProfileModal()">
                     <i data-lucide="x"></i>
                 </button>
             </div>
-            <div class="modal-body">
-                <form class="profile-form" id="profile-form" onsubmit="handleProfileUpdate(event)">
-                    <div class="profile-avatar-section">
-                        <div class="profile-avatar">
-                            <i data-lucide="user"></i>
-                        </div>
-                        <button type="button" class="btn-secondary" onclick="showToast('Foto de Perfil', 'Funcionalidade em desenvolvimento', 'info')">
-                            <i data-lucide="camera"></i>
-                            Alterar Foto
-                        </button>
-                    </div>
+            
+            <!-- Profile Tabs -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" onclick="switchProfileTab('profile-info')">
+                    <i data-lucide="user"></i>
+                    Informações Pessoais
+                </button>
+                <button class="tab-btn" onclick="switchProfileTab('order-history')">
+                    <i data-lucide="package"></i>
+                    Histórico de Pedidos
+                </button>
+            </div>
 
+            <!-- Profile Info Tab -->
+            <div id="profile-info" class="tab-content active">
+                <form class="profile-form" onsubmit="updateProfile(event)">
                     <div class="form-group">
-                        <label for="profile-name">Nome Completo</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="user" class="input-icon"></i>
-                            <input type="text" id="profile-name" name="name" required>
-                        </div>
+                        <label for="profile-name">Nome completo</label>
+                        <input type="text" id="profile-name" name="name" required>
                     </div>
-
                     <div class="form-group">
                         <label for="profile-email">E-mail</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="mail" class="input-icon"></i>
-                            <input type="email" id="profile-email" name="email" required>
-                        </div>
+                        <input type="email" id="profile-email" name="email" required>
                     </div>
-
                     <div class="form-group">
                         <label for="profile-phone">Telefone</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="phone" class="input-icon"></i>
-                            <input type="tel" id="profile-phone" name="phone">
-                        </div>
+                        <input type="tel" id="profile-phone" name="phone">
                     </div>
-
                     <div class="form-group">
                         <label for="profile-address">Endereço</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="map-pin" class="input-icon"></i>
-                            <input type="text" id="profile-address" name="address" placeholder="Rua, número, bairro">
-                        </div>
+                        <textarea id="profile-address" name="address" rows="3"></textarea>
                     </div>
-
                     <div class="profile-actions">
                         <button type="submit" class="btn-primary">
-                            <i data-lucide="save"></i>
-                            <span>Salvar Alterações</span>
+                            Salvar alterações
                         </button>
-                        
-                        <button type="button" class="btn-outline" onclick="openChangePasswordModal()">
-                            <i data-lucide="key"></i>
-                            <span>Alterar Senha</span>
+                        <button type="button" class="btn-secondary" onclick="openChangePasswordModal()">
+                            Alterar senha
                         </button>
                     </div>
                 </form>
+            </div>
+
+            <!-- Order History Tab -->
+            <div id="order-history" class="tab-content">
+                <div id="orders-container">
+                    <!-- Orders will be loaded here -->
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Change Password Modal -->
-    <div id="change-password-modal" class="modal" style="display: none;">
+    <div id="change-password-modal" class="modal">
         <div class="modal-overlay" onclick="closeChangePasswordModal()"></div>
-        <div class="modal-content auth-modal-content">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3>Alterar Senha</h3>
+                <h3>Alterar senha</h3>
                 <button class="modal-close" onclick="closeChangePasswordModal()">
                     <i data-lucide="x"></i>
                 </button>
             </div>
-            <div class="modal-body">
-                <form class="auth-form" id="change-password-form" onsubmit="handleChangePassword(event)">
-                    <div class="form-group">
-                        <label for="current-password">Senha Atual</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="lock" class="input-icon"></i>
-                            <input type="password" id="current-password" name="currentPassword" placeholder="Digite sua senha atual" required>
-                            <button type="button" class="password-toggle" onclick="togglePassword('current-password', this)">
-                                <i data-lucide="eye"></i>
-                            </button>
-                        </div>
+            <form class="auth-form" onsubmit="handleChangePassword(event)">
+                <div class="form-group">
+                    <label for="current-password">Senha atual</label>
+                    <div class="password-input">
+                        <input type="password" id="current-password" name="currentPassword" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('current-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="new-password">Nova Senha</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="lock" class="input-icon"></i>
-                            <input type="password" id="new-password" name="newPassword" placeholder="Digite a nova senha" required minlength="6">
-                            <button type="button" class="password-toggle" onclick="togglePassword('new-password', this)">
-                                <i data-lucide="eye"></i>
-                            </button>
-                        </div>
-                        <div class="password-strength" id="new-password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Nova senha</label>
+                    <div class="password-input">
+                        <input type="password" id="new-password" name="newPassword" required 
+                               oninput="updatePasswordStrength('new-password', 'new-password-strength')">
+                        <button type="button" class="password-toggle" onclick="togglePassword('new-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="confirm-new-password">Confirmar Nova Senha</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="lock" class="input-icon"></i>
-                            <input type="password" id="confirm-new-password" name="confirmNewPassword" placeholder="Digite a nova senha novamente" required>
-                            <button type="button" class="password-toggle" onclick="togglePassword('confirm-new-password', this)">
-                                <i data-lucide="eye"></i>
-                            </button>
-                        </div>
+                    <div id="new-password-strength" class="password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-new-password">Confirmar nova senha</label>
+                    <div class="password-input">
+                        <input type="password" id="confirm-new-password" name="confirmNewPassword" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirm-new-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
                     </div>
+                </div>
+                <button type="submit" class="btn-primary auth-btn">
+                    Alterar senha
+                </button>
+            </form>
+        </div>
+    </div>
 
-                    <button type="submit" class="btn-primary auth-submit">
-                        <i data-lucide="key"></i>
-                        <span>Alterar Senha</span>
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-overlay" onclick="closeCart()"></div>
+        <div class="modal-content cart-modal">
+            <div class="modal-header">
+                <h3>Meu Carrinho</h3>
+                <button class="modal-close" onclick="closeCart()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div id="cart-total" class="cart-total">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span id="total-amount">R$ 0,00</span>
+                </div>
+                <button class="btn-primary checkout-btn" onclick="checkout()">
+                    Finalizar Pedido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="product-detail-modal" class="modal">
+        <div class="modal-overlay" onclick="closeProductDetail()"></div>
+        <div class="modal-content product-detail-modal">
+            <div class="modal-header">
+                <h3 id="product-detail-title">Produto</h3>
+                <button class="modal-close" onclick="closeProductDetail()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="product-detail-content">
+                <div class="product-detail-image">
+                    <img id="product-detail-img" src="" alt="">
+                </div>
+                <div class="product-detail-info">
+                    <p id="product-detail-description"></p>
+                    <div class="product-detail-price">
+                        <span id="product-detail-price-value">R$ 0,00</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                        <span id="detail-quantity">1</span>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                    <button class="btn-primary add-to-cart-detail" onclick="addToCartFromDetail()">
+                        Adicionar ao Carrinho
                     </button>
-
-                    <button type="button" class="btn-secondary" onclick="closeChangePasswordModal()">
-                        <i data-lucide="x"></i>
-                        <span>Cancelar</span>
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- JavaScript -->
     <script src="script.js"></script>
-    
-    <!-- Initialize Lucide Icons -->
     <script>
+        // Initialize Lucide icons
         lucide.createIcons();
     </script>
 </body>
