@@ -226,7 +226,7 @@ html {
     right: 0;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(223, 118, 11, 0.2);
+    border-bottom: 1px solid rgba(255, 133, 10, 0.76);
     z-index: 1000;
     box-shadow: var(--shadow);
 }
