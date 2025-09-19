@@ -18,7 +18,7 @@ const PRODUCTS_DATABASE = [
         description: "Alface crespa fresca cultivada sem pesticidas em estufa climatizada, colhida diariamente para garantir máximo frescor e crocância. Rica em vitaminas A e K.",
         price: 4.50,
         category: "verduras",
-        image: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        image: "alface.jpeg",
         rating: 4.6,
         reviews: 89,
         inStock: true,
