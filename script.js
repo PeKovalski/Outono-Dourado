@@ -156,6 +156,13 @@ let detailQuantity = 1;
 // Estado de autenticação
 let currentUser = null;
 let isLoggedIn = false;
+let isAdmin = false;
+
+// Credenciais de administrador (em um sistema real, isso seria validado no servidor)
+const ADMIN_CREDENTIALS = {
+    email: 'admin@outonodourado.com.br',
+    password: 'admin123'
+};
 
 // Estado do mascote
 let mascotMessages = [
@@ -188,6 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedUser) {
         currentUser = JSON.parse(savedUser);
         isLoggedIn = true;
+        isAdmin = currentUser.isAdmin || false;
         updateAuthUI();
         loadUserOrders();
     }
@@ -632,9 +640,37 @@ function updateAuthUI() {
         authButtons.style.display = 'none';
         userMenu.style.display = 'block';
         userName.textContent = currentUser.name.split(' ')[0]; // First name only
+        
+        // Show admin panel option if user is admin
+        updateAdminUI();
     } else {
         authButtons.style.display = 'block';
         userMenu.style.display = 'none';
+    }
+}
+
+// Update admin UI elements
+function updateAdminUI() {
+    const dropdown = document.getElementById('user-dropdown');
+    let adminOption = dropdown.querySelector('.admin-panel-item');
+    
+    if (isAdmin && !adminOption) {
+        // Add admin panel option
+        const adminItem = document.createElement('div');
+        adminItem.className = 'dropdown-item admin-panel-item';
+        adminItem.onclick = () => openAdminPanel();
+        adminItem.innerHTML = `
+            <i data-lucide="settings"></i>
+            <span>Painel Admin</span>
+        `;
+        
+        // Insert before "Meus Pedidos"
+        const pedidosItem = dropdown.querySelector('[onclick*="showOrderHistory"]');
+        dropdown.insertBefore(adminItem, pedidosItem);
+        lucide.createIcons();
+    } else if (!isAdmin && adminOption) {
+        // Remove admin panel option
+        adminOption.remove();
     }
 }
 
@@ -780,18 +816,37 @@ function handleLogin(event) {
     showToast('Fazendo login...', 'Verificando suas credenciais', 'info');
     
     setTimeout(() => {
-        // Simulate successful login
-        const user = {
-            id: 'user_' + Date.now(),
-            name: 'João Silva', // In a real app, this would come from the server
-            email: email,
-            phone: '',
-            address: '',
-            registeredAt: new Date().toISOString()
-        };
+        let user;
+        let isAdminLogin = false;
+        
+        // Check if admin credentials
+        if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+            user = {
+                id: 'admin_001',
+                name: 'Administrador',
+                email: email,
+                phone: '',
+                address: '',
+                isAdmin: true,
+                registeredAt: new Date().toISOString()
+            };
+            isAdminLogin = true;
+        } else {
+            // Regular user login
+            user = {
+                id: 'user_' + Date.now(),
+                name: 'João Silva', // In a real app, this would come from the server
+                email: email,
+                phone: '',
+                address: '',
+                isAdmin: false,
+                registeredAt: new Date().toISOString()
+            };
+        }
         
         currentUser = user;
         isLoggedIn = true;
+        isAdmin = user.isAdmin || false;
         
         // Save to localStorage
         localStorage.setItem('outono-dourado-user', JSON.stringify(user));
@@ -803,7 +858,11 @@ function handleLogin(event) {
         closeLoginModal();
         loadUserOrders();
         
-        showToast('Login realizado!', `Bem-vindo, ${user.name}!`, 'success');
+        const welcomeMessage = isAdminLogin ? 
+            `Bem-vindo, ${user.name}! Painel administrativo disponível.` : 
+            `Bem-vindo, ${user.name}!`;
+        
+        showToast('Login realizado!', welcomeMessage, 'success');
         
         // Reset form
         event.target.reset();
@@ -1085,6 +1144,7 @@ function showOrderHistory() {
 function logout() {
     currentUser = null;
     isLoggedIn = false;
+    isAdmin = false;
     userOrders = [];
     
     // Clear localStorage
@@ -1093,6 +1153,7 @@ function logout() {
     localStorage.removeItem('outono-dourado-orders');
     
     updateAuthUI();
+    closeAdminPanel(); // Close admin panel if open
     
     showToast('Logout realizado', 'Até logo! Volte sempre.', 'success');
 }
@@ -1139,4 +1200,207 @@ window.addEventListener('scroll', function() {
 // Initialize Lucide icons when DOM loads
 document.addEventListener('DOMContentLoaded', function() {
     lucide.createIcons();
+});
+
+// ========================
+// ADMIN PANEL FUNCTIONALITY
+// ========================
+
+let editingProduct = null;
+
+// Open admin panel
+function openAdminPanel() {
+    if (!isAdmin) {
+        showToast('Acesso negado', 'Você não tem permissão para acessar o painel administrativo', 'error');
+        return;
+    }
+    
+    closeAllModals();
+    loadAdminProducts();
+    document.getElementById('admin-panel').style.display = 'flex';
+}
+
+// Close admin panel
+function closeAdminPanel() {
+    const adminPanel = document.getElementById('admin-panel');
+    if (adminPanel) {
+        adminPanel.style.display = 'none';
+    }
+    editingProduct = null;
+}
+
+// Load products for admin management
+function loadAdminProducts() {
+    const container = document.getElementById('admin-products-list');
+    if (!container) return;
+    
+    container.innerHTML = PRODUCTS_DATABASE.map(product => `
+        <div class="admin-product-card" data-product-id="${product.id}">
+            <div class="admin-product-image">
+                <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="admin-product-info">
+                <h4>${product.name}</h4>
+                <p class="product-category">${getCategoryName(product.category)}</p>
+                <p class="product-price">R$ ${product.price.toFixed(2)}</p>
+                <p class="product-stock ${product.inStock ? 'in-stock' : 'out-stock'}">
+                    ${product.inStock ? 'Em estoque' : 'Fora de estoque'}
+                </p>
+            </div>
+            <div class="admin-product-actions">
+                <button class="btn-admin-edit" onclick="editProduct('${product.id}')">
+                    <i data-lucide="edit"></i>
+                    Editar
+                </button>
+                <button class="btn-admin-delete" onclick="deleteProduct('${product.id}')">
+                    <i data-lucide="trash-2"></i>
+                    Excluir
+                </button>
+            </div>
+        </div>
+    `).join('');
+    
+    lucide.createIcons();
+}
+
+// Open add product modal
+function openAddProductModal() {
+    editingProduct = null;
+    clearProductForm();
+    document.getElementById('product-form-title').textContent = 'Adicionar Novo Produto';
+    document.getElementById('product-form-modal').style.display = 'flex';
+}
+
+// Open edit product modal
+function editProduct(productId) {
+    const product = PRODUCTS_DATABASE.find(p => p.id === productId);
+    if (!product) return;
+    
+    editingProduct = product;
+    populateProductForm(product);
+    document.getElementById('product-form-title').textContent = 'Editar Produto';
+    document.getElementById('product-form-modal').style.display = 'flex';
+}
+
+// Close product form modal
+function closeProductFormModal() {
+    document.getElementById('product-form-modal').style.display = 'none';
+    editingProduct = null;
+}
+
+// Clear product form
+function clearProductForm() {
+    document.getElementById('product-name').value = '';
+    document.getElementById('product-description').value = '';
+    document.getElementById('product-price').value = '';
+    document.getElementById('product-category').value = 'alimentos';
+    document.getElementById('product-image').value = '';
+    document.getElementById('product-tags').value = '';
+    document.getElementById('product-stock').checked = true;
+}
+
+// Populate product form with existing product data
+function populateProductForm(product) {
+    document.getElementById('product-name').value = product.name;
+    document.getElementById('product-description').value = product.description;
+    document.getElementById('product-price').value = product.price;
+    document.getElementById('product-category').value = product.category;
+    document.getElementById('product-image').value = product.image;
+    document.getElementById('product-tags').value = product.tags.join(', ');
+    document.getElementById('product-stock').checked = product.inStock;
+}
+
+// Handle product form submission
+function handleProductForm(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const productData = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        price: parseFloat(formData.get('price')),
+        category: formData.get('category'),
+        image: formData.get('image'),
+        tags: formData.get('tags').split(',').map(tag => tag.trim()).filter(tag => tag),
+        inStock: formData.get('stock') === 'on',
+        rating: editingProduct ? editingProduct.rating : 4.5,
+        reviews: editingProduct ? editingProduct.reviews : 0
+    };
+    
+    // Validation
+    if (!productData.name || !productData.description || !productData.price || !productData.image) {
+        showToast('Erro', 'Preencha todos os campos obrigatórios', 'error');
+        return;
+    }
+    
+    if (editingProduct) {
+        // Update existing product
+        const index = PRODUCTS_DATABASE.findIndex(p => p.id === editingProduct.id);
+        if (index !== -1) {
+            PRODUCTS_DATABASE[index] = { ...PRODUCTS_DATABASE[index], ...productData };
+            showToast('Produto Atualizado', `${productData.name} foi atualizado com sucesso`, 'success');
+        }
+    } else {
+        // Add new product
+        const newProduct = {
+            id: 'custom-product-' + Date.now(),
+            ...productData
+        };
+        PRODUCTS_DATABASE.push(newProduct);
+        showToast('Produto Adicionado', `${productData.name} foi adicionado com sucesso`, 'success');
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('outono-dourado-products', JSON.stringify(PRODUCTS_DATABASE));
+    
+    // Refresh displays
+    loadProducts();
+    loadAdminProducts();
+    closeProductFormModal();
+}
+
+// Delete product
+function deleteProduct(productId) {
+    const product = PRODUCTS_DATABASE.find(p => p.id === productId);
+    if (!product) return;
+    
+    if (confirm(`Tem certeza que deseja excluir o produto "${product.name}"?`)) {
+        const index = PRODUCTS_DATABASE.findIndex(p => p.id === productId);
+        if (index !== -1) {
+            PRODUCTS_DATABASE.splice(index, 1);
+            localStorage.setItem('outono-dourado-products', JSON.stringify(PRODUCTS_DATABASE));
+            
+            showToast('Produto Excluído', `${product.name} foi removido com sucesso`, 'success');
+            
+            // Refresh displays
+            loadProducts();
+            loadAdminProducts();
+        }
+    }
+}
+
+// Load products from localStorage on page load (if any custom products exist)
+function loadCustomProducts() {
+    const savedProducts = localStorage.getItem('outono-dourado-products');
+    if (savedProducts) {
+        const customProducts = JSON.parse(savedProducts);
+        // Merge with default products, prioritizing saved versions
+        const mergedProducts = [...PRODUCTS_DATABASE];
+        customProducts.forEach(customProduct => {
+            const existingIndex = mergedProducts.findIndex(p => p.id === customProduct.id);
+            if (existingIndex !== -1) {
+                mergedProducts[existingIndex] = customProduct;
+            } else {
+                mergedProducts.push(customProduct);
+            }
+        });
+        // Replace the products database
+        PRODUCTS_DATABASE.length = 0;
+        PRODUCTS_DATABASE.push(...mergedProducts);
+    }
+}
+
+// Initialize custom products loading
+document.addEventListener('DOMContentLoaded', function() {
+    loadCustomProducts();
 });

@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://outonodourado.com.br/">
     <meta property="og:title" content="Outono Dourado - Produtos Orgânicos e Sustentáveis">
     <meta property="og:description" content="Sua loja de produtos orgânicos e sustentáveis em Araucária, Paraná.">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -705,6 +705,16 @@
             <div class="auth-divider">
                 <span>ou</span>
             </div>
+            
+            <!-- Admin Info -->
+            <div class="admin-info">
+                <p class="admin-info-text">
+                    <strong>Acesso Administrativo:</strong><br>
+                    E-mail: admin@outonodourado.com.br<br>
+                    Senha: admin123
+                </p>
+            </div>
+            
             <button class="btn-secondary auth-btn" onclick="openRegisterModal()">
                 Criar nova conta
             </button>
@@ -967,6 +977,102 @@
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-panel" class="modal admin-panel-modal">
+        <div class="modal-overlay" onclick="closeAdminPanel()"></div>
+        <div class="modal-content admin-panel-content">
+            <div class="modal-header">
+                <h3>Painel Administrativo</h3>
+                <button class="modal-close" onclick="closeAdminPanel()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="admin-panel-body">
+                <div class="admin-header">
+                    <h4>Gerenciar Produtos</h4>
+                    <button class="btn-primary" onclick="openAddProductModal()">
+                        <i data-lucide="plus"></i>
+                        Adicionar Produto
+                    </button>
+                </div>
+                
+                <div class="admin-products-container">
+                    <div id="admin-products-list" class="admin-products-list">
+                        <!-- Products will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Form Modal -->
+    <div id="product-form-modal" class="modal">
+        <div class="modal-overlay" onclick="closeProductFormModal()"></div>
+        <div class="modal-content product-form-content">
+            <div class="modal-header">
+                <h3 id="product-form-title">Adicionar Produto</h3>
+                <button class="modal-close" onclick="closeProductFormModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <form class="product-form" onsubmit="handleProductForm(event)">
+                <div class="form-group">
+                    <label for="product-name">Nome do Produto *</label>
+                    <input type="text" id="product-name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-description">Descrição *</label>
+                    <textarea id="product-description" name="description" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-price">Preço (R$) *</label>
+                        <input type="number" id="product-price" name="price" step="0.01" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-category">Categoria *</label>
+                        <select id="product-category" name="category" required>
+                            <option value="alimentos">Alimentos</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="legumes">Legumes</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-image">URL da Imagem *</label>
+                    <input type="url" id="product-image" name="image" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-tags">Tags (separadas por vírgula)</label>
+                    <input type="text" id="product-tags" name="tags" placeholder="orgânico, fresco, local">
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="product-stock" name="stock" checked>
+                        <span>Produto em estoque</span>
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeProductFormModal()">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        Salvar Produto
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
