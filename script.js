@@ -2,13 +2,8 @@
 const PRODUCTS_DATABASE = [
     {
         id: "Milho",
-<<<<<<< HEAD
         name: "Milho Premium",
         description: "Quinoa orgânica de alta qualidade importada dos Andes, rica em proteínas completas, aminoácidos essenciais e minerais. Ideal para dietas veganas e vegetarianas.",
-=======
-        name: "Batata Doce Premium",
-        description: "Milho orgânico cultivado de forma sustentável, sem pesticidas, colhido fresquinho, Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
->>>>>>> 968fd95886b30cf5dde9390402202d96ddaca5f8
         price: 24.90,
         category: "alimentos",
         image: "milho.jpeg",
