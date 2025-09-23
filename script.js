@@ -90,12 +90,12 @@ const PRODUCTS_DATABASE = [
         tags: ["tradicional", "proteína-vegetal", "antioxidantes", "brasileiro", "nutritivo"]
     },
     {
-        id: "rucula-organica-selvagem-008",
-        name: "Rúcula Orgânica Selvagem Picante",
-        description: "Rúcula orgânica selvagem com sabor intenso e levemente picante. Folhas pequenas e aromáticas, perfeitas para saladas sofisticadas e pizzas gourmet.",
+        id: "Laranjas Orgânicas Premium-008",
+        name: "Laranjas Orgânicas Premium",
+        description: "Laranjas suculentas e doces, cultivadas organicamente, ricas em vitamina C. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
         price: 5.50,
         category: "verduras",
-        image: "https://images.unsplash.com/photo-1616484474306-5d29da8f5b63?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        image: "laranja.jpeg",
         rating: 4.7,
         reviews: 92,
         inStock: true,
