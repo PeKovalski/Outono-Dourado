@@ -6,7 +6,7 @@ const PRODUCTS_DATABASE = [
         description: "Quinoa orgânica de alta qualidade importada dos Andes, rica em proteínas completas, aminoácidos essenciais e minerais. Ideal para dietas veganas e vegetarianas.",
         price: 24.90,
         category: "alimentos",
-        image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        image: "batatadoce.jpeg",
         rating: 4.8,
         reviews: 127,
         inStock: true,
