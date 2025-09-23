@@ -102,12 +102,12 @@ const PRODUCTS_DATABASE = [
         tags: ["picante", "aromática", "gourmet", "pizza", "sofisticada"]
     },
     {
-        id: "abobrinha-organica-italiana-009",
-        name: "Abobrinha Orgânica Italiana Verde",
-        description: "Abobrinhas orgânicas da variedade italiana, tenras e saborosas com casca comestível. Baixas em calorias e versáteis na cozinha. Colhidas no ponto ideal.",
+        id: "Brócolis Orgânico Fresco-009",
+        name: "Brócolis Orgânico Fresco",
+        description: "Brócolis orgânico fresco, rico em vitaminas e minerais, cultivado sem agrotóxicos. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
         price: 7.90,
         category: "legumes",
-        image: "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        image: "brocolis.jpeg",
         rating: 4.5,
         reviews: 118,
         inStock: true,
