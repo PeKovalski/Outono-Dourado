@@ -49,12 +49,12 @@ const PRODUCTS_DATABASE = [
         tags: ["tradicional", "fibras", "complexo-b", "energético", "versátil"]
     },
     {
-        id: "espinafre-organico-baby-005",
-        name: "Espinafre Orgânico Baby Leaves",
-        description: "Espinafre baby leaves orgânico, folhas tenras e saborosas colhidas jovens. Rico em ferro, ácido fólico e antioxidantes. Ideal para saladas gourmet.",
+        id: "Castanhas Orgânicas Premium-005",
+        name: "Castanhas Orgânicas Premium",
+        description: "Castanhas doces e saborosas, colhidas no outono, ricas em nutrientes e energia. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
         price: 6.90,
         category: "verduras",
-        image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        image: "castanha.jpeg",
         rating: 4.9,
         reviews: 78,
         inStock: true,
