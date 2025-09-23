@@ -42,7 +42,7 @@ const PRODUCTS_DATABASE = [
         description: "Abóboras orgânicas selecionadas, cultivadas sem agrotóxicos, ideais para receitas saudáveis. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico.",
         price: 12.90,
         category: "alimentos",
-        image: "abo",
+        image: "abobora.jpeg",
         rating: 4.5,
         reviews: 203,
         inStock: true,
