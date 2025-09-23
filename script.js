@@ -2,8 +2,13 @@
 const PRODUCTS_DATABASE = [
     {
         id: "Milho",
+<<<<<<< HEAD
+        name: "Milho Premium",
+        description: "Quinoa orgânica de alta qualidade importada dos Andes, rica em proteínas completas, aminoácidos essenciais e minerais. Ideal para dietas veganas e vegetarianas.",
+=======
         name: "Batata Doce Premium",
         description: "Milho orgânico cultivado de forma sustentável, sem pesticidas, colhido fresquinho, Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
+>>>>>>> 968fd95886b30cf5dde9390402202d96ddaca5f8
         price: 24.90,
         category: "alimentos",
         image: "milho.jpeg",
@@ -25,12 +30,12 @@ const PRODUCTS_DATABASE = [
         tags: ["fresco", "hidropônico", "vitaminas", "baixa-caloria", "crocante"]
     },
     {
-        id: "Tomate-001",
+        id: "Tomate",
         name: "Tomate Orgânico Fresco",
         description: "Tomates orgânicos da variedade italiana cultivados ao ar livre, suculentos e aromáticos. Perfeitos para saladas, molhos e conservas caseiras.",
         price: 8.90,
         category: "legumes",
-        image: "tomatesss.jpeg",
+        image: "tomate.jpeg",
         rating: 4.7,
         reviews: 156,
         inStock: true,
@@ -61,7 +66,7 @@ const PRODUCTS_DATABASE = [
         tags: ["baby-leaves", "ferro", "ácido-fólico", "gourmet", "antioxidante"]
     },
     {
-        id: "cenoura-organica-nantes-006",
+        id: "Cenoura Premium",
         name: "Cenoura Orgânica Nantes Doce",
         description: "Cenouras orgânicas da variedade Nantes, doces e crocantes com formato cilíndrico perfeito. Ricas em betacaroteno e fibras. Ideais para sucos e pratos infantis.",
         price: 5.90,
