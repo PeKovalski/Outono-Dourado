@@ -2,7 +2,7 @@
 const PRODUCTS_DATABASE = [
     {
         id: "quinoa-organica-premium-001",
-        name: "Quinoa Orgânica Premium Andina",
+        name: "Batata Doce Premium",
         description: "Quinoa orgânica de alta qualidade importada dos Andes, rica em proteínas completas, aminoácidos essenciais e minerais. Ideal para dietas veganas e vegetarianas.",
         price: 24.90,
         category: "alimentos",
@@ -30,7 +30,7 @@ const PRODUCTS_DATABASE = [
         description: "Tomates orgânicos da variedade italiana cultivados ao ar livre, suculentos e aromáticos. Perfeitos para saladas, molhos e conservas caseiras.",
         price: 8.90,
         category: "legumes",
-        image: "uva.jpeg",
+        image: "tomate.jpeg",
         rating: 4.7,
         reviews: 156,
         inStock: true,
