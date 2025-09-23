@@ -66,7 +66,7 @@ const PRODUCTS_DATABASE = [
         description: "Cenouras orgânicas da variedade Nantes, doces e crocantes com formato cilíndrico perfeito. Ricas em betacaroteno e fibras. Ideais para sucos e pratos infantis.",
         price: 5.90,
         category: "legumes",
-        image: "cenoura.jpeg",
+        image: "cenouras.jpeg",
         rating: 4.6,
         reviews: 142,
         inStock: true,
