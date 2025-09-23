@@ -78,7 +78,7 @@ const PRODUCTS_DATABASE = [
         description: " Uvas selecionadas de vinhedos orgânicos, doces e suculentas, ricas em antioxidantes. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico",
         price: 9.90,
         category: "alimentos",
-        image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        image: "uva.jpeg",
         rating: 4.4,
         reviews: 167,
         inStock: true,
