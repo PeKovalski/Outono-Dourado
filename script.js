@@ -25,12 +25,12 @@ const PRODUCTS_DATABASE = [
         tags: ["fresco", "hidropônico", "vitaminas", "baixa-caloria", "crocante"]
     },
     {
-        id: "Milho-Orgânico-Fresco-001",
-        name: "Milho Orgânico Fresco",
+        id: "Tomate-001",
+        name: "Tomate Orgânico Fresco",
         description: "Tomates orgânicos da variedade italiana cultivados ao ar livre, suculentos e aromáticos. Perfeitos para saladas, molhos e conservas caseiras.",
         price: 8.90,
         category: "legumes",
-        image: "tomate.jpeg",
+        image: "tomatesss.jpeg",
         rating: 4.7,
         reviews: 156,
         inStock: true,
