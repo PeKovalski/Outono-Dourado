@@ -114,12 +114,12 @@ const PRODUCTS_DATABASE = [
         tags: ["italiana", "baixa-caloria", "versátil", "casca-comestível", "tenra"]
     },
     {
-        id: "granola-organica-artesanal-010",
+        id: "Batata Premium",
         name: "Granola Orgânica Artesanal Crocante",
         description: "Granola artesanal com aveia, castanhas, frutas secas e mel orgânico. Assada lentamente para máxima crocância. Rica em fibras e energia natural.",
         price: 18.90,
         category: "alimentos",
-        image: "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        image: "batata.jpeg",
         rating: 4.8,
         reviews: 189,
         inStock: true,
