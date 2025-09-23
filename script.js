@@ -37,12 +37,12 @@ const PRODUCTS_DATABASE = [
         tags: ["italiano", "suculento", "molhos", "antioxidante", "licopeno"]
     },
     {
-        id: "arroz-integral-cateto-004",
-        name: "Arroz Integral Cateto Paranaense",
-        description: "Arroz integral da variedade cateto cultivado tradicionalmente no Paraná. Grãos longos e aromáticos, fonte de fibras, vitaminas do complexo B e minerais essenciais.",
+        id: "Abóbora Orgânica Premium",
+        name: "Abóbora Orgânica Premium",
+        description: "Abóboras orgânicas selecionadas, cultivadas sem agrotóxicos, ideais para receitas saudáveis. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico.",
         price: 12.90,
         category: "alimentos",
-        image: "maça.jpeg",
+        image: "abo",
         rating: 4.5,
         reviews: 203,
         inStock: true,
