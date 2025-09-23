@@ -18,15 +18,15 @@ const PRODUCTS_DATABASE = [
         description: "Alface crespa fresca cultivada sem pesticidas em estufa climatizada, colhida diariamente para garantir máximo frescor e crocância. Rica em vitaminas A e K.",
         price: 4.50,
         category: "verduras",
-        image: "alface.jpeg",uva.jpeg
+        image: "alface.jpeg",
         rating: 4.6,
         reviews: 89,
         inStock: true,
         tags: ["fresco", "hidropônico", "vitaminas", "baixa-caloria", "crocante"]
     },
     {
-        id: "tomate-organico-italiano-003",
-        name: "Tomate Orgânico Italiano Rasteiro",
+        id: "Milho-Orgânico-Fresco-001",
+        name: "Milho Orgânico Fresco",
         description: "Tomates orgânicos da variedade italiana cultivados ao ar livre, suculentos e aromáticos. Perfeitos para saladas, molhos e conservas caseiras.",
         price: 8.90,
         category: "legumes",
