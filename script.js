@@ -1,12 +1,12 @@
 // Base de dados dos produtos
 const PRODUCTS_DATABASE = [
     {
-        id: "quinoa-organica-premium-001",
+        id: "Milho",
         name: "Batata Doce Premium",
         description: "Quinoa orgânica de alta qualidade importada dos Andes, rica em proteínas completas, aminoácidos essenciais e minerais. Ideal para dietas veganas e vegetarianas.",
         price: 24.90,
         category: "alimentos",
-        image: "batatadoce.jpeg",
+        image: "milho.jpeg",
         rating: 4.8,
         reviews: 127,
         inStock: true,
