@@ -176,6 +176,7 @@ let mascotMessages = [
     "Algumas pessoas me inspiram tanto a nunca ser como elas! Juro!"
 ];
 let currentMascotMessage = 0;
+let mascotElement = document.getElementById("mascot"); // div ou span no HTML
 
 // Banco de dados de pedidos simulado
 let userOrders = [];
