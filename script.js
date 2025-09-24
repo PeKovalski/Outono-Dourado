@@ -174,13 +174,6 @@ let mascotMessages = [
     "Algumas pessoas me inspiram tanto a nunca ser como elas! Juro!"
 ];
 let currentMascotMessage = 0;
-let mascotElement = document.getElementById("mascot"); // div ou span no HTML
-
-setInterval(() => {
-    // troca mensagem
-    currentMascotMessage = (currentMascotMessage + 1) % mascotMessages.length;
-    mascotElement.textContent = mascotMessages[currentMascotMessage];
-}, 10000); // 10 segundos
 
 // Banco de dados de pedidos simulado
 let userOrders = [];
