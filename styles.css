@@ -7,18 +7,18 @@
 
 :root {
     /* Cores do tema Outono Dourado */
-    --primary: #ffffff;
+    --primary: #DF760B;
     --primary-dark: #b8620a;
     --secondary: #F6B61E;
     --secondary-dark: #d4a01b;
     
     /* Cores de background */
-    --bg-primary: #DF760B;;
+    --bg-primary: #ffffff;
     --bg-secondary: #fef7ed;
     --bg-muted: #f9fafb;
     
     /* Cores de texto */
-    --text-primary: #rgba;
+    --text-primary: #1f2937;
     --text-secondary: #6b7280;
     --text-muted: #9ca3af;
     

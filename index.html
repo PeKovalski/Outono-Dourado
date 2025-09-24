@@ -41,15 +41,7 @@
     <style>
         .toaster {
             position: fixed;
-            top: 20px;click="openCart()">
-                        <i data-lucide="shopping-cart"></i>
-                        <span class="cart-badge" id="cart-badge">0</span>
-                    </button>
-
-                    <!-- Mobile Menu Toggle -->
-                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                        <i data-lucide="menu"></i>
-                    </button>
+            top: 20px;
             right: 20px;
             z-index: 9999;
         }
@@ -60,7 +52,7 @@
             border-radius: 8px;
             padding: 16px;
             margin-bottom: 8px;
-            box-shadow: 0 10px 15px ef4444(255, 23, 23, 0.1);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             min-width: 300px;
             animation: slideIn 0.3s ease-out;
         }
@@ -70,7 +62,7 @@
         }
         
         .toast.error {
-            border-left: 4px solid #000000;
+            border-left: 4px solid #ef4444;
         }
         
         @keyframes slideIn {
@@ -329,15 +321,7 @@
                         </div>
                     </div>
 
-                    <div class="process-step reverse">click="openCart()">
-                        <i data-lucide="shopping-cart"></i>
-                        <span class="cart-badge" id="cart-badge">0</span>
-                    </button>
-
-                    <!-- Mobile Menu Toggle -->
-                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                        <i data-lucide="menu"></i>
-                    </button>
+                    <div class="process-step reverse">
                         <div class="step-image">
                             <img src="https://images.unsplash.com/photo-1727099079513-952d40de9d78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmVlbmhvdXNlJTIwb3JnYW5pYyUyMHZlZ2V0YWJsZXMlMjBncm93aW5nfGVufDF8fHx8MTc1NzY4MTA3OXww&ixlib=rb-4.1.0&q=80&w=1080" 
                                  alt="Cultivo em estufa sustentável" loading="lazy">
@@ -1026,7 +1010,7 @@
             </div>
         </div>
     </div>
- 
+
     <!-- Product Form Modal -->
     <div id="product-form-modal" class="modal">
         <div class="modal-overlay" onclick="closeProductFormModal()"></div>
