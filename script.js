@@ -178,16 +178,6 @@ let mascotMessages = [
     
 ];
 let currentMascotMessage = 0;
-let mascotElement = document.getElementById("mascot"); // div ou span no HTML
-
-// mostra a primeira mensagem já
-mascotElement.textContent = mascotMessages[currentMascotMessage];
-
-setInterval(() => {
-    // troca mensagem
-    currentMascotMessage = (currentMascotMessage + 1) % mascotMessages.length;
-    mascotElement.textContent = mascotMessages[currentMascotMessage];
-}, 10000); // 10 segundos
 
 // Banco de dados de pedidos simulado
 let userOrders = [];
