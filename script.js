@@ -168,8 +168,6 @@ const ADMIN_CREDENTIALS = {
 let mascotMessages = [
    "Olá! Eu sou o Milhito🌽!",
     "Sou primo do verdeco! Nossas empressas são socias! 🥬",
-    "Que tal experimentar nossos produtos sustentáveis hoje? 🌱",
-    "Dica do Milhito: Nossos produtos são 100% orgânicos! ✨",
     "NOSSOS PRODUTOS SÃO PREMIUNSSSSSS!!!!JURO!!",
     "E você ainda pensa em comprar do concorrente 🙄",
     "Você é o motivo de alguns animais comerem seus filhotes! #vegano",
