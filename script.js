@@ -166,15 +166,34 @@ const ADMIN_CREDENTIALS = {
 
 // Estado do mascote
 let mascotMessages = [
-   "Olá! Eu sou o Milhito🌽!",
-    "Sou primo do verdeco! Nossas empressas são socias! 🥬",
-    "NOSSOS PRODUTOS SÃO PREMIUNSSSSSS!!!!JURO!!",
-    "E você ainda pensa em comprar do concorrente 🙄",
-    "Você é o motivo de alguns animais comerem seus filhotes! #vegano",
-    "Algumas pessoas me inspiram tanto a nunca ser como elas! Juro!"
+  "Olá! Eu sou o Milhito🌽!",
+  "Sou primo do verdeco! Nossas empressas são socias! 🥬",
+  "NOSSOS PRODUTOS SÃO PREMIUNSSSSSS!!!!JURO!!",
+  "E você ainda pensa em comprar do concorrente 🙄",
+  "Você é o motivo de alguns animais comerem seus filhotes! #vegano",
+  "Algumas pessoas me inspiram tanto a nunca ser como elas! Juro!"
 ];
-let currentMascotMessage = 0;
 
+let currentMascotMessage = 0;
+let mascotText = document.getElementById("mascot-text");
+let mascotMessageBox = document.getElementById("mascot-message");
+
+function toggleMascotMessage() {
+  mascotText.textContent = mascotMessages[currentMascotMessage];
+  mascotMessageBox.style.display = "block"; // abre balão
+
+  // prepara próxima mensagem
+  currentMascotMessage = (currentMascotMessage + 1) % mascotMessages.length;
+
+  // fecha depois de 10 segundos
+  setTimeout(() => {
+    mascotMessageBox.style.display = "none";
+  }, 10000);
+}
+
+function closeMascotMessage() {
+  mascotMessageBox.style.display = "none"; // fecha no X
+}
 // Banco de dados de pedidos simulado
 let userOrders = [];
 
