@@ -121,12 +121,12 @@ const PRODUCTS_DATABASE = [
         tags: ["artesanal", "crocante", "energia", "mel", "café-da-manhã"]
     },
     {
-        id: "couve-organica-manteiga-011",
+        id: "Batata Doce Premim",
         name: "Couve Orgânica Manteiga Gigante",
         description: "Couve manteiga orgânica de folhas grandes e tenras, cultivada tradicionalmente. Excelente fonte de vitaminas A, C e K, cálcio e ferro. Ideal para refogados.",
         price: 4.90,
         category: "verduras",
-        image: "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        image: "batatadoce.jpeg",
         rating: 4.6,
         reviews: 134,
         inStock: true,
