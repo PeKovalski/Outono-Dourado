@@ -110,7 +110,7 @@ const PRODUCTS_DATABASE = [
     },
     {
         id: "Batata Orgânicas Premium-010",
-        name: "Batata Orgânicas Premium-01",
+        name: "Batata Orgânicas Premium",
         description: "Batatas orgânicas frescas, cultivadas naturalmente sem agrotóxicos, ideais para diversos pratos. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
         price: 18.90,
         category: "alimentos",
@@ -121,9 +121,9 @@ const PRODUCTS_DATABASE = [
         tags: ["artesanal", "crocante", "energia", "mel", "café-da-manhã"]
     },
     {
-        id: "Batata Doce Premim",
-        name: "Couve Orgânica Manteiga Gigante",
-        description: "Couve manteiga orgânica de folhas grandes e tenras, cultivada tradicionalmente. Excelente fonte de vitaminas A, C e K, cálcio e ferro. Ideal para refogados.",
+        id: "Batata Doce Premim-011",
+        name: "Batata Doce Orgânica Premium",
+        description: "Batata doce orgânica naturalmente doce, rica em vitaminas e fibras, cultivada sem pesticidas. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico.",
         price: 4.90,
         category: "verduras",
         image: "batatadoce.jpeg",
