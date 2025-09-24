@@ -7,18 +7,18 @@
 
 :root {
     /* Cores do tema Outono Dourado */
-    --primary: #DF760B;
+    --primary: #ffffff;
     --primary-dark: #b8620a;
     --secondary: #F6B61E;
     --secondary-dark: #d4a01b;
     
     /* Cores de background */
-    --bg-primary: #ffffff;
+    --bg-primary: #DF760B;;
     --bg-secondary: #fef7ed;
     --bg-muted: #f9fafb;
     
     /* Cores de texto */
-    --text-primary: #1f2937;
+    --text-primary: #rgba;
     --text-secondary: #6b7280;
     --text-muted: #9ca3af;
     
@@ -226,7 +226,7 @@ html {
     right: 0;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(223, 118, 11, 0.2);
+    border-bottom: 1px solid rgba(255, 133, 10, 0.76);
     z-index: 1000;
     box-shadow: var(--shadow);
 }
