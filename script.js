@@ -166,11 +166,14 @@ const ADMIN_CREDENTIALS = {
 
 // Estado do mascote
 let mascotMessages = [
-    "Olá! Eu sou o Milhito, seu assistente da Outono Dourado! 🌽",
-    "Precisa de ajuda para escolher produtos orgânicos frescos? 🥬",
+   "Olá! Eu sou o Milhito🌽!",
+    "Sou primo do verdeco! Nossas empressas são socias! 🥬",
     "Que tal experimentar nossos produtos sustentáveis hoje? 🌱",
     "Dica do Milhito: Nossos produtos são 100% orgânicos! ✨",
-    "Posso te ajudar a encontrar algo especial? 😊"
+    "NOSSOS PRODUTOS SÃO PREMIUNSSSSSS!!!!JURO!!",
+    "E você ainda pensa em comprar do concorrente 🙄",
+    "Você é o motivo de alguns animais comerem seus filhotes! #vegano",
+    "Algumas pessoas me inspiram tanto a nunca ser como elas! Juro!"
 ];
 let currentMascotMessage = 0;
 
