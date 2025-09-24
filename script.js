@@ -109,9 +109,9 @@ const PRODUCTS_DATABASE = [
         tags: ["italiana", "baixa-caloria", "versátil", "casca-comestível", "tenra"]
     },
     {
-        id: "Batata Orgânicas Premium",
-        name: "Granola Orgânica Artesanal Crocante",
-        description: "Granola artesanal com aveia, castanhas, frutas secas e mel orgânico. Assada lentamente para máxima crocância. Rica em fibras e energia natural.",
+        id: "Batata Orgânicas Premium-010",
+        name: "Batata Orgânicas Premium-01",
+        description: "Batatas orgânicas frescas, cultivadas naturalmente sem agrotóxicos, ideais para diversos pratos. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
         price: 18.90,
         category: "alimentos",
         image: "batata.jpeg",
@@ -133,12 +133,12 @@ const PRODUCTS_DATABASE = [
         tags: ["tradicional", "folhas-grandes", "refogado", "cálcio", "ferro"]
     },
     {
-        id: "beterraba-organica-detroit-012",
-        name: "Beterraba Orgânica Detroit Doce",
-        description: "Beterrabas orgânicas da variedade Detroit, formato redondo perfeito e cor vermelha intensa. Doces e nutritivas, ricas em antioxidantes e nitrato natural.",
+        id: "Maçã Orgânica Premium-012",
+        name: "Maçã Orgânica Premium",
+        description: "Maçãs vermelhas selecionadas, cultivadas organicamente, doces e crocantes. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
         price: 6.50,
         category: "legumes",
-        image: "https://images.unsplash.com/photo-1568584711271-98a1c95eaa1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        image: "maça.jpeg",
         rating: 4.4,
         reviews: 108,
         inStock: true,
