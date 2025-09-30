@@ -1365,7 +1365,8 @@ function handleProductForm(event) {
                 <div class="order-info">
                     <h4>Pedido ${order.id}</h4>
                     <p class="order-date">${formatDat
-        const index = PRODUCTS_DATABASE.findIndex(p => p.id === editingProduct.id);
+        const index = PRODUCTS_DATABASE?.findIndex(p => p.id === editingProduct?.id);
+
         if (index !== -1) {
             PRODUCTS_DATABASE[index] = { ...PRODUCTS_DATABASE[index], ...productData };
             showToast('Produto Atualizado', `${productData.name} foi atualizado com sucesso`, 'success');
