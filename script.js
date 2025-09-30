@@ -171,7 +171,7 @@ let mascotMessages = [
   "NOSSOS PRODUTOS SÃO PREMIUNSSSSSS!!!!JURO!!",
   "E você ainda pensa em comprar do concorrente 🙄",
   "Vou ali pegar um regador🚿, tá? É que seu raciocínio é tão lento que é preciso regar para ver se cresce.🌝",
-  "Algumas pessoas me inspiram tanto a nunca ser como elas! Juro!"
+  "Algumas pessoas me inspiram tanto a nunca ser como elas! Juro!",
   "Grandes batalhas só são dadas a grandes guerreiros.Vulgo os trabalhadores da Outono♻️",
   "Não Deu Valor? Desculpa, Mais Não Sou A Globo, Tenho Certeza Que Nossa História Não Vale A Pena Ver De Novo🌞(ex-socios)",
 ];
