@@ -1357,16 +1357,7 @@ function handleProductForm(event) {
     
     if (editingProduct) {
         // Update existing product
-    userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
-    
-    container.innerHTML = userOrders.map(order => `
-        <div class="order-card">
-            <div class="order-header">
-                <div class="order-info">
-                    <h4>Pedido ${order.id}</h4>
-                    <p class="order-date">${formatDat
-        const index = PRODUCTS_DATABASE?.findIndex(p => p.id === editingProduct?.id);
-
+        const index = PRODUCTS_DATABASE.findIndex(p => p.id === editingProduct.id);
         if (index !== -1) {
             PRODUCTS_DATABASE[index] = { ...PRODUCTS_DATABASE[index], ...productData };
             showToast('Produto Atualizado', `${productData.name} foi atualizado com sucesso`, 'success');
