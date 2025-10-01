@@ -1555,7 +1555,7 @@ html {
 /* Footer */
 .footer {
     background: var(--text-primary); /* Usando a variável para o fundo */
-    color: #f59e0b; /* Cor do texto */
+    color: hsl(38, 100%, 80%); /* Cor do texto */
     padding: 3rem 0 1rem;
 }
 
