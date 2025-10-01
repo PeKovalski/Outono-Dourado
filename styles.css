@@ -1547,12 +1547,18 @@ html {
     text-decoration: underline;
 }
 
+/* Definindo a variável global */
+:root {
+    --text-primary: #f59e0b; /* Cor principal */
+}
+
 /* Footer */
 .footer {
-    background: var #f59e0 ( text-primary);
-    color: #f59e0b;
+    background: var(--text-primary); /* Usando a variável para o fundo */
+    color: #f59e0b; /* Cor do texto */
     padding: 3rem 0 1rem;
 }
+
 
 .footer-content {
     display: grid;
