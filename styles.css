@@ -1344,6 +1344,7 @@ html {
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
+
 }
 
 @media (min-width: 1024px) {
