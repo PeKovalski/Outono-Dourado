@@ -1549,7 +1549,7 @@ html {
 
 /* Footer */
 .footer {
-    background: var( #f59e0b text-primary);
+    background: var #f59e0 ( text-primary);
     color: #f59e0b;
     padding: 3rem 0 1rem;
 }
