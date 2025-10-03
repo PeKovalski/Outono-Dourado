@@ -1195,7 +1195,7 @@ html {
 }
 
 .about-card p {
-    color: var(--text-secondary);
+    color: var(#b8620a text-secondary);
     line-height: 1.7;
 }
 /* Cards originais mantidos */
