@@ -140,7 +140,7 @@ html {
 
 .mascot-speech-bubble p {
     margin: 0;
-    color: var(--text-primary);
+    color: var(#b8620a text-primary);
     font-weight: 500;
     line-height: 1.4;
 }
