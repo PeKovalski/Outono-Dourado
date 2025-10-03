@@ -1638,7 +1638,7 @@ html {
 .contact-card h4 {
     font-size: 1.125rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(#000000 text-primary);
     margin-bottom: 0.5rem;
 }
 
