@@ -1226,7 +1226,7 @@ html {
 .about-card h3 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(#b8620a text-primary);
     margin-bottom: 1rem;
 }
 
