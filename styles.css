@@ -1550,8 +1550,8 @@ html {
 
 /* Definindo a variável global */
 :root {
-    --text-primary: #f59e0b; /* Cor principal */
-}
+    --text-primary: #f59e0b2b; /* Cor principal */
+
 
 /* Footer */
 .footer {
