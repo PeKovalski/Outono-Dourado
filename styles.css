@@ -1484,12 +1484,12 @@ html {
 }
 
 .detail-content p {
-    color: var(--text-secondary);
+    color: var(#000000 text-secondary);
     line-height: 1.6;
 }
 
 .detail-content a {
-    color: var(--primary);
+    color: var(#000000 primary);
     text-decoration: none;
 }
 
