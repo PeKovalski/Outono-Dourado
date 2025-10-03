@@ -1,7 +1,6 @@
 // Base de dados dos produtos
 const PRODUCTS_DATABASE = [
     {
-        SELECT * FROM produtos WHERE categoria = 'verduras';
 
         id: "Milho",
         name: "Milho Premium",
