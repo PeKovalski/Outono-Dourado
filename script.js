@@ -5,7 +5,7 @@ const PRODUCTS_DATABASE = [
 
         id: "Milho",
         name: "Milho Premium",
-        description: "Quinoa orgânica de alta qualidade importada dos Andes, rica em proteínas completas, aminoácidos essenciais e minerais. Ideal para dietas veganas e vegetarianas.",
+        description: "Milho orgânico cultivado de forma sustentável, sem pesticidas, colhido fresquinho, Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico",
         price: 24.90,
         category: "Legumes",
         image: "milho.jpeg",
