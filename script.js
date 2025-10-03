@@ -1,6 +1,8 @@
 // Base de dados dos produtos
 const PRODUCTS_DATABASE = [
     {
+      
+
 
         id: "Milho",
         name: "Milho Premium",
@@ -1426,4 +1428,16 @@ function loadCustomProducts() {
 // Initialize custom products loading
 document.addEventListener('DOMContentLoaded', function() {
     loadCustomProducts();
+    const filteredProducts = PRODUCTS_DATABASE.filter(product => {
+    const matchesFilter = currentFilter === 'all' || 
+        product.category.toLowerCase() === currentFilter.toLowerCase();
+    
+    const matchesSearch = searchQuery === '' || 
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    return matchesFilter && matchesSearch;
+});
+
 });
