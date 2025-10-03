@@ -1,6 +1,8 @@
 // Base de dados dos produtos
 const PRODUCTS_DATABASE = [
     {
+        SELECT * FROM produtos WHERE categoria = 'verduras';
+
         id: "Milho",
         name: "Milho Premium",
         description: "Quinoa orgânica de alta qualidade importada dos Andes, rica em proteínas completas, aminoácidos essenciais e minerais. Ideal para dietas veganas e vegetarianas.",
