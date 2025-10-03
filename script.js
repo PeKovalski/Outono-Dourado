@@ -12,7 +12,7 @@ const PRODUCTS_DATABASE = [
         rating: 4.8,
         reviews: 127,
         inStock: true,
-        tags: ["premium", "proteína", "vegano", "sem-glúten", "superfood"]
+        tags: ["premium", "proteína", "vegano", "sem-glúten", "superfood",]
     },
     {
         id: "alface-organica-crespa-002",
@@ -24,7 +24,7 @@ const PRODUCTS_DATABASE = [
         rating: 4.6,
         reviews: 89,
         inStock: true,
-        tags: ["fresco", "hidropônico", "vitaminas", "baixa-caloria", "crocante"]
+        tags: ["fresco", "hidropônico", "vitaminas", "baixa-caloria", "crocante", "Verduras"]
     },
     {
         id: "Tomate",
