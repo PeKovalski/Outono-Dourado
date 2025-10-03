@@ -994,6 +994,109 @@ html {
     line-height: 1.7;
 }
 
+/* Processo de Plantio e Colheita */
+.process-section {
+    margin-bottom: 4rem;
+}
+
+.process-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.process-header h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.process-header p {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+}
+
+.process-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.process-step {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .process-step {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .process-step.reverse {
+        direction: rtl;
+    }
+    
+    .process-step.reverse > * {
+        direction: ltr;
+    }
+}
+
+.step-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.step-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.step-image:hover img {
+    transform: scale(1.05);
+}
+
+.step-content {
+    position: relative;
+    padding: 1.5rem;
+}
+
+.step-number {
+    position: absolute;
+    top: -1rem;
+    left: 1.5rem;
+    background: var(--primary);
+    color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-md);
+}
+
+.step-content h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.step-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+
 /* Nossa Equipe */
 .team-section {
     margin-bottom: 4rem;
