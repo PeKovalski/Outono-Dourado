@@ -1710,7 +1710,7 @@ html {
 }
 
 .footer-links a {
-    color: #d1d5db;
+    color: #000000;
     text-decoration: none;
     transition: color 0.2s ease;
 }
