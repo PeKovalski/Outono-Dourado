@@ -8,7 +8,7 @@ const PRODUCTS_DATABASE = [
         name: "Milho Premium",
         description: "Milho orgânico cultivado de forma sustentável, sem pesticidas, colhido fresquinho, Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico",
         price: 24.90,
-        category: "Legumes",
+        category: "Verduras",
         image: "milho.jpeg",
         rating: 4.8,
         reviews: 127,
