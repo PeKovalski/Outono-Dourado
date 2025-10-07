@@ -8,7 +8,7 @@ const PRODUCTS_DATABASE = [
         name: "Milho Premium",
         description: "Milho orgânico cultivado de forma sustentável, sem pesticidas, colhido fresquinho, Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico",
         price: 24.90,
-        category: "Verduras",
+        category: "Legumes",
         image: "milho.jpeg",
         rating: 4.8,
         reviews: 127,
@@ -20,7 +20,7 @@ const PRODUCTS_DATABASE = [
         name: "Alface Orgânica Crespa Verde",
         description: "Alface crespa fresca cultivada sem pesticidas em estufa climatizada, colhida diariamente para garantir máximo frescor e crocância. Rica em vitaminas A e K.",
         price: 4.50,
-        category: "Verduras Frescas",
+        category: "Verduras",
         image: "alface.jpeg",
         rating: 4.6,
         reviews: 89,
@@ -345,7 +345,7 @@ function loadProducts() {
     if (filteredProducts.length === 0) {
         grid.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                <p style="color: rgba(0, 0, 0, 1); font-size: 1.125rem;">Nenhum produto encontrado</p>
+                <p style="color: #6b7280; font-size: 1.125rem;">Nenhum produto encontrado</p>
                 <button class="btn-primary" onclick="clearFilters()" style="margin-top: 1rem;">
                     Limpar Filtros
                 </button>
@@ -391,7 +391,7 @@ function loadProducts() {
 
 function getCategoryName(category) {
     const categoryNames = {
-        'alimentos': 'Verduras',
+        'alimentos': 'Alimentos',
         'verduras': 'Verduras',
         'legumes': 'Legumes'
     };
@@ -1403,23 +1403,6 @@ function deleteProduct(productId) {
         }
     }
 }
-const productList = document.getElementById('product-list'); // Supondo que você tenha uma div com id 'product-list'
-
-verduraProducts.forEach(product => {
-    const productElement = document.createElement('div');
-    productElement.classList.add('product');
-    
-    productElement.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <span>Preço: R$${product.price}</span>
-        <span>Avaliação: ${product.rating} ★</span>
-        <span>Estoque: ${product.inStock ? 'Disponível' : 'Indisponível'}</span>
-    `;
-
-    productList.appendChild(productElement);
-});
 
 // Load products from localStorage on page load (if any custom products exist)
 function loadCustomProducts() {
@@ -1440,10 +1423,7 @@ function loadCustomProducts() {
         PRODUCTS_DATABASE.length = 0;
         PRODUCTS_DATABASE.push(...mergedProducts);
     }
-}
-const verduraProducts = PRODUCTS_DATABASE.filter(product => product.category === "Verduras");
-console.log(verduraProducts);
-
+}.
 
 // Initialize custom products loading
 document.addEventListener('DOMContentLoaded', function() {
