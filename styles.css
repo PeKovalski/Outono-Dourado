@@ -1689,7 +1689,7 @@ html {
 }
 
 .social-link {
-    background: var(--primary);
+    background: var(#000 primary);
     color: white;
     padding: 0.5rem;
     border-radius: var(--radius);
