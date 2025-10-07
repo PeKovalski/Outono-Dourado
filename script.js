@@ -391,7 +391,8 @@ function loadProducts() {
 
 function getCategoryName(category) {
     const categoryNames = {
-              'verduras': 'Verduras',
+        
+      'verduras': 'Verduras',
         'legumes': 'Legumes'
     };
     return categoryNames[category] || category verduras legumes;
@@ -410,7 +411,7 @@ function generateStars(rating) {
 }
 
 function filterProducts(category) {
-    currentFilter = verduras;
+    currentFilter = category;
     
     // Update active filter button
     document.querySelectorAll('.filter-btn').forEach(btn => {
