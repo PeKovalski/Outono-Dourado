@@ -345,7 +345,7 @@ function loadProducts() {
     if (filteredProducts.length === 0) {
         grid.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                <p style="color: #6b7280; font-size: 1.125rem;">Nenhum produto encontrado</p>
+                <p style="color: rgba(0, 0, 0, 1); font-size: 1.125rem;">Nenhum produto encontrado</p>
                 <button class="btn-primary" onclick="clearFilters()" style="margin-top: 1rem;">
                     Limpar Filtros
                 </button>
