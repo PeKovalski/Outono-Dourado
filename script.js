@@ -391,8 +391,8 @@ function loadProducts() {
 
 function getCategoryName(category) {
     const categoryNames = {
-        
-      'verduras': 'Verduras',
+        'alimentos': 'Alimentos',
+        'verduras': 'Verduras',
         'legumes': 'Legumes'
     };
     return categoryNames[category] || category verduras legumes;
