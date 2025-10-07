@@ -25,7 +25,7 @@ const PRODUCTS_DATABASE = [
         rating: 4.6,
         reviews: 89,
         inStock: true,
-        tags: ["fresco", "hidropônico", "vitaminas", "baixa-caloria", "crocante", "Verduras"]
+        tags: ["fresco", "verduras", "hidropônico", "vitaminas", "baixa-caloria", "crocante", "Verduras"]
     },
     {
         id: "Tomate",
@@ -73,7 +73,7 @@ const PRODUCTS_DATABASE = [
         rating: 4.6,
         reviews: 142,
         inStock: true,
-        tags: ["doce", "betacaroteno", "crocante", "infantil", "sucos"]
+        tags: ["doce", "verduras", "betacaroteno", "crocante", "infantil", "sucos"]
     },
     {
         id: "Uvas Orgânicas Premium-007",
