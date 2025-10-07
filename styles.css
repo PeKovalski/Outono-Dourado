@@ -1774,7 +1774,7 @@ html {
 .modal-header h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #df760b;
 }
 
 .modal-close {
