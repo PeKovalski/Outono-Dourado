@@ -391,11 +391,11 @@ function loadProducts() {
 
 function getCategoryName(category) {
     const categoryNames = {
-        'alimentos': 'Alimentos',
+        
         'verduras': 'Verduras',
         'legumes': 'Legumes'
     };
-    return categoryNames[category] || category;
+    return categoryNames[category] || category verduras legumes;
 }
 
 function generateStars(rating) {
