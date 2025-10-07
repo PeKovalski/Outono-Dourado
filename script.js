@@ -1424,6 +1424,9 @@ function loadCustomProducts() {
         PRODUCTS_DATABASE.push(...mergedProducts);
     }
 }
+const verduraProducts = PRODUCTS_DATABASE.filter(product => product.category === "Verduras");
+console.log(verduraProducts);
+
 
 // Initialize custom products loading
 document.addEventListener('DOMContentLoaded', function() {
