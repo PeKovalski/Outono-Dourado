@@ -1724,14 +1724,14 @@ html {
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
-    color: #d1d5db;
+    color: #000000;
 }
 
 .footer-bottom {
     padding-top: 2rem;
     border-top: 1px solid #df760b;
     text-align: center;
-    color: #d1d5db;
+    color: hsl(0, 0%, 0%);
 }
 
 /* Modal */
