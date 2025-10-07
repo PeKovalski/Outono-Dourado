@@ -1403,6 +1403,23 @@ function deleteProduct(productId) {
         }
     }
 }
+const productList = document.getElementById('product-list'); // Supondo que você tenha uma div com id 'product-list'
+
+verduraProducts.forEach(product => {
+    const productElement = document.createElement('div');
+    productElement.classList.add('product');
+    
+    productElement.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <span>Preço: R$${product.price}</span>
+        <span>Avaliação: ${product.rating} ★</span>
+        <span>Estoque: ${product.inStock ? 'Disponível' : 'Indisponível'}</span>
+    `;
+
+    productList.appendChild(productElement);
+});
 
 // Load products from localStorage on page load (if any custom products exist)
 function loadCustomProducts() {
