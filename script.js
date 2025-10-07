@@ -20,7 +20,7 @@ const PRODUCTS_DATABASE = [
         name: "Alface Orgânica Crespa Verde",
         description: "Alface crespa fresca cultivada sem pesticidas em estufa climatizada, colhida diariamente para garantir máximo frescor e crocância. Rica em vitaminas A e K.",
         price: 4.50,
-        category: "Verduras",
+        category: "Verduras Frescas",
         image: "alface.jpeg",
         rating: 4.6,
         reviews: 89,
