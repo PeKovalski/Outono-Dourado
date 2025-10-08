@@ -334,7 +334,8 @@ function loadProducts() {
     if (!grid) return;
     
     const filteredProducts = PRODUCTS_DATABASE.filter(product => {
-        const matchesFilter = currentFilter === 'all' || product.category === currentFilter;
+        const matchesFilter = currentFilter === 'all' || 
+            product.category.toLowerCase() === currentFilter.toLowerCase();
         const matchesSearch = searchQuery === '' || 
             product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -394,9 +395,10 @@ function getCategoryName(category) {
     const categoryNames = {
         'alimentos': 'Alimentos',
         'verduras': 'Verduras',
-        'legumes': 'Legumes'
+        'legumes': 'Legumes',
+        'frutas': 'Frutas'
     };
-    return categoryNames[category] || category;
+    return categoryNames[category.toLowerCase()] || category;
 }
 
 function generateStars(rating) {
@@ -1227,6 +1229,176 @@ window.addEventListener('scroll', function() {
 document.addEventListener('DOMContentLoaded', function() {
     lucide.createIcons();
 });
+
+// ========================
+// CHECKOUT & PAYMENT FUNCTIONALITY
+// ========================
+
+let selectedPaymentMethod = 'pix';
+
+// Open checkout modal
+function openCheckoutModal() {
+    if (cart.length === 0) {
+        showToast('Carrinho vazio', 'Adicione produtos antes de finalizar', 'error');
+        return;
+    }
+    
+    if (!isLoggedIn) {
+        showToast('Login necessário', 'Faça login para finalizar seu pedido', 'error');
+        openLoginModal();
+        return;
+    }
+    
+    // Load checkout summary
+    loadCheckoutSummary();
+    
+    // Show modal
+    const modal = document.getElementById('checkout-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        lucide.createIcons();
+    }
+    
+    closeCart();
+}
+
+// Close checkout modal
+function closeCheckoutModal() {
+    const modal = document.getElementById('checkout-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Load checkout summary
+function loadCheckoutSummary() {
+    const summaryContainer = document.getElementById('checkout-items-summary');
+    const totalElement = document.getElementById('checkout-total-amount');
+    
+    if (!summaryContainer || !totalElement) return;
+    
+    // Display items
+    summaryContainer.innerHTML = cart.map(item => `
+        <div class="checkout-item">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="item-details">
+                <span class="item-name">${item.name}</span>
+                <span class="item-quantity">${item.quantity}x R$ ${item.price.toFixed(2)}</span>
+            </div>
+            <span class="item-total">R$ ${(item.price * item.quantity).toFixed(2)}</span>
+        </div>
+    `).join('');
+    
+    // Calculate and display total
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    totalElement.textContent = `R$ ${total.toFixed(2)}`;
+}
+
+// Select payment method
+function selectPaymentMethod(method) {
+    selectedPaymentMethod = method;
+    
+    // Update tabs
+    document.querySelectorAll('.payment-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    event.target.closest('.payment-tab').classList.add('active');
+    
+    // Update content
+    document.querySelectorAll('.payment-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    const contentId = method + '-payment';
+    const content = document.getElementById(contentId);
+    if (content) {
+        content.classList.add('active');
+    }
+    
+    lucide.createIcons();
+}
+
+// Copy PIX code
+function copyPixCode() {
+    const pixInput = document.getElementById('pix-code-input');
+    if (!pixInput) return;
+    
+    pixInput.select();
+    document.execCommand('copy');
+    
+    showToast('Código copiado!', 'Cole no app do seu banco', 'success');
+}
+
+// Copy boleto code
+function copyBoletoCode() {
+    const boletoCode = '23793.38128 60047.947309 99877.661022 8 99560000015000';
+    
+    // Create temporary input
+    const tempInput = document.createElement('input');
+    tempInput.value = boletoCode;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    
+    showToast('Código copiado!', 'Use para pagar o boleto', 'success');
+}
+
+// Confirm payment
+function confirmPayment(method) {
+    event.preventDefault();
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    // Create order
+    const order = {
+        id: 'ORD-' + Date.now(),
+        date: new Date().toISOString(),
+        items: [...cart],
+        total: total,
+        status: method === 'pix' ? 'pending' : method === 'card' ? 'confirmed' : 'pending',
+        paymentMethod: method,
+        userId: currentUser.id
+    };
+    
+    // Add to orders
+    userOrders.push(order);
+    localStorage.setItem('outono-dourado-orders', JSON.stringify(userOrders));
+    
+    // Show success message based on payment method
+    let successMessage = '';
+    let successDescription = '';
+    
+    switch(method) {
+        case 'pix':
+            successMessage = 'Aguardando Pagamento PIX';
+            successDescription = 'Assim que confirmarmos o pagamento, você receberá um e-mail';
+            break;
+        case 'card':
+            successMessage = 'Pagamento Aprovado!';
+            successDescription = `Pedido ${order.id} confirmado. Você receberá um e-mail em breve`;
+            break;
+        case 'boleto':
+            successMessage = 'Boleto Gerado!';
+            successDescription = 'O boleto foi enviado para seu e-mail';
+            break;
+    }
+    
+    showToast(successMessage, successDescription, 'success');
+    
+    // Clear cart
+    setTimeout(() => {
+        cart = [];
+        updateCartBadge();
+        saveCartToStorage();
+        closeCheckoutModal();
+    }, 2000);
+}
+
+// Legacy checkout function - now redirects to checkout modal
+function checkout() {
+    openCheckoutModal();
+}
 
 // ========================
 // ADMIN PANEL FUNCTIONALITY

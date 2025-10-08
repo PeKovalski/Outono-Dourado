@@ -501,13 +501,14 @@
                     <button class="filter-btn active" onclick="filterProducts('all')">
                         Todos
                     </button>
-            
-                    </button>
                     <button class="filter-btn" onclick="filterProducts('verduras')">
                         Verduras
                     </button>
                     <button class="filter-btn" onclick="filterProducts('legumes')">
                         Legumes
+                    </button>
+                    <button class="filter-btn" onclick="filterProducts('frutas')">
+                        Frutas
                     </button>
                 </div>
 
@@ -1014,12 +1015,23 @@
             <div id="cart-items" class="cart-items">
                 <!-- Cart items will be loaded here -->
             </div>
+            
+            <!-- Mascote Vix Pix no Carrinho -->
+            <div class="cart-mascot" id="cart-mascot">
+                <div class="mascot-container">
+                    <img src="milhito.png" alt="Vix Pix - Mascote Outono Dourado" class="mascot-image-cart">
+                    <div class="mascot-bubble">
+                        <p>Olá! Eu sou o Vix Pix! 🌽✨ Estou aqui para te ajudar com sua compra!</p>
+                    </div>
+                </div>
+            </div>
+            
             <div id="cart-total" class="cart-total">
                 <div class="total-row">
                     <span>Total:</span>
                     <span id="total-amount">R$ 0,00</span>
                 </div>
-                <button class="btn-primary checkout-btn" onclick="checkout()">
+                <button class="btn-primary checkout-btn" onclick="openCheckoutModal()">
                     Finalizar Pedido
                 </button>
             </div>
@@ -1151,6 +1163,162 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Checkout Payment Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-overlay" onclick="closeCheckoutModal()"></div>
+        <div class="modal-content checkout-modal">
+            <div class="modal-header">
+                <h3>Finalizar Pagamento</h3>
+                <button class="modal-close" onclick="closeCheckoutModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="checkout-content">
+                <!-- Resumo do Pedido -->
+                <div class="checkout-summary">
+                    <h4>Resumo do Pedido</h4>
+                    <div id="checkout-items-summary" class="checkout-items">
+                        <!-- Items serão carregados aqui -->
+                    </div>
+                    <div class="checkout-total">
+                        <span>Total:</span>
+                        <span id="checkout-total-amount">R$ 0,00</span>
+                    </div>
+                </div>
+                
+                <!-- Métodos de Pagamento -->
+                <div class="payment-methods">
+                    <h4>Escolha o método de pagamento</h4>
+                    <div class="payment-tabs">
+                        <button class="payment-tab active" onclick="selectPaymentMethod('pix')">
+                            <i data-lucide="smartphone"></i>
+                            PIX
+                        </button>
+                        <button class="payment-tab" onclick="selectPaymentMethod('card')">
+                            <i data-lucide="credit-card"></i>
+                            Cartão
+                        </button>
+                        <button class="payment-tab" onclick="selectPaymentMethod('boleto')">
+                            <i data-lucide="file-text"></i>
+                            Boleto
+                        </button>
+                    </div>
+                    
+                    <!-- PIX Payment -->
+                    <div id="pix-payment" class="payment-content active">
+                        <div class="pix-container">
+                            <h5>Pague com PIX</h5>
+                            <p>Escaneie o QR Code abaixo ou copie o código PIX:</p>
+                            
+                            <div class="pix-qrcode">
+                                <img id="pix-qr-image" src="https://via.placeholder.com/250x250/DF760B/FFFFFF?text=QR+CODE+PIX" alt="QR Code PIX">
+                                <p class="pix-instruction">Abra o app do seu banco e escaneie o código</p>
+                            </div>
+                            
+                            <div class="pix-code">
+                                <input type="text" id="pix-code-input" value="00020126580014BR.GOV.BCB.PIX0136chave-pix-exemplo@outonodourado.com" readonly>
+                                <button class="btn-copy" onclick="copyPixCode()">
+                                    <i data-lucide="copy"></i>
+                                    Copiar
+                                </button>
+                            </div>
+                            
+                            <div class="pix-mascot">
+                                <img src="milhito.png" alt="Vix Pix">
+                                <p>O Vix Pix está esperando seu pagamento! 🌽💚</p>
+                            </div>
+                            
+                            <button class="btn-primary btn-confirm-payment" onclick="confirmPayment('pix')">
+                                Confirmar Pagamento
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Card Payment -->
+                    <div id="card-payment" class="payment-content">
+                        <div class="card-container">
+                            <h5>Pagamento com Cartão</h5>
+                            
+                            <form id="card-form" onsubmit="confirmPayment('card'); return false;">
+                                <div class="form-group">
+                                    <label for="card-number">Número do Cartão</label>
+                                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="card-name">Nome no Cartão</label>
+                                        <input type="text" id="card-name" placeholder="NOME COMPLETO" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="card-expiry">Validade</label>
+                                        <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="card-cvv">CVV</label>
+                                        <input type="text" id="card-cvv" placeholder="123" maxlength="3" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="card-installments">Parcelas</label>
+                                    <select id="card-installments">
+                                        <option value="1">1x sem juros</option>
+                                        <option value="2">2x sem juros</option>
+                                        <option value="3">3x sem juros</option>
+                                        <option value="4">4x com juros (2%)</option>
+                                        <option value="5">5x com juros (2%)</option>
+                                        <option value="6">6x com juros (2%)</option>
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary btn-confirm-payment">
+                                    Confirmar Pagamento
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Boleto Payment -->
+                    <div id="boleto-payment" class="payment-content">
+                        <div class="boleto-container">
+                            <h5>Pagamento com Boleto</h5>
+                            <p>O boleto será gerado e enviado para seu e-mail</p>
+                            
+                            <div class="boleto-info">
+                                <div class="info-item">
+                                    <i data-lucide="calendar"></i>
+                                    <span>Vencimento em 3 dias úteis</span>
+                                </div>
+                                <div class="info-item">
+                                    <i data-lucide="alert-circle"></i>
+                                    <span>Confirmação em até 2 dias úteis após pagamento</span>
+                                </div>
+                            </div>
+                            
+                            <div class="boleto-barcode">
+                                <img src="https://via.placeholder.com/400x60/000000/FFFFFF?text=||+|++||++|+|++||+|+||++|" alt="Código de Barras">
+                                <p class="boleto-code">23793.38128 60047.947309 99877.661022 8 99560000015000</p>
+                                <button class="btn-copy" onclick="copyBoletoCode()">
+                                    <i data-lucide="copy"></i>
+                                    Copiar código
+                                </button>
+                            </div>
+                            
+                            <button class="btn-primary btn-confirm-payment" onclick="confirmPayment('boleto')">
+                                Gerar Boleto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
