@@ -410,10 +410,10 @@ html {
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
-    color: var(--text-primary);
+    color: var(#000 text-primary);
     cursor: pointer;
     transition: background 0.2s ease;
-    border-radius: var(--radius);
+    border-radius: var(#000 radius);
     margin: 0.25rem;
 }
 
@@ -2020,7 +2020,7 @@ html {
 }
 
 .order-info h4 {
-    color: var(--text-primary);
+    color: var(3#000 text-primary);
     margin-bottom: 0.25rem;
 }
 
@@ -2095,7 +2095,7 @@ html {
 
 .item-name {
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(#0000008e text-primary);
     font-size: 0.875rem;
 }
 
