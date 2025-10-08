@@ -405,7 +405,7 @@ function generateStars(rating) {
         if (i <= rating) {
             stars += '<span class="star">★</span>';
         } else {
-            stars += '<span class="star" style="color: #d1d5db;">★</span>';
+            stars += '<span class="star" style="color: #000000ff;">★</span>';
         }
     }
     return stars;
