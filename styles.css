@@ -1992,7 +1992,7 @@ html {
 }
 
 .empty-orders h4 {
-    color: var(--text-primary);
+    color: var(#b8620a text-primary);
     margin-bottom: 0.5rem;
 }
 
