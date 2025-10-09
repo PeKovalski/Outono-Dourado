@@ -2370,7 +2370,7 @@ html {
     height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right: 10px solid var(--primary);
+    border-right: 10px solid var(#000 primary);
 }
 
 .mascot-bubble p {
