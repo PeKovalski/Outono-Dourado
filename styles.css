@@ -1658,8 +1658,8 @@ html {
 
 /* Footer */
 .footer {
-    background: var(--text-primary); /* Usando a variável para o fundo */
-    color: hsl(38, 100%, 80%); /* Cor do texto */
+    background: var(#f3aa61ab text-primary); /* Usando a variável para o fundo */
+    color: hsl(38, 98%, 48%); /* Cor do texto */
     padding: 3rem 0 1rem;
 }
 
@@ -2375,7 +2375,7 @@ html {
 
 .mascot-bubble p {
     margin: 0;
-    color: var(#000text-primary);
+    color: var(#000 text-primary);
     font-size: 0.875rem;
     line-height: 1.5;
 }
