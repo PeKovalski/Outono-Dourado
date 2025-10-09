@@ -2417,7 +2417,7 @@ html {
 
 .checkout-summary h4 {
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    color: var(#000 text-primary);
     font-size: 1.25rem;
 }
 
