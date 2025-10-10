@@ -1678,7 +1678,7 @@ html {
 }
 
 .footer-description {
-    color: #000000;
+    color: #d3670f;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -2180,12 +2180,12 @@ html {
 
 .cart-item-name {
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(#d3670f text-primary);
     margin-bottom: 0.5rem;
 }
 
 .cart-item-price {
-    color: var(--primary);
+    color: var(#000 primary);
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
