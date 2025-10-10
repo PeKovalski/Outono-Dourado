@@ -1032,22 +1032,7 @@ function handleLogin(event) {
         isLoggedIn = true;
         isAdmin = user.isAdmin || false;
         
-        // Save to localStorage
-        localStorage.setItem('outono-dourado-user', JSON.stringify(user));
-        if (rememberMe) {
-            localStorage.setItem('outono-dourado-remember', 'true');
-        }
-        
-        updateAuthUI();
-        closeLoginModal();
-        loadUserOrders();
-        
-        const welcomeMessage = isAdminLogin ? 
-            `Bem-vindo, ${user.name}! Painel administrativo disponível.` : 
-            `Bem-vindo, ${user.name}!`;
-        
-        showToast('Login realizado!', welcomeMessage, 'success');
-        
+       
         // Reset form
         event.target.reset();
     }, 1500);
