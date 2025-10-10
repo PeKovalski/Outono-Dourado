@@ -2625,7 +2625,7 @@ html {
 .pix-mascot p {
     flex: 1;
     margin: 0;
-    color: var(--text-primary);
+    color: var(#000 text-primary);
     font-weight: 500;
 }
 
