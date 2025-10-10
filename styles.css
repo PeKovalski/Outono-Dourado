@@ -3046,7 +3046,7 @@ html {
 }
 
 .admin-product-info .product-price {
-    color: var(--text-primary);
+    color: var(#000 text-primary);
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
