@@ -1,3 +1,553 @@
+/**
+ * OUTONO DOURADO - INTEGRAÇÃO SUPABASE
+ * 
+ * Este arquivo adiciona funcionalidade de banco de dados real ao site HTML
+ * SEM modificar os arquivos originais (index.html, script.js, styles.css)
+ * 
+ * Para usar: adicione este script ANTES do script.js no index.html
+ */
+
+// ===== CONFIGURAÇÃO SUPABASE =====
+const SUPABASE_CONFIG = {
+  url: 'https://khzrncdvwawmlmwfhoil.supabase.co',
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtoenJuY2R2d2F3bWxtd2Zob2lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0OTg5ODQsImV4cCI6MjA3NTA3NDk4NH0.aA-ecvCZgllSRD6ANnZN6FetHqPixTXlMgmxow6a2BU'
+};
+
+// Variável global para o cliente Supabase
+let supabaseClient = null;
+
+// ===== INICIALIZAÇÃO =====
+async function initSupabase() {
+  console.log('🍂 Iniciando integração Supabase - Outono Dourado...');
+  
+  try {
+    // Importar Supabase dinamicamente
+    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+    
+    supabaseClient = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+    
+    console.log('✅ Cliente Supabase inicializado com sucesso!');
+    
+    // Testar conexão
+    const { data, error } = await supabaseClient.from('products').select('count');
+    
+    if (error) {
+      console.warn('⚠️ Erro ao conectar com Supabase, usando dados locais:', error.message);
+      return false;
+    }
+    
+    console.log('✅ Conexão com banco de dados confirmada!');
+    return true;
+  } catch (error) {
+    console.error('❌ Erro ao inicializar Supabase:', error);
+    return false;
+  }
+}
+
+// ===== FUNÇÕES DE PRODUTOS =====
+
+/**
+ * Carregar produtos do Supabase
+ */
+async function loadProductsFromSupabase() {
+  if (!supabaseClient) {
+    console.log('⚠️ Supabase não inicializado, usando produtos locais');
+    return null;
+  }
+
+  try {
+    console.log('📦 Carregando produtos do banco de dados...');
+    
+    const { data: products, error } = await supabaseClient
+      .from('products')
+      .select('*')
+      .eq('in_stock', true)
+      .order('name');
+
+    if (error) throw error;
+
+    console.log(`✅ ${products.length} produtos carregados do banco de dados`);
+    
+    // Converter formato do banco para formato do site
+    return products.map(p => ({
+      id: p.id,
+      name: p.name,
+      description: p.description,
+      price: parseFloat(p.price),
+      category: p.category,
+      image: p.image_url || 'placeholder.jpg',
+      rating: 4.5, // Valor padrão
+      reviews: 0,
+      inStock: p.in_stock,
+      tags: Array.isArray(p.tags) ? p.tags : []
+    }));
+  } catch (error) {
+    console.error('❌ Erro ao carregar produtos:', error);
+    return null;
+  }
+}
+
+/**
+ * Buscar produto por ID
+ */
+async function getProductById(productId) {
+  if (!supabaseClient) return null;
+
+  try {
+    const { data, error } = await supabaseClient
+      .from('products')
+      .select('*')
+      .eq('id', productId)
+      .single();
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('❌ Erro ao buscar produto:', error);
+    return null;
+  }
+}
+
+// ===== FUNÇÕES DE AUTENTICAÇÃO =====
+
+/**
+ * Registrar novo usuário
+ */
+async function registerUser(userData) {
+  if (!supabaseClient) {
+    console.log('⚠️ Usando registro local (sem banco)');
+    return { success: false, error: 'Banco de dados não disponível' };
+  }
+
+  try {
+    console.log('👤 Registrando usuário:', userData.email);
+
+    // 1. Criar usuário na autenticação
+    const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+      email: userData.email,
+      password: userData.password,
+      options: {
+        data: {
+          name: userData.name,
+          phone: userData.phone || '',
+        }
+      }
+    });
+
+    if (authError) throw authError;
+
+    // 2. Criar perfil do usuário
+    if (authData.user) {
+      const { error: profileError } = await supabaseClient
+        .from('users')
+        .insert([{
+          id: authData.user.id,
+          email: userData.email,
+          name: userData.name,
+          phone: userData.phone || '',
+          address: userData.address || '',
+          role: 'customer'
+        }]);
+
+      if (profileError) {
+        console.warn('⚠️ Erro ao criar perfil, mas autenticação OK:', profileError);
+      }
+    }
+
+    console.log('✅ Usuário registrado com sucesso!');
+    return { 
+      success: true, 
+      user: {
+        id: authData.user.id,
+        email: userData.email,
+        name: userData.name
+      }
+    };
+  } catch (error) {
+    console.error('❌ Erro ao registrar usuário:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Login de usuário
+ */
+async function loginUser(email, password) {
+  if (!supabaseClient) {
+    console.log('⚠️ Usando login local (sem banco)');
+    return { success: false, error: 'Banco de dados não disponível' };
+  }
+
+  try {
+    console.log('🔐 Fazendo login:', email);
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) throw error;
+
+    // Buscar dados do perfil
+    const { data: profile } = await supabaseClient
+      .from('users')
+      .select('*')
+      .eq('id', data.user.id)
+      .single();
+
+    console.log('✅ Login realizado com sucesso!');
+    return { 
+      success: true, 
+      user: {
+        id: data.user.id,
+        email: data.user.email,
+        name: profile?.name || data.user.email,
+        phone: profile?.phone || '',
+        address: profile?.address || '',
+        role: profile?.role || 'customer'
+      }
+    };
+  } catch (error) {
+    console.error('❌ Erro no login:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Logout
+ */
+async function logoutUser() {
+  if (!supabaseClient) return { success: false };
+
+  try {
+    await supabaseClient.auth.signOut();
+    console.log('✅ Logout realizado');
+    return { success: true };
+  } catch (error) {
+    console.error('❌ Erro no logout:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Obter usuário atual
+ */
+async function getCurrentUser() {
+  if (!supabaseClient) return null;
+
+  try {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    
+    if (!user) return null;
+
+    // Buscar perfil completo
+    const { data: profile } = await supabaseClient
+      .from('users')
+      .select('*')
+      .eq('id', user.id)
+      .single();
+
+    return {
+      id: user.id,
+      email: user.email,
+      name: profile?.name || user.email,
+      phone: profile?.phone || '',
+      address: profile?.address || '',
+      role: profile?.role || 'customer'
+    };
+  } catch (error) {
+    console.error('❌ Erro ao obter usuário:', error);
+    return null;
+  }
+}
+
+// ===== FUNÇÕES DE CARRINHO =====
+
+/**
+ * Adicionar item ao carrinho (Supabase)
+ */
+async function addToCartSupabase(userId, productId, quantity = 1) {
+  if (!supabaseClient || !userId) {
+    console.log('⚠️ Usando carrinho local');
+    return { success: false };
+  }
+
+  try {
+    console.log('🛒 Adicionando ao carrinho:', productId);
+
+    // Verificar se item já existe
+    const { data: existingItem } = await supabaseClient
+      .from('cart')
+      .select('*')
+      .eq('user_id', userId)
+      .eq('product_id', productId)
+      .single();
+
+    if (existingItem) {
+      // Atualizar quantidade
+      const { error } = await supabaseClient
+        .from('cart')
+        .update({ quantity: existingItem.quantity + quantity })
+        .eq('id', existingItem.id);
+
+      if (error) throw error;
+    } else {
+      // Adicionar novo item
+      const { error } = await supabaseClient
+        .from('cart')
+        .insert([{
+          user_id: userId,
+          product_id: productId,
+          quantity: quantity
+        }]);
+
+      if (error) throw error;
+    }
+
+    console.log('✅ Item adicionado ao carrinho!');
+    return { success: true };
+  } catch (error) {
+    console.error('❌ Erro ao adicionar ao carrinho:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Obter carrinho do usuário
+ */
+async function getCartSupabase(userId) {
+  if (!supabaseClient || !userId) return { success: false, cart: [] };
+
+  try {
+    const { data: cartItems, error } = await supabaseClient
+      .from('cart')
+      .select(`
+        id,
+        quantity,
+        products (
+          id,
+          name,
+          price,
+          image_url,
+          category
+        )
+      `)
+      .eq('user_id', userId);
+
+    if (error) throw error;
+
+    return { 
+      success: true, 
+      cart: cartItems.map(item => ({
+        cartItemId: item.id,
+        quantity: item.quantity,
+        ...item.products
+      }))
+    };
+  } catch (error) {
+    console.error('❌ Erro ao buscar carrinho:', error);
+    return { success: false, cart: [] };
+  }
+}
+
+/**
+ * Limpar carrinho
+ */
+async function clearCartSupabase(userId) {
+  if (!supabaseClient || !userId) return { success: false };
+
+  try {
+    const { error } = await supabaseClient
+      .from('cart')
+      .delete()
+      .eq('user_id', userId);
+
+    if (error) throw error;
+
+    console.log('✅ Carrinho limpo!');
+    return { success: true };
+  } catch (error) {
+    console.error('❌ Erro ao limpar carrinho:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// ===== FUNÇÕES DE PEDIDOS =====
+
+/**
+ * Criar novo pedido
+ */
+async function createOrderSupabase(userId, orderData) {
+  if (!supabaseClient || !userId) return { success: false };
+
+  try {
+    console.log('📦 Criando pedido...');
+
+    const { data: order, error } = await supabaseClient
+      .from('orders')
+      .insert([{
+        user_id: userId,
+        items: orderData.items,
+        total: orderData.total,
+        status: 'pending',
+        payment_method: orderData.payment_method || 'pix',
+        delivery_address: orderData.delivery_address || ''
+      }])
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    // Limpar carrinho após pedido
+    await clearCartSupabase(userId);
+
+    console.log('✅ Pedido criado com sucesso:', order.id);
+    return { success: true, order };
+  } catch (error) {
+    console.error('❌ Erro ao criar pedido:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Obter pedidos do usuário
+ */
+async function getUserOrdersSupabase(userId) {
+  if (!supabaseClient || !userId) return { success: false, orders: [] };
+
+  try {
+    const { data: orders, error } = await supabaseClient
+      .from('orders')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    return { success: true, orders };
+  } catch (error) {
+    console.error('❌ Erro ao buscar pedidos:', error);
+    return { success: false, orders: [] };
+  }
+}
+
+// ===== MIGRAÇÃO DE DADOS LOCAIS =====
+
+/**
+ * Migrar dados do localStorage para Supabase
+ */
+async function migrateLocalDataToSupabase() {
+  console.log('🔄 Verificando dados locais para migração...');
+
+  try {
+    const currentUser = await getCurrentUser();
+    if (!currentUser) {
+      console.log('⚠️ Usuário não autenticado, migração não necessária');
+      return;
+    }
+
+    // Migrar carrinho local
+    const localCart = localStorage.getItem('outono-dourado-cart');
+    if (localCart) {
+      const cartItems = JSON.parse(localCart);
+      console.log(`🔄 Migrando ${cartItems.length} itens do carrinho...`);
+
+      for (const item of cartItems) {
+        await addToCartSupabase(currentUser.id, item.id, item.quantity);
+      }
+
+      // Limpar carrinho local após migração
+      localStorage.removeItem('outono-dourado-cart');
+      console.log('✅ Carrinho migrado com sucesso!');
+    }
+  } catch (error) {
+    console.error('❌ Erro na migração:', error);
+  }
+}
+
+// ===== OVERRIDE DE FUNÇÕES GLOBAIS =====
+
+/**
+ * Sobrescrever a variável PRODUCTS_DATABASE quando disponível
+ */
+async function overrideProductsDatabase() {
+  const supabaseProducts = await loadProductsFromSupabase();
+  
+  if (supabaseProducts && supabaseProducts.length > 0) {
+    // Substituir PRODUCTS_DATABASE global
+    if (typeof window.PRODUCTS_DATABASE !== 'undefined') {
+      window.PRODUCTS_DATABASE_BACKUP = window.PRODUCTS_DATABASE; // Backup
+      window.PRODUCTS_DATABASE = supabaseProducts;
+      console.log('✅ Produtos do banco de dados carregados e aplicados!');
+    } else {
+      // Se ainda não existe, criar
+      window.PRODUCTS_DATABASE = supabaseProducts;
+      console.log('✅ Produtos do banco de dados definidos!');
+    }
+    
+    // Disparar evento para que o site recarregue produtos
+    window.dispatchEvent(new CustomEvent('productsLoaded', { 
+      detail: { products: supabaseProducts } 
+    }));
+  }
+}
+
+// ===== EXPORTAR PARA USO GLOBAL =====
+
+window.SupabaseIntegration = {
+  // Cliente
+  getClient: () => supabaseClient,
+  
+  // Produtos
+  loadProducts: loadProductsFromSupabase,
+  getProduct: getProductById,
+  
+  // Autenticação
+  register: registerUser,
+  login: loginUser,
+  logout: logoutUser,
+  getCurrentUser: getCurrentUser,
+  
+  // Carrinho
+  addToCart: addToCartSupabase,
+  getCart: getCartSupabase,
+  clearCart: clearCartSupabase,
+  
+  // Pedidos
+  createOrder: createOrderSupabase,
+  getUserOrders: getUserOrdersSupabase,
+  
+  // Migração
+  migrateData: migrateLocalDataToSupabase
+};
+
+// ===== AUTO-INICIALIZAÇÃO =====
+
+(async function() {
+  console.log('🍂 Outono Dourado - Integração Supabase v1.0');
+  
+  const initialized = await initSupabase();
+  
+  if (initialized) {
+    // Carregar produtos do banco
+    await overrideProductsDatabase();
+    
+    // Verificar usuário autenticado
+    const user = await getCurrentUser();
+    if (user) {
+      console.log('👤 Usuário autenticado:', user.email);
+      
+      // Migrar dados locais se necessário
+      await migrateLocalDataToSupabase();
+    }
+    
+    console.log('✅ Integração Supabase pronta!');
+    console.log('💡 Use window.SupabaseIntegration para acessar as funções');
+  } else {
+    console.log('⚠️ Executando em modo offline (dados locais)');
+  }
+})();
+
 
 // Base de dados dos produtos
 const PRODUCTS_DATABASE = [
