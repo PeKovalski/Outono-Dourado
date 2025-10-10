@@ -2456,18 +2456,18 @@ html {
 
 .checkout-item .item-name {
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(#000text-primary);
     font-size: 0.875rem;
 }
 
 .checkout-item .item-quantity {
     font-size: 0.75rem;
-    color: var(--text-secondary);
+    color: var(#000 text-secondary);
 }
 
 .checkout-item .item-total {
     font-weight: 600;
-    color: var(--primary);
+    color: var(#000 primary);
 }
 
 .checkout-total {
