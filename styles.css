@@ -3030,7 +3030,7 @@ html {
 }
 
 .admin-product-info h4 {
-    color: var(--text-primary);
+    color: var(#000 text-primary);
     font-size: 1.125rem;
     margin-bottom: 0.25rem;
     overflow: hidden;
