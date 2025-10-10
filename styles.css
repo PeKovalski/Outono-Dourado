@@ -2467,7 +2467,7 @@ html {
 
 .checkout-item .item-total {
     font-weight: 600;
-    color: var(#000 primary);
+    color: var(#ff7b10 primary);
 }
 
 .checkout-total {
@@ -2517,8 +2517,8 @@ html {
 }
 
 .payment-tab.active {
-    color: var(--primary);
-    border-bottom-color: var(--primary);
+    color: var(#000 primary);
+    border-bottom-color: var(##000 primary);
     background: var(--bg-secondary);
 }
 
@@ -2538,12 +2538,12 @@ html {
 
 .pix-container h5 {
     font-size: 1.5rem;
-    color: var(#f59e0b text-primary);
+    color: var(hwb(27 6% 18%) text-primary);
     margin-bottom: 0.5rem;
 }
 
 .pix-container > p {
-    color: var(#000 text-secondary);
+    color: var(lab(61.88% 56.59 65.34) text-secondary);
     margin-bottom: 1.5rem;
 }
 
