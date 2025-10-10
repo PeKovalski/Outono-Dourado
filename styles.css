@@ -2475,15 +2475,15 @@ html {
     justify-content: space-between;
     align-items: center;
     padding-top: 1rem;
-    border-top: 2px solid var(--primary);
+    border-top: 2px solid var( #d3670f primary);
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(#d3670f text-primary);
 }
 
 .payment-methods h4 {
     margin-bottom: 1.5rem;
-    color: var(--text-primary);
+    color: var(#d3670f text-primary);
     font-size: 1.25rem;
 }
 
