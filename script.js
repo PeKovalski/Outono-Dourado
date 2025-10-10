@@ -1,24 +1,4 @@
 
-// ========================
-// SUPABASE CONNECTION
-// ========================
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-
-// Conexão com o banco Supabase
-const SUPABASE_URL = 'https://khzrncdvwawmlmwfhoil.supabase.co'
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtoenJuY2R2d2F3bWxtd2Zob2lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0OTg5ODQsImV4cCI6MjA3NTA3NDk4NH0.aA-ecvCZgllSRD6ANnZN6FetHqPixTXlMgmxow6a2BU'
-
-export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
-
-// ========================
-// FIM DA CONEXÃO SUPABASE
-// ========================
-
-
-// (seu código original começa exatamente aqui, sem nenhuma modificação)
-
-
-
 // Base de dados dos produtos
 const PRODUCTS_DATABASE = [
     {
