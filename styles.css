@@ -2853,7 +2853,7 @@ html {
     }
 }
 
-/* Print Styles */
+/* Print Styles#f59e0b */
 @media print {
     .header,
     .mascot,
@@ -3039,7 +3039,7 @@ html {
 }
 
 .admin-product-info .product-category {
-    color: var(--primary);
+    color: var(#f59e0b primary);
     font-size: 0.875rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
