@@ -2507,13 +2507,13 @@ html {
     cursor: pointer;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--text-secondary);
+    color: var(#000 text-secondary);
     transition: all 0.3s ease;
 }
 
 .payment-tab:hover {
-    color: var(--primary);
-    background: var(--bg-secondary);
+    color: var(#d3670fprimary);
+    background: var(#000 bg-secondary);
 }
 
 .payment-tab.active {
