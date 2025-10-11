@@ -23,7 +23,7 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
 // ATENÇÃO: Substitua pelas suas credenciais do projeto Supabase.
-const supabaseUrl = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBiZXpvamNwdGljY3l5d3h6eGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgyOTE0MDgsImV4cCI6MjA3Mzg2NzQwOH0.bn_i_V-e-fUMQ22zF5VHQ0azfhyFE0cdSXFJRxNB_Ik';
+const supabaseUrl = 'https://pbezojcpticcyywxzxaa.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBiZXpvamNwdGljY3l5d3h6eGFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgyOTE0MDgsImV4cCI6MjA3Mzg2NzQwOH0.bn_i_V-e-fUMQ22zF5VHQ0azfhyFE0cdSXFJRxNB_Ik';
 
 // Validação para garantir que as chaves foram inseridas.
