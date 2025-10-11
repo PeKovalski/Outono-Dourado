@@ -1989,3 +1989,25 @@ function generateReceiptHTML(order) {
 </body>
 </html>`;
 }
+// =========================
+// 🧩 Corrige escopo global
+// =========================
+
+// Expõe funções usadas no HTML para o escopo global (necessário pois script é módulo)
+window.openLoginModal = openLoginModal;
+window.openCart = openCart;
+window.closeCart = closeCart;
+window.scrollToSection = scrollToSection;
+window.filterProducts = filterProducts;
+window.searchProducts = searchProducts;
+window.clearFilters = clearFilters;
+window.addToCart = addToCart;
+window.updateCartQuantity = updateCartQuantity;
+window.removeFromCart = removeFromCart;
+window.checkout = checkout;
+
+// Expõe funções do mascote
+window.toggleMascotMessage = toggleMascotMessage;
+window.closeMascotMessage = closeMascotMessage;
+
+console.log("🌽 Funções globais carregadas com sucesso!");
