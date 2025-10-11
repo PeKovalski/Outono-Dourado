@@ -311,14 +311,6 @@ function initializeMascot() {
     }, 30000); // Show message every 30 seconds
 }
 
-function toggleMascotMessage() {
-    const messageDiv = document.getElementById('mascot-message');
-    if (messageDiv.style.display === 'none' || !messageDiv.style.display) {
-        showRandomMascotMessage();
-    } else {
-        closeMascotMessage();
-    }
-}
 
 function showRandomMascotMessage() {
     const messageDiv = document.getElementById('mascot-message');
