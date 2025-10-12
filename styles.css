@@ -1690,7 +1690,7 @@ html {
 
 .social-link {
     background: var(#000 primary);
-    color: rgb(0, 0, 0);
+    color: white;
     padding: 0.5rem;
     border-radius: var(--radius);
     text-decoration: none;
@@ -2625,7 +2625,7 @@ html {
 .pix-mascot p {
     flex: 1;
     margin: 0;
-    color: var(#000 text-primary);
+    color: var(--text-primary);
     font-weight: 500;
 }
 
