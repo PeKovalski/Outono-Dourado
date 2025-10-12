@@ -3,175 +3,1389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outono Dourado</title>
+    <title>Outono Dourado - Produtos Orgânicos e Sustentáveis</title>
+    <meta name="description" content="Outono Dourado - Sua loja de produtos orgânicos e sustentáveis em Araucária, Paraná. Descubra alimentos, verduras e legumes frescos e naturais.">
+    <meta name="keywords" content="produtos orgânicos, sustentáveis, Araucária, Paraná, alimentos naturais, verduras, legumes">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://outonodourado.com.br/">
+    <meta property="og:title" content="Outono Dourado - Produtos Orgânicos e Sustentáveis">
+    <meta property="og:description" content="Sua loja de produtos orgânicos e sustentáveis em Araucária, Paraná.">
+    <meta property="og:image" content="banner.png.png" 
+    
+
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://outonodourado.com.br/">
+    <meta property="twitter:title" content="Outono Dourado - Produtos Orgânicos e Sustentáveis">
+    <meta property="twitter:description" content="Sua loja de produtos orgânicos e sustentáveis em Araucária, Paraná.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍂</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Supabase CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
-    <!-- Script principal -->
-    <script type="module" src="script.js" defer></script>
+    
+    <!-- Toaster CSS -->
+    <style>
+        .toaster {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .toast {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 8px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            min-width: 300px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .toast.success {
+            border-left: 4px solid #22c55e;
+        }
+        
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="logo.png" alt="Outono Dourado Logo" class="logo-img">
+    <!-- Toaster Container -->
+    <div id="toaster" class="toaster"></div>
+
+    <!-- Mascot Milhito -->
+    <div id="mascot" class="mascot">
+        <div class="mascot-character" onclick="toggleMascotMessage()">
+            <img src="milhito.png">
+            <div class="mascot-pulse"></div>
         </div>
-        <nav>
-            <input type="text" id="search-bar" placeholder="Pesquisar produtos..." class="search-bar">
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#sobre">Sobre</a>
-                <a href="#produtos">Produtos</a>
-                <a href="#contato">Contato</a>
+        <div id="mascot-message" class="mascot-message" style="display: none;">
+            <div class="mascot-speech-bubble">
+                <p id="mascot-text">Olá! Eu sou o Milhito, seu assistente da Outono Dourado! 🌽</p>
+                <button class="mascot-close" onclick="closeMascotMessage()">×</button>
             </div>
-            <div id="auth-section">
-                <button class="btn-primary" onclick="openLoginModal()">Login</button>
-                <button class="btn-secondary" onclick="openRegisterModal()">Registrar</button>
-                <div id="user-menu" style="display: none;">
-                    <button class="btn-user" onclick="toggleUserDropdown()">
-                        <span id="user-name">Usuário</span>
-                        <span class="dropdown-arrow">▼</span>
-                    </button>
-                    <div id="user-dropdown" class="dropdown-menu">
-                        <button onclick="openProfileModal()">Perfil</button>
-                        <button onclick="showOrderHistory()">Pedidos</button>
-                        <button onclick="logout()">Sair</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <i data-lucide="leaf"></i>
                     </div>
+                    <span class="brand-name">Outono Dourado</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <button class="nav-link" onclick="scrollToSection('home')">Início</button>
+                    <button class="nav-link" onclick="scrollToSection('about')">Sobre Nós</button>
+                    <button class="nav-link" onclick="scrollToSection('products')">Produtos</button>
+                    <button class="nav-link" onclick="scrollToSection('store')">Loja Física</button>
+                    <button class="nav-link" onclick="scrollToSection('contact')">Contato</button>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- User Authentication -->
+                    <div class="auth-section" id="auth-section">
+                        <!-- Not Logged In -->
+                        <div class="auth-buttons" id="auth-buttons">
+                            <button class="login-btn" onclick="openLoginModal()">
+                                <i data-lucide="user"></i>
+                                <span class="login-text">Entrar</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Logged In -->
+                        <div class="user-menu" id="user-menu" style="display: none;">
+                            <button class="user-profile-btn" onclick="toggleUserDropdown()">
+                                <div class="user-avatar">
+                                    <i data-lucide="user"></i>
+                                </div>
+                                <span class="user-name" id="user-name">Usuário</span>
+                                <i data-lucide="chevron-down" class="dropdown-arrow"></i>
+                            </button>
+                            
+                            <div class="user-dropdown" id="user-dropdown">
+                                <div class="dropdown-item" onclick="openProfileModal()">
+                                    <i data-lucide="user"></i>
+                                    <span>Meu Perfil</span>
+                                </div>
+                                <div class="dropdown-item" onclick="showOrderHistory()">
+                                    <i data-lucide="package"></i>
+                                    <span>Meus Pedidos</span>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-item logout-item" onclick="logout()">
+                                    <i data-lucide="log-out"></i>
+                                    <span>Sair</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart -->
+                    <button class="cart-btn" onclick="openCart()">
+                        <i data-lucide="shopping-cart"></i>
+                        <span class="cart-badge" id="cart-badge">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <i data-lucide="menu"></i>
+                    </button>
                 </div>
             </div>
-            <div class="cart-icon" onclick="openCart()">
-                <img src="cart-icon.png" alt="Carrinho">
-                <span id="cart-badge">0</span>
+
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav" id="mobile-nav">
+                <button class="mobile-nav-link" onclick="scrollToSection('home')">Início</button>
+                <button class="mobile-nav-link" onclick="scrollToSection('about')">Sobre Nós</button>
+                <button class="mobile-nav-link" onclick="scrollToSection('products')">Produtos</button>
+                <button class="mobile-nav-link" onclick="scrollToSection('store')">Loja Física</button>
+                <button class="mobile-nav-link" onclick="scrollToSection('contact')">Contato</button>
             </div>
-        </nav>
+        </div>
     </header>
 
+    <!-- Main Content -->
     <main>
-        <section id="hero">
-            <h1>Bem-vindo à Outono Dourado</h1>
-            <p>Produtos orgânicos frescos direto da fazenda para sua mesa.</p>
-            <button class="btn-primary">Explorar Produtos</button>
-        </section>
-
-        <section id="products">
-            <div class="filter-bar">
-                <button class="filter-btn active" onclick="currentFilter='all'; loadProducts();">Todos</button>
-                <button class="filter-btn" onclick="currentFilter='Legumes'; loadProducts();">Legumes</button>
-                <button class="filter-btn" onclick="currentFilter='Verduras'; loadProducts();">Verduras</button>
-                <button class="filter-btn" onclick="currentFilter='Frutas'; loadProducts();">Frutas</button>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-background">
+                <img src="baneers.png" 
+                     alt="Produtos orgânicos frescos" class="hero-image">
+                <div class="hero-overlay"></div>
             </div>
-            <div id="products-grid"></div>
-        </section>
-
-        <!-- Mascote -->
-        <div id="mascot" class="mascot" onclick="toggleMascotMessage()">
-            <img src="mascot.png" alt="Milhito Mascote">
-            <div id="mascot-message" class="mascot-message">
-                <span id="mascot-text"></span>
-                <span class="close-btn" onclick="closeMascotMessage()">✖</span>
-            </div>
-        </div>
-
-        <!-- Modais -->
-        <div id="product-detail-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeProductDetail()">✖</span>
-                <div class="product-detail">
-                    <img id="product-detail-image" src="" alt="Produto">
-                    <h2 id="product-detail-name"></h2>
-                    <p id="product-detail-description"></p>
-                    <div id="product-detail-rating"></div>
-                    <div id="product-detail-price"></div>
-                    <div class="quantity-control">
-                        <button onclick="updateQuantity(-1)">-</button>
-                        <input type="number" id="detail-quantity" value="1" min="1" readonly>
-                        <button onclick="updateQuantity(1)">+</button>
+            <div class="hero-content">
+                <div class="hero-icon">
+                    <i data-lucide="leaf"></i>
+                </div>
+                <h1 class="hero-title">Outono Dourado</h1>
+                <p class="hero-subtitle">
+                    Produtos orgânicos e sustentáveis cultivados com amor e respeito pela natureza em Araucária, Paraná
+                </p>
+                <div class="hero-features">
+                    <div class="feature-badge">
+                        <i data-lucide="recycle"></i>
+                        <span>Sustentável</span>
                     </div>
-                    <button class="btn-primary" onclick="addToCartFromDetail()">Adicionar ao Carrinho</button>
+                    <div class="feature-badge">
+                        <i data-lucide="heart"></i>
+                        <span>Qualidade</span>
+                    </div>
+                    <div class="feature-badge">
+                        <i data-lucide="leaf"></i>
+                        <span>Orgânico</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="scrollToSection('products')">
+                        Ver Produtos
+                    </button>
+                    <button class="btn-secondary" onclick="scrollToSection('about')">
+                        Saiba Mais
+                    </button>
                 </div>
             </div>
-        </div>
-
-        <div id="login-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeLoginModal()">✖</span>
-                <h2>Login</h2>
-                <form onsubmit="login(document.getElementById('login-email').value, document.getElementById('login-password').value); event.preventDefault();">
-                    <input type="email" id="login-email" placeholder="E-mail" required>
-                    <input type="password" id="login-password" placeholder="Senha" required>
-                    <button type="submit" class="btn-primary">Entrar</button>
-                </form>
-                <p>Não tem conta? <a href="#" onclick="openRegisterModal(); closeLoginModal();">Registre-se</a></p>
-            </div>
-        </div>
-
-        <div id="register-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeRegisterModal()">✖</span>
-                <h2>Registrar</h2>
-                <form onsubmit="register(document.getElementById('register-name').value, document.getElementById('register-email').value, document.getElementById('register-password').value); event.preventDefault();">
-                    <input type="text" id="register-name" placeholder="Nome" required>
-                    <input type="email" id="register-email" placeholder="E-mail" required>
-                    <input type="password" id="register-password" placeholder="Senha" required>
-                    <button type="submit" class="btn-primary">Registrar</button>
-                </form>
-                <p>Já tem conta? <a href="#" onclick="openLoginModal(); closeRegisterModal();">Faça login</a></p>
-            </div>
-        </div>
-
-        <div id="profile-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeProfileModal()">✖</span>
-                <h2>Perfil</h2>
-                <p>Informações do usuário aqui.</p>
-            </div>
-        </div>
-
-        <div id="cart-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeCart()">✖</span>
-                <h2>Carrinho</h2>
-                <div id="cart-items"></div>
-                <div class="cart-total">Total: <span id="cart-total">R$ 0.00</span></div>
-                <button class="btn-primary" onclick="openCheckoutModal()">Finalizar Compra</button>
-            </div>
-        </div>
-
-        <div id="checkout-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeCheckoutModal()">✖</span>
-                <h2>Checkout</h2>
-                <div id="checkout-items-summary"></div>
-                <div class="checkout-total">Total: <span id="checkout-total-amount">R$ 0.00</span></div>
-                <div class="payment-tabs">
-                    <button class="payment-tab active" onclick="selectPaymentMethod('pix')">PIX</button>
-                    <button class="payment-tab" onclick="selectPaymentMethod('credit')">Cartão</button>
+            <div class="scroll-indicator">
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
                 </div>
-                <div class="payment-content active" id="pix-payment">
-                    <img id="pix-qr-image" src="pix-qr.png" alt="QR Code PIX">
-                    <input type="text" id="pix-code-input" value="123456789" readonly>
-                    <button class="btn-secondary" onclick="copyPixCode()">Copiar Código</button>
-                </div>
-                <div class="payment-content" id="credit-payment">
-                    <p>Detalhes do cartão aqui.</p>
-                </div>
-                <button class="btn-primary" onclick="confirmPayment(document.querySelector('.payment-tab.active').textContent.toLowerCase())">Confirmar Pagamento</button>
             </div>
-        </div>
+        </section>
 
-        <div id="order-history-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeOrderHistory()">✖</span>
-                <h2>Histórico de Pedidos</h2>
-                <div id="admin-products-list"></div>
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Sobre o Outono Dourado</h2>
+                    <p class="section-subtitle">
+                        Uma empresa familiar dedicada à sustentabilidade e qualidade de vida
+                    </p>
+                </div>
+
+                <!-- História da Empresa -->
+                <div class="history-section">
+                    <div class="history-content">
+                        <div class="history-text">
+                            <h3>Nossa História</h3>
+                            <p>
+                                Fundada em 2000 em Araucária, Paraná, a Outono Dourado nasceu do sonho de uma família 
+                                apaixonada pela natureza e comprometida com o meio ambiente. Logo a empresa foi passada 
+                                para seus descendentes que atualizaram e modernizaram a estrutura. Começamos pequenos, 
+                                com a visão de oferecer produtos sustentáveis que fazem a diferença na vida das 
+                                pessoas e do planeta.
+                            </p>
+                            <p>
+                                Hoje, somos referência em produtos ecológicos na região metropolitana de Curitiba, 
+                                atendendo famílias que compartilham dos nossos valores de sustentabilidade e 
+                                responsabilidade ambiental.
+                            </p>
+                        </div>
+                        <div class="history-image">
+                            <img src="antonio mayaea.png" 
+                                 alt="Família Outono Dourado no campo" loading="lazy">
+                            <div class="image-caption">
+                                <div class="caption-icon">
+                                    <i data-lucide="users"></i>
+                                </div>
+                                <div>
+                                    <p class="caption-number">500+</p>
+                                    <p class="caption-text">Famílias Atendidas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                   <!-- Valores da Empresa -->
+                   <div class="values-section">
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i data-lucide="target"></i>
+                            </div>
+                            <h4>Missão</h4>
+                            <p>Promover um estilo de vida sustentável através de produtos ecológicos de qualidade</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i data-lucide="heart"></i>
+                            </div>
+                            <h4>Valores</h4>
+                            <p>Sustentabilidade, qualidade, transparência e respeito ao meio ambiente</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <h4>Localização</h4>
+                            <p><strong>Araucária, Paraná</strong> - No coração da região metropolitana de Curitiba</p>
+                        </div>
+                    </div>
+                </div>
+               <!-- Processo de Plantio e Colheita -->
+               <div class="process-section">
+                <div class="process-header">
+                    <h3>Do Plantio à Mesa</h3>
+                    <p>Conheça nosso processo cuidadoso de cultivo orgânico</p>
+                </div>
+                
+                <div class="process-timeline">
+                    <div class="process-step">
+                        <div class="step-image">
+                            <img src="plantio.jpeg" 
+                                 alt="Plantio de sementes orgânicas" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">1</div>
+                            <h4>Plantio Consciente</h4>
+                            <p>
+                                Utilizamos apenas sementes orgânicas certificadas, plantadas em solo preparado 
+                                sem agrotóxicos ou fertilizantes químicos. Cada semente é cuidadosamente 
+                                selecionada para garantir a melhor qualidade.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step reverse">
+                        <div class="step-image">
+                            <img src="https://images.unsplash.com/photo-1727099079513-952d40de9d78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmVlbmhvdXNlJTIwb3JnYW5pYyUyMHZlZ2V0YWJsZXMlMjBncm93aW5nfGVufDF8fHx8MTc1NzY4MTA3OXww&ixlib=rb-4.1.0&q=80&w=1080" 
+                                 alt="Cultivo em estufa sustentável" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">2</div>
+                            <h4>Cultivo Sustentável</h4>
+                            <p>
+                                Nossas estufas utilizam técnicas de agricultura regenerativa, sistemas de 
+                                irrigação por gotejamento e controle natural de pragas. O crescimento é 
+                                monitorado diariamente por nossa equipe especializada.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-image">
+                            <img src="cultivo.jpeg" 
+                                 alt="Colheita manual de vegetais" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">3</div>
+                            <h4>Colheita no Momento Ideal</h4>
+                            <p>
+                                A colheita é feita manualmente no ponto exato de maturação, garantindo 
+                                máximo sabor e valor nutricional. Cada produto é cuidadosamente selecionado 
+                                e embalado para preservar sua qualidade.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step reverse">
+                        <div class="step-image">
+                            <img src="colheita_.jpeg" 
+                                 alt="Produtos frescos na loja" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">4</div>
+                            <h4>Entrega Fresca</h4>
+                            <p>
+                                Da colheita diretamente para sua mesa em menos de 24 horas. Nosso sistema 
+                                de logística refrigerada garante que os produtos cheguen até você com 
+                                total frescor e qualidade preservada.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+            <!-- Fotos da seed -->
+            <div class="process-section">
+                <div class="process-header">
+                    <h3>Nossa seed cheia de história.</h3>
+                    <p>Conheça onde foi criado toda nossa história</p>
+                </div>
+                
+                <div class="process-timeline">
+                    <div class="process-step">
+                        <div class="step-image">
+                            <img src="fotodafrente.png" 
+                                 alt="Seed="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">1</div>
+                            <h4>Tradição e Modernidade no Coração da Cidade.</h4>
+                            <p>
+                                Recebemos você em um casarão histórico, onde a solidez do passado encontra a inovação do futuro.
+                            </p>
+                        </div>
+                    </div>
 
-        <!-- Toaster para notificações -->
-        <div id="toaster" class="toaster"></div>
+                    <div class="process-step reverse">
+                        <div class="step-image">
+                            <img src="recepção.png" 
+                                 alt="Nossa recepção calorosa" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">2</div>
+                            <h4>Seu Conforto, Nossa Prioridade.</h4>
+                            <p>
+                                Um ambiente exclusivo, pensado para conversas estratégicas e decisões importantes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-image">
+                            <img src="salaprincipal.png" 
+                                 alt="Area de cafe" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">3</div>
+                            <h4>Espaços Inspiradores.</h4>
+                            <p>
+                               Relaxe enquanto cuidamos do seu futuro. Design e bem-estar para uma experiência completa.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="process-step reverse">
+                        <div class="step-image">
+                            <img src="café.png" 
+                                 alt="Produtos frescos na loja" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">4</div>
+                            <h4>O Detalhe que Faz a Diferença.</h4>
+                            <p>
+                                 Desfrute de um café especial enquanto faz uma pausa ou finaliza seu encontro.
+                            </p>
+                        </div>
+                    </div>
+                     <div class="process-step">
+                        <div class="step-image">
+                            <img src="dedia.png" 
+                                 alt="Area de cafe" loading="lazy">
+                        </div>
+                        <div class="step-content">
+                            <div class="step-number">5</div>
+                            <h4> Onde a Tradição Encontra o Futuro.</h4>
+                            <p>
+                               Tudo começou aqui, aqui é onde ela crescerá
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- Valores Fundamentais (Cards originais mantidos) -->
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon">🌱</div>
+                        <h3>100% Orgânico</h3>
+                        <p>
+                            Todos os nossos produtos são certificados orgânicos, livres de pesticidas e químicos prejudiciais.
+                        </p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">🤝</div>
+                        <h3>Produtores Locais</h3>
+                        <p>
+                            Trabalhamos diretamente com agricultores locais de Araucária e região, garantindo frescor e qualidade.
+                        </p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">♻️</div>
+                        <h3>Sustentabilidade</h3>
+                        <p>
+                            Nosso compromisso com o meio ambiente vai além dos produtos, incluindo embalagens eco-friendly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="products">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Nossos Produtos</h2>
+                    <p class="section-subtitle">
+                        Produtos frescos e orgânicos selecionados especialmente para você
+                    </p>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" 
+                               id="product-search" 
+                               class="search-input"
+                               placeholder="Buscar produtos..."
+                               oninput="searchProducts()">
+                    </div>
+                </div>
+
+                <!-- Product Filters -->
+                <div class="product-filters">
+                    <button class="filter-btn active" onclick="filterProducts('all')">
+                        Todos
+                    </button>
+                    <button class="filter-btn" onclick="filterProducts('verduras')">
+                        Verduras
+                    </button>
+                    <button class="filter-btn" onclick="filterProducts('legumes')">
+                        Legumes
+                    </button>
+                    <button class="filter-btn" onclick="filterProducts('frutas')">
+                        Frutas
+                    </button>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Section -->
+        <section id="store" class="store">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Nossa Loja Física</h2>
+                    <p class="section-subtitle">
+                        Visite nossa loja em Araucária e conheça nossos produtos de perto
+                    </p>
+                </div>
+                <div class="store-content">
+                    <div class="store-info">
+                        <div class="store-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i data-lucide="map-pin"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <h4>Endereço</h4>
+                                    <p>
+                                       Av. do Batel, 1 - Batel<br>
+                                        Curitiba - PR, 80420-090
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i data-lucide="clock"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <h4>Horário de Funcionamento</h4>
+                                    <p>
+                                        Segunda a Sexta: 8h às 18h<br>
+                                        Sábado: 8h às 17h<br>
+                                        Domingo: 9h às 15h
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i data-lucide="phone"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <h4>Contato</h4>
+                                    <p>
+                                        <a href="tel:+554133721234">(41) 3372-1234</a><br>
+                                        <a href="https://wa.me/5541999887766" target="_blank">
+                                            WhatsApp: (41) 99988-7766
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i data-lucide="car"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <h4>Estacionamento</h4>
+                                    <p>
+                                        Estacionamento gratuito disponível<br>
+                                        Acesso facilitado para cargas
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="store-actions">
+                            <a href="https://maps.google.com/maps?q=Rua+das+Flores,+123,+Araucária,+PR" 
+                               target="_blank" 
+                               class="btn-primary">
+                                <i data-lucide="navigation"></i>
+                                <span>Como Chegar</span>
+                            </a>
+                            <a href="https://wa.me/5541999887766" 
+                               target="_blank" 
+                               class="btn-secondary">
+                                <i data-lucide="message-circle"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="store-map-container">
+                        <div class="store-map">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.0341260839843!2d-49.28553692499!3d-25.42897887761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351cdb3d3%3A0x6d2f6a0e4b8f8a0e!2sAv.+do+Batel%2C+1+-+Batel%2C+Curitiba+-+PR%2C+80420-090!5e0!3m2!1spt!2sbr!4v1639590000000!5m2!1spt!2sbr"
+                                width="100%" 
+                                height="400" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                        <div class="map-overlay">
+                            <div class="map-info">
+                                <h4>📍 Outono Dourado</h4>
+                                <p>Av. do Batel, 1 - Batel</p>
+                                <span class="map-status">• Aberto agora</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Entre em Contato</h2>
+                    <p class="section-subtitle">
+                        Fale conosco para esclarecer dúvidas ou fazer sugestões
+                    </p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <h4>E-mail</h4>
+                            <p>contato@outonodourado.com.br</p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i data-lucide="phone"></i>
+                            </div>
+                            <h4>Telefone</h4>
+                            <p>(41) 3372-1234</p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i data-lucide="message-circle"></i>
+                            </div>
+                            <h4>WhatsApp</h4>
+                            <p>(41) 99988-7766</p>
+                        </div>
+                    </div>
+                    <form class="contact-form" onsubmit="submitContactForm(event)">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Seu e-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Assunto" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Sua mensagem" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Outono Dourado. Todos os direitos reservados.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <i data-lucide="leaf"></i>
+                        </div>
+                        <span class="brand-name">Outono Dourado</span>
+                    </div>
+                    <p class="footer-description">
+                        Produtos orgânicos e sustentáveis de qualidade, cultivados com amor e respeito pela natureza.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i data-lucide="facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Produtos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#products">Alimentos Orgânicos</a></li>
+                        <li><a href="#products">Verduras Frescas</a></li>
+                        <li><a href="#products">Legumes Naturais</a></li>
+                        <li><a href="#products">Todos os Produtos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">Sobre Nós</a></li>
+                        <li><a href="#store">Nossa Loja</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Atendimento</h4>
+                    <div class="contact-item">
+                        <i data-lucide="phone"></i>
+                        <span>(41) 3372-1234</span>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="mail"></i>
+                        <span>contato@outonodourado.com.br</span>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="map-pin"></i>
+                        <span>Araucária, PR</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Outono Dourado. Todos os direitos reservados.</p>
+            </div>
+        </div>
     </footer>
+
+    <!-- Modals -->
+    
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-overlay" onclick="closeLoginModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Entrar na sua conta</h3>
+                <button class="modal-close" onclick="closeLoginModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <form class="auth-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">E-mail</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Senha</label>
+                    <div class="password-input">
+                        <input type="password" id="login-password" name="password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('login-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me">
+                        <span>Lembrar-me</span>
+                    </label>
+                    <button type="button" class="forgot-password" onclick="openForgotPasswordModal()">
+                        Esqueci minha senha
+                    </button>
+                </div>
+                <button type="submit" class="btn-primary auth-btn">
+                    Entrar
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>ou</span>
+            </div>
+            
+            <!-- Admin Info -->
+            <div class="admin-info">
+                <p class="admin-info-text">
+                    <strong>Acesso Administrativo:</strong><br>
+                    E-mail: admin@outonodourado.com.br<br>
+                    Senha: admin123
+                </p>
+            </div>
+            
+            <button class="btn-secondary auth-btn" onclick="openRegisterModal()">
+                Criar nova conta
+            </button>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-overlay" onclick="closeRegisterModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Criar nova conta</h3>
+                <button class="modal-close" onclick="closeRegisterModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <form class="auth-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="register-name">Nome completo</label>
+                    <input type="text" id="register-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">E-mail</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Telefone (opcional)</label>
+                    <input type="tel" id="register-phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Senha</label>
+                    <div class="password-input">
+                        <input type="password" id="register-password" name="password" required 
+                               oninput="updatePasswordStrength('register-password', 'password-strength')">
+                        <button type="button" class="password-toggle" onclick="togglePassword('register-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                    <div id="password-strength" class="password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirmar senha</label>
+                    <div class="password-input">
+                        <input type="password" id="register-confirm-password" name="confirmPassword" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('register-confirm-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required>
+                        <span>Aceito os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a></span>
+                    </label>
+                </div>
+                <button type="submit" class="btn-primary auth-btn">
+                    Criar conta
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>ou</span>
+            </div>
+            <button class="btn-secondary auth-btn" onclick="openLoginModal()">
+                Já tenho uma conta
+            </button>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="modal">
+        <div class="modal-overlay" onclick="closeForgotPasswordModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Recuperar senha</h3>
+                <button class="modal-close" onclick="closeForgotPasswordModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-description">
+                <p>Digite seu e-mail e enviaremos instruções para redefinir sua senha.</p>
+            </div>
+            <form class="auth-form" onsubmit="handleForgotPassword(event)">
+                <div class="form-group">
+                    <label for="forgot-email">E-mail</label>
+                    <input type="email" id="forgot-email" name="email" required>
+                </div>
+                <button type="submit" class="btn-primary auth-btn">
+                    Enviar instruções
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>ou</span>
+            </div>
+            <button class="btn-secondary auth-btn" onclick="openLoginModal()">
+                Voltar ao login
+            </button>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-overlay" onclick="closeProfileModal()"></div>
+        <div class="modal-content profile-modal">
+            <div class="modal-header">
+                <h3>Meu Perfil</h3>
+                <button class="modal-close" onclick="closeProfileModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <!-- Profile Tabs -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" onclick="switchProfileTab('profile-info')">
+                    <i data-lucide="user"></i>
+                    Informações Pessoais
+                </button>
+                <button class="tab-btn" onclick="switchProfileTab('order-history')">
+                    <i data-lucide="package"></i>
+                    Histórico de Pedidos
+                </button>
+                <button class="tab-btn" onclick="switchProfileTab('order-tracking')">
+                    <i data-lucide="map-pin"></i>
+                    Rastreamento
+                </button>
+            </div>
+
+            <!-- Profile Info Tab -->
+            <div id="profile-info" class="tab-content active">
+                <form class="profile-form" onsubmit="updateProfile(event)">
+                    <div class="form-group">
+                        <label for="profile-name">Nome completo</label>
+                        <input type="text" id="profile-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-email">E-mail</label>
+                        <input type="email" id="profile-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-phone">Telefone</label>
+                        <input type="tel" id="profile-phone" name="phone" placeholder="(41) 99999-9999">
+                    </div>
+                    
+                    <div class="address-section">
+                        <h4 class="address-title">
+                            <i data-lucide="map-pin"></i>
+                            Endereço de Entrega
+                        </h4>
+                        
+                        <div class="form-row">
+                            <div class="form-group" style="flex: 2;">
+                                <label for="profile-street">Rua/Avenida</label>
+                                <input type="text" id="profile-street" name="street" placeholder="Ex: Rua das Flores">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label for="profile-number">Número</label>
+                                <input type="text" id="profile-number" name="number" placeholder="123">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profile-complement">Complemento</label>
+                            <input type="text" id="profile-complement" name="complement" placeholder="Apto, Bloco, etc (opcional)">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profile-neighborhood">Bairro</label>
+                                <input type="text" id="profile-neighborhood" name="neighborhood" placeholder="Centro">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-city">Cidade</label>
+                                <input type="text" id="profile-city" name="city" placeholder="Araucária">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profile-state">Estado</label>
+                                <input type="text" id="profile-state" name="state" placeholder="PR" maxlength="2">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-zipcode">CEP</label>
+                                <input type="text" id="profile-zipcode" name="zipcode" placeholder="83700-000" maxlength="9">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-actions">
+                        <button type="submit" class="btn-primary">
+                            <i data-lucide="save"></i>
+                            Salvar alterações
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="openChangePasswordModal()">
+                            <i data-lucide="key"></i>
+                            Alterar senha
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Order History Tab -->
+            <div id="order-history" class="tab-content">
+                <div id="orders-container">
+                    <!-- Orders will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Order Tracking Tab -->
+            <div id="order-tracking" class="tab-content">
+                <div class="tracking-section-header">
+                    <h4>Rastreie seus pedidos</h4>
+                    <p>Acompanhe o status e localização das suas encomendas em tempo real</p>
+                </div>
+                <div id="tracking-container">
+                    <!-- Tracking info will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="change-password-modal" class="modal">
+        <div class="modal-overlay" onclick="closeChangePasswordModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Alterar senha</h3>
+                <button class="modal-close" onclick="closeChangePasswordModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <form class="auth-form" onsubmit="handleChangePassword(event)">
+                <div class="form-group">
+                    <label for="current-password">Senha atual</label>
+                    <div class="password-input">
+                        <input type="password" id="current-password" name="currentPassword" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('current-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Nova senha</label>
+                    <div class="password-input">
+                        <input type="password" id="new-password" name="newPassword" required 
+                               oninput="updatePasswordStrength('new-password', 'new-password-strength')">
+                        <button type="button" class="password-toggle" onclick="togglePassword('new-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                    <div id="new-password-strength" class="password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-new-password">Confirmar nova senha</label>
+                    <div class="password-input">
+                        <input type="password" id="confirm-new-password" name="confirmNewPassword" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirm-new-password', this)">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary auth-btn">
+                    Alterar senha
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-overlay" onclick="closeCart()"></div>
+        <div class="modal-content cart-modal">
+            <div class="modal-header">
+                <h3>Meu Carrinho</h3>
+                <button class="modal-close" onclick="closeCart()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be loaded here -->
+            </div>
+            
+            <!-- Mascote Vix Pix no Carrinho -->
+            <div class="cart-mascot" id="cart-mascot">
+                <div class="mascot-container">
+                    <img src="milhito.png" alt="Vix Pix - Mascote Outono Dourado" class="mascot-image-cart">
+                    <div class="mascot-bubble">
+                        <p>Olá! Eu sou o Vix Pix! 🌽✨ Estou aqui para te ajudar com sua compra!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="cart-total" class="cart-total">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span id="total-amount">R$ 0,00</span>
+                </div>
+                <button class="btn-primary checkout-btn" onclick="openCheckoutModal()">
+                    Finalizar Pedido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="product-detail-modal" class="modal">
+        <div class="modal-overlay" onclick="closeProductDetail()"></div>
+        <div class="modal-content product-detail-modal">
+            <div class="modal-header">
+                <h3 id="product-detail-title">Produto</h3>
+                <button class="modal-close" onclick="closeProductDetail()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="product-detail-content">
+                <div class="product-detail-image">
+                    <img id="product-detail-img" src="" alt="">
+                </div>
+                <div class="product-detail-info">
+                    <p id="product-detail-description"></p>
+                    <div class="product-detail-price">
+                        <span id="product-detail-price-value">R$ 0,00</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                        <span id="detail-quantity">1</span>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                    <button class="btn-primary add-to-cart-detail" onclick="addToCartFromDetail()">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-panel" class="modal admin-panel-modal">
+        <div class="modal-overlay" onclick="closeAdminPanel()"></div>
+        <div class="modal-content admin-panel-content">
+            <div class="modal-header">
+                <h3>Painel Administrativo</h3>
+                <button class="modal-close" onclick="closeAdminPanel()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="admin-panel-body">
+                <div class="admin-header">
+                    <h4>Gerenciar Produtos</h4>
+                    <button class="btn-primary" onclick="openAddProductModal()">
+                        <i data-lucide="plus"></i>
+                        Adicionar Produto
+                    </button>
+                </div>
+                
+                <div class="admin-products-container">
+                    <div id="admin-products-list" class="admin-products-list">
+                        <!-- Products will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Form Modal -->
+    <div id="product-form-modal" class="modal">
+        <div class="modal-overlay" onclick="closeProductFormModal()"></div>
+        <div class="modal-content product-form-content">
+            <div class="modal-header">
+                <h3 id="product-form-title">Adicionar Produto</h3>
+                <button class="modal-close" onclick="closeProductFormModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <form class="product-form" onsubmit="handleProductForm(event)">
+                <div class="form-group">
+                    <label for="product-name">Nome do Produto *</label>
+                    <input type="text" id="product-name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-description">Descrição *</label>
+                    <textarea id="product-description" name="description" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-price">Preço (R$) *</label>
+                        <input type="number" id="product-price" name="price" step="0.01" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-category">Categoria *</label>
+                        <select id="product-category" name="category" required>
+                            <option value="alimentos">Alimentos</option>
+                            <option value="verduras">Verduras</option>
+                            <option value="legumes">Legumes</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-image">URL da Imagem *</label>
+                    <input type="url" id="product-image" name="image" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-tags">Tags (separadas por vírgula)</label>
+                    <input type="text" id="product-tags" name="tags" placeholder="orgânico, fresco, local">
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="product-stock" name="stock" checked>
+                        <span>Produto em estoque</span>
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeProductFormModal()">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        Salvar Produto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Checkout Payment Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-overlay" onclick="closeCheckoutModal()"></div>
+        <div class="modal-content checkout-modal">
+            <div class="modal-header">
+                <h3>Finalizar Pagamento</h3>
+                <button class="modal-close" onclick="closeCheckoutModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="checkout-content">
+                <!-- Resumo do Pedido -->
+                <div class="checkout-summary">
+                    <h4>Resumo do Pedido</h4>
+                    <div id="checkout-items-summary" class="checkout-items">
+                        <!-- Items serão carregados aqui -->
+                    </div>
+                    <div class="checkout-total">
+                        <span>Total:</span>
+                        <span id="checkout-total-amount">R$ 0,00</span>
+                    </div>
+                </div>
+                
+                <!-- Métodos de Pagamento -->
+                <div class="payment-methods">
+                    <h4>Escolha o método de pagamento</h4>
+                    <div class="payment-tabs">
+                        <button class="payment-tab active" onclick="selectPaymentMethod('pix')">
+                            <i data-lucide="smartphone"></i>
+                            PIX
+                        </button>
+                        <button class="payment-tab" onclick="selectPaymentMethod('card')">
+                            <i data-lucide="credit-card"></i>
+                            Cartão
+                        </button>
+                        <button class="payment-tab" onclick="selectPaymentMethod('boleto')">
+                            <i data-lucide="file-text"></i>
+                            Boleto
+                        </button>
+                    </div>
+                    
+                    <!-- PIX Payment -->
+                    <div id="pix-payment" class="payment-content active">
+                        <div class="pix-container">
+                            <h5>Pague com PIX</h5>
+                            <p>Escaneie o QR Code abaixo ou copie o código PIX:</p>
+                            
+                            <div class="pix-qrcode">
+                                <img id="pix-qr-image" src="https://via.placeholder.com/250x250/DF760B/FFFFFF?text=QR+CODE+PIX" alt="QR Code PIX">
+                                <p class="pix-instruction">Abra o app do seu banco e escaneie o código</p>
+                            </div>
+                            
+                            <div class="pix-code">
+                                <input type="text" id="pix-code-input" value="00020126580014BR.GOV.BCB.PIX0136chave-pix-exemplo@outonodourado.com" readonly>
+                                <button class="btn-copy" onclick="copyPixCode()">
+                                    <i data-lucide="copy"></i>
+                                    Copiar
+                                </button>
+                            </div>
+                            
+                            <div class="pix-mascot">
+                                <img src="milhito.png" alt="Vix Pix">
+                                <p>O Vix Pix está esperando seu pagamento! 🌽💚</p>
+                            </div>
+                            
+                            <button class="btn-primary btn-confirm-payment" onclick="confirmPayment('pix')">
+                                Confirmar Pagamento
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Card Payment -->
+                    <div id="card-payment" class="payment-content">
+                        <div class="card-container">
+                            <h5>Pagamento com Cartão</h5>
+                            
+                            <form id="card-form" onsubmit="confirmPayment('card'); return false;">
+                                <div class="form-group">
+                                    <label for="card-number">Número do Cartão</label>
+                                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="card-name">Nome no Cartão</label>
+                                        <input type="text" id="card-name" placeholder="NOME COMPLETO" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="card-expiry">Validade</label>
+                                        <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="card-cvv">CVV</label>
+                                        <input type="text" id="card-cvv" placeholder="123" maxlength="3" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="card-installments">Parcelas</label>
+                                    <select id="card-installments">
+                                        <option value="1">1x sem juros</option>
+                                        <option value="2">2x sem juros</option>
+                                        <option value="3">3x sem juros</option>
+                                        <option value="4">4x com juros (2%)</option>
+                                        <option value="5">5x com juros (2%)</option>
+                                        <option value="6">6x com juros (2%)</option>
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary btn-confirm-payment">
+                                    Confirmar Pagamento
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Boleto Payment -->
+                    <div id="boleto-payment" class="payment-content">
+                        <div class="boleto-container">
+                            <h5>Pagamento com Boleto</h5>
+                            <p>O boleto será gerado e enviado para seu e-mail</p>
+                            
+                            <div class="boleto-info">
+                                <div class="info-item">
+                                    <i data-lucide="calendar"></i>
+                                    <span>Vencimento em 3 dias úteis</span>
+                                </div>
+                                <div class="info-item">
+                                    <i data-lucide="alert-circle"></i>
+                                    <span>Confirmação em até 2 dias úteis após pagamento</span>
+                                </div>
+                            </div>
+                            
+                            <div class="boleto-barcode">
+                                <img src="https://via.placeholder.com/400x60/000000/FFFFFF?text=||+|++||++|+|++||+|+||++|" alt="Código de Barras">
+                                <p class="boleto-code">23793.38128 60047.947309 99877.661022 8 99560000015000</p>
+                                <button class="btn-copy" onclick="copyBoletoCode()">
+                                    <i data-lucide="copy"></i>
+                                    Copiar código
+                                </button>
+                            </div>
+                            
+                            <button class="btn-primary btn-confirm-payment" onclick="confirmPayment('boleto')">
+                                Gerar Boleto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
