@@ -48,8 +48,8 @@
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
     line-height: 1.6;
-    color: var(#000 text-primary);
-    background-color: var(#000 bg-primary);
+    color: var(#000000 text-primary);
+    background-color: var(--bg-primary);
     font-size: 14px;
 }
 
@@ -1601,7 +1601,7 @@ html {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px #df760b(223, 118, 11, 0.1);
+    box-shadow: 0 0 0 3px rgba(223, 118, 11, 0.1);
 }
 
 .form-group textarea {
@@ -1659,7 +1659,7 @@ html {
 /* Footer */
 .footer {
     background: var(--text-primary); /* Usando a variável para o fundo */
-    color: hwb(38 0% 8%); /* Cor do texto */
+    color: hsl(38, 100%, 80%); /* Cor do texto */
     padding: 3rem 0 1rem;
 }
 
@@ -1678,7 +1678,7 @@ html {
 }
 
 .footer-description {
-    color: #d3670f;
+    color: #000000;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -2180,12 +2180,12 @@ html {
 
 .cart-item-name {
     font-weight: 600;
-    color: var(#d3670f text-primary);
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .cart-item-price {
-    color: var(#000 primary);
+    color: var(--primary);
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -2375,7 +2375,7 @@ html {
 
 .mascot-bubble p {
     margin: 0;
-    color: var(#000 text-primary);
+    color: var(#000text-primary);
     font-size: 0.875rem;
     line-height: 1.5;
 }
@@ -2417,7 +2417,7 @@ html {
 
 .checkout-summary h4 {
     margin-bottom: 1rem;
-    color: var(#b8620a text-primary);
+    color: var(--text-primary);
     font-size: 1.25rem;
 }
 
@@ -2456,18 +2456,18 @@ html {
 
 .checkout-item .item-name {
     font-weight: 500;
-    color: var#f59e0b text-primary);
+    color: var(--text-primary);
     font-size: 0.875rem;
 }
 
 .checkout-item .item-quantity {
     font-size: 0.75rem;
-    color: var(#000 text-secondary);
+    color: var(--text-secondary);
 }
 
 .checkout-item .item-total {
     font-weight: 600;
-    color: var(#ff7b10 primary);
+    color: var(--primary);
 }
 
 .checkout-total {
@@ -2475,15 +2475,15 @@ html {
     justify-content: space-between;
     align-items: center;
     padding-top: 1rem;
-    border-top: 2px solid var( #d3670f primary);
+    border-top: 2px solid var(--primary);
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(#d3670f text-primary);
+    color: var(--text-primary);
 }
 
 .payment-methods h4 {
     margin-bottom: 1.5rem;
-    color: var(#d3670f text-primary);
+    color: var(--text-primary);
     font-size: 1.25rem;
 }
 
@@ -2517,8 +2517,8 @@ html {
 }
 
 .payment-tab.active {
-    color: var(#000 primary);
-    border-bottom-color: var(##000 primary);
+    color: var(--primary);
+    border-bottom-color: var(--primary);
     background: var(--bg-secondary);
 }
 
@@ -2538,12 +2538,12 @@ html {
 
 .pix-container h5 {
     font-size: 1.5rem;
-    color: var(hwb(27 6% 18%) text-primary);
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .pix-container > p {
-    color: var(lab(61.88% 56.59 65.34) text-secondary);
+    color: var(--text-secondary);
     margin-bottom: 1.5rem;
 }
 
@@ -2853,7 +2853,7 @@ html {
     }
 }
 
-/* Print Styles#f59e0b */
+/* Print Styles */
 @media print {
     .header,
     .mascot,
@@ -3030,7 +3030,7 @@ html {
 }
 
 .admin-product-info h4 {
-    color: var(#000 text-primary);
+    color: var(--text-primary);
     font-size: 1.125rem;
     margin-bottom: 0.25rem;
     overflow: hidden;
@@ -3039,14 +3039,14 @@ html {
 }
 
 .admin-product-info .product-category {
-    color: var(#f59e0b primary);
+    color: var(--primary);
     font-size: 0.875rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
 }
 
 .admin-product-info .product-price {
-    color: var(#000 text-primary);
+    color: var(--text-primary);
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
@@ -3244,400 +3244,4 @@ html {
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-lg);
-}
-
-/* ========================
-   ORDER TRACKING STYLES
-   ======================== */
-
-.tracking-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.tracking-header h4 {
-    color: var(--primary);
-    font-size: 1.25rem;
-    margin: 0;
-}
-
-.tracking-header p {
-    color: var(--text-secondary);
-}
-
-.tracking-section-header {
-    margin-bottom: 2rem;
-    text-align: center;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--border);
-}
-
-.tracking-section-header h4 {
-    color: var(--primary);
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.tracking-section-header p {
-    color: var(--text-secondary);
-}
-
-.empty-tracking {
-    text-align: center;
-    padding: 3rem 2rem;
-    background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
-}
-
-.empty-tracking-icon {
-    width: 80px;
-    height: 80px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    box-shadow: var(--shadow-md);
-}
-
-.empty-tracking-icon i {
-    width: 40px;
-    height: 40px;
-    color: var(--primary);
-}
-
-.empty-tracking h4 {
-    color: var(--text-primary);
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-
-.empty-tracking p {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-}
-
-.tracking-card {
-    background: white;
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border);
-}
-
-.tracking-card:last-child {
-    margin-bottom: 0;
-}
-
-.tracking-date {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-}
-
-.tracking-route {
-    background: var(--bg-secondary);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.route-point {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    background: white;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-}
-
-.route-point.origin {
-    margin-bottom: 1rem;
-}
-
-.route-icon {
-    width: 50px;
-    height: 50px;
-    background: var(--primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.route-icon i {
-    width: 24px;
-    height: 24px;
-    color: white;
-}
-
-.route-info {
-    flex: 1;
-}
-
-.route-info h5 {
-    color: var(--text-primary);
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-}
-
-.route-info p {
-    color: var(--text-primary);
-    font-size: 0.9375rem;
-    margin-bottom: 0.25rem;
-}
-
-.route-status {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-}
-
-.route-arrow {
-    text-align: center;
-    padding: 0.5rem 0;
-}
-
-.route-arrow i {
-    width: 24px;
-    height: 24px;
-    color: var(--primary);
-}
-
-.tracking-timeline {
-    margin-bottom: 1.5rem;
-}
-
-.timeline-step {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem 0;
-    position: relative;
-}
-
-.step-marker {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.step-circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--bg-muted);
-    border: 3px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    z-index: 2;
-}
-
-.step-circle i {
-    width: 20px;
-    height: 20px;
-    color: var(--text-muted);
-}
-
-.timeline-step.completed .step-circle {
-    background: var(--success);
-    border-color: var(--success);
-}
-
-.timeline-step.completed .step-circle i {
-    color: white;
-}
-
-.timeline-step.current .step-circle {
-    background: var(--primary);
-    border-color: var(--primary);
-    animation: pulse 2s infinite;
-}
-
-.timeline-step.current .step-circle i {
-    color: white;
-}
-
-.step-line {
-    width: 3px;
-    flex: 1;
-    background: var(--border);
-    margin-top: 0.5rem;
-}
-
-.timeline-step.completed .step-line {
-    background: var(--success);
-}
-
-.step-content {
-    flex: 1;
-    padding-top: 0.5rem;
-}
-
-.step-content h5 {
-    color: var(--text-primary);
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-}
-
-.step-content p {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    margin-bottom: 0.25rem;
-}
-
-.step-time {
-    color: var(--text-muted);
-    font-size: 0.8125rem;
-}
-
-.tracking-actions {
-    display: flex;
-    gap: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border-light);
-}
-
-.tracking-actions button {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.tracking-actions button i {
-    width: 18px;
-    height: 18px;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(223, 118, 11, 0.7);
-    }
-    50% {
-        box-shadow: 0 0 0 10px rgba(223, 118, 11, 0);
-    }
-}
-
-/* ========================
-   PROFILE SECTION STYLES
-   ======================== */
-
-.address-section {
-    background: var(--bg-secondary);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-top: 1.5rem;
-    border: 1px solid var(--border-light);
-}
-
-.address-title {
-    color: var(--primary);
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.address-title i {
-    width: 20px;
-    height: 20px;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-
-.form-row .form-group {
-    flex: 1;
-}
-
-.profile-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.profile-actions button {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.profile-actions button i {
-    width: 18px;
-    height: 18px;
-}
-
-/* Mobile responsive for tracking and profile */
-@media (max-width: 768px) {
-    .tracking-route {
-        padding: 1rem;
-    }
-
-    .route-point {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .route-icon {
-        margin: 0 auto;
-    }
-
-    .tracking-actions {
-        flex-direction: column;
-    }
-
-    .tracking-actions button {
-        width: 100%;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .profile-actions {
-        flex-direction: column;
-    }
-
-    .profile-actions button {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .tracking-card {
-        padding: 1rem;
-    }
-
-    .timeline-step {
-        gap: 0.75rem;
-    }
-
-    .step-circle {
-        width: 32px;
-        height: 32px;
-    }
-
-    .step-circle i {
-        width: 16px;
-        height: 16px;
-    }
-
-    .address-section {
-        padding: 1rem;
-    }
 }

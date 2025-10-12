@@ -914,10 +914,6 @@
                     <i data-lucide="package"></i>
                     Histórico de Pedidos
                 </button>
-                <button class="tab-btn" onclick="switchProfileTab('order-tracking')">
-                    <i data-lucide="map-pin"></i>
-                    Rastreamento
-                </button>
             </div>
 
             <!-- Profile Info Tab -->
@@ -933,61 +929,17 @@
                     </div>
                     <div class="form-group">
                         <label for="profile-phone">Telefone</label>
-                        <input type="tel" id="profile-phone" name="phone" placeholder="(41) 99999-9999">
+                        <input type="tel" id="profile-phone" name="phone">
                     </div>
-                    
-                    <div class="address-section">
-                        <h4 class="address-title">
-                            <i data-lucide="map-pin"></i>
-                            Endereço de Entrega
-                        </h4>
-                        
-                        <div class="form-row">
-                            <div class="form-group" style="flex: 2;">
-                                <label for="profile-street">Rua/Avenida</label>
-                                <input type="text" id="profile-street" name="street" placeholder="Ex: Rua das Flores">
-                            </div>
-                            <div class="form-group" style="flex: 1;">
-                                <label for="profile-number">Número</label>
-                                <input type="text" id="profile-number" name="number" placeholder="123">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="profile-complement">Complemento</label>
-                            <input type="text" id="profile-complement" name="complement" placeholder="Apto, Bloco, etc (opcional)">
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="profile-neighborhood">Bairro</label>
-                                <input type="text" id="profile-neighborhood" name="neighborhood" placeholder="Centro">
-                            </div>
-                            <div class="form-group">
-                                <label for="profile-city">Cidade</label>
-                                <input type="text" id="profile-city" name="city" placeholder="Araucária">
-                            </div>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="profile-state">Estado</label>
-                                <input type="text" id="profile-state" name="state" placeholder="PR" maxlength="2">
-                            </div>
-                            <div class="form-group">
-                                <label for="profile-zipcode">CEP</label>
-                                <input type="text" id="profile-zipcode" name="zipcode" placeholder="83700-000" maxlength="9">
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="profile-address">Endereço</label>
+                        <textarea id="profile-address" name="address" rows="3"></textarea>
                     </div>
-                    
                     <div class="profile-actions">
                         <button type="submit" class="btn-primary">
-                            <i data-lucide="save"></i>
                             Salvar alterações
                         </button>
                         <button type="button" class="btn-secondary" onclick="openChangePasswordModal()">
-                            <i data-lucide="key"></i>
                             Alterar senha
                         </button>
                     </div>
@@ -998,17 +950,6 @@
             <div id="order-history" class="tab-content">
                 <div id="orders-container">
                     <!-- Orders will be loaded here -->
-                </div>
-            </div>
-            
-            <!-- Order Tracking Tab -->
-            <div id="order-tracking" class="tab-content">
-                <div class="tracking-section-header">
-                    <h4>Rastreie seus pedidos</h4>
-                    <p>Acompanhe o status e localização das suas encomendas em tempo real</p>
-                </div>
-                <div id="tracking-container">
-                    <!-- Tracking info will be loaded here -->
                 </div>
             </div>
         </div>
