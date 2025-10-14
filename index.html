@@ -1328,5 +1328,87 @@
         // Initialize Lucide icons
         lucide.createIcons();
     </script>
+
+ <script type="module">
+        // 1. IMPORTAR SUPABASE
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+        // 2. SUAS CHAVES
+        const SUPABASE_URL = 'https://khzrncdvwawmlmwfhoil.supabase.co'
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtoenJuY2R2d2F3bWxtd2Zob2lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0OTg5ODQsImV4cCI6MjA3NTA3NDk4NH0.aA-ecvCZgllSRD6ANnZN6FetHqPixTXlMgmxow6a2BU'
+
+        // 3. CONECTAR
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+
+        // 4. AGORA VOCÊ USA ASSIM:
+
+        // ===== BUSCAR PRODUTOS =====
+        async function buscarProdutos() {
+            const { data: produtos } = await supabase
+                .from('produtos')
+                .select('*')
+            
+            // Exibir na tela
+            const container = document.getElementById('produtos')
+            produtos.forEach(produto => {
+                container.innerHTML += `
+                    <div>
+                        <h3>${produto.nome}</h3>
+                        <p>R$ ${produto.preco}</p>
+                    </div>
+                `
+            })
+        }
+
+        // ===== CADASTRAR CLIENTE =====
+        async function cadastrarCliente() {
+            const nome = document.getElementById('nome').value
+            const email = document.getElementById('email').value
+            
+            const { data, error } = await supabase
+                .from('clientes')
+                .insert([{
+                    nome: nome,
+                    email: email
+                    // adicione outros campos aqui
+                }])
+            
+            if (error) {
+                alert('Erro: ' + error.message)
+            } else {
+                alert('Cliente cadastrado!')
+            }
+        }
+
+        // ===== SALVAR PAGAMENTO =====
+        async function salvarPagamento() {
+            const { data, error } = await supabase
+                .from('pagamentos')
+                .insert([{
+                    cliente_id: 1,
+                    metodo_pagamento: 'PIX',
+                    valor: 50.00,
+                    status: 'Pendente'
+                }])
+            
+            if (error) {
+                alert('Erro: ' + error.message)
+            } else {
+                alert('Pagamento registrado!')
+            }
+        }
+
+        // 5. CHAMAR AS FUNÇÕES
+        // Chame quando a página carregar
+        buscarProdutos()
+
+        // OU vincule aos seus botões/formulários
+        document.getElementById('formCadastro')?.addEventListener('submit', (e) => {
+            e.preventDefault()
+            cadastrarCliente()
+        })
+    </script>
+
+
 </body>
 </html>
