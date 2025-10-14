@@ -1343,7 +1343,7 @@
         // 4. AGORA VOCÊ USA ASSIM:
 
         // ===== BUSCAR PRODUTOS =====
-        async function buscarProdutos() {
+        async function produtos() {
             const { data: produtos } = await supabase
                 .from('produtos')
                 .select('*')
@@ -1361,7 +1361,7 @@
         }
 
         // ===== CADASTRAR CLIENTE =====
-        async function cadastrarCliente() {
+        async function clientes() {
             const nome = document.getElementById('nome').value
             const email = document.getElementById('email').value
             
@@ -1369,7 +1369,9 @@
                 .from('clientes')
                 .insert([{
                     nome: nome,
-                    email: email
+                    email: email,
+                    telefone: telefone,
+                    senha: senha,
                     // adicione outros campos aqui
                 }])
             
@@ -1381,7 +1383,7 @@
         }
 
         // ===== SALVAR PAGAMENTO =====
-        async function salvarPagamento() {
+        async function pagamento() {
             const { data, error } = await supabase
                 .from('pagamentos')
                 .insert([{
