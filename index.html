@@ -1328,8 +1328,35 @@
         // Initialize Lucide icons
         lucide.createIcons();
     </script>
+h1>Cadastrar Novo Cliente</h1>
 
- <script type="module">
+    <form id="formCadastro">
+        <label for="nome">Nome:</label>  
+
+        <input type="text" id="nome" name="nome" required>  
+  
+
+
+        <label for="email">Email:</label>  
+
+        <input type="email" id="email" name="email" required>  
+  
+
+
+        <button type="submit">Cadastrar Cliente</button>
+    </form>
+
+    <div id="produtos"></div> <!-- Se você estiver usando a seção de produtos -->
+
+    <!-- Seu script.js, se houver -->
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide icons (se estiver usando )
+        lucide.createIcons();
+    </script>
+
+    <!-- SEU CÓDIGO SUPABASE AQUI -->
+    <script type="module">
         // 1. IMPORTAR SUPABASE
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -1338,30 +1365,32 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtoenJuY2R2d2F3bWxtd2Zob2lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0OTg5ODQsImV4cCI6MjA3NTA3NDk4NH0.aA-ecvCZgllSRD6ANnZN6FetHqPixTXlMgmxow6a2BU'
 
         // 3. CONECTAR
-        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY )
 
         // 4. AGORA VOCÊ USA ASSIM:
 
         // ===== BUSCAR PRODUTOS =====
-        async function produtos() {
+        async function buscarProdutos() {
             const { data: produtos } = await supabase
                 .from('produtos')
                 .select('*')
             
             // Exibir na tela
             const container = document.getElementById('produtos')
-            produtos.forEach(produto => {
-                container.innerHTML += `
-                    <div>
-                        <h3>${produto.nome}</h3>
-                        <p>R$ ${produto.preco}</p>
-                    </div>
-                `
-            })
+            if (container && produtos) {
+                produtos.forEach(produto => {
+                    container.innerHTML += `
+                        <div>
+                            <h3>${produto.nome}</h3>
+                            <p>R$ ${produto.preco}</p>
+                        </div>
+                    `
+                })
+            }
         }
 
         // ===== CADASTRAR CLIENTE =====
-        async function clientes() {
+        async function cadastrarCliente() {
             const nome = document.getElementById('nome').value
             const email = document.getElementById('email').value
             
@@ -1369,21 +1398,23 @@
                 .from('clientes')
                 .insert([{
                     nome: nome,
-                    email: email,
-                    telefone: telefone,
-                    senha: senha,
+                    email: email
                     // adicione outros campos aqui
                 }])
             
             if (error) {
-                alert('Erro: ' + error.message)
+                alert('Erro ao cadastrar cliente: ' + error.message)
+                console.error('Erro Supabase:', error)
             } else {
-                alert('Cliente cadastrado!')
+                alert('Cliente cadastrado com sucesso!')
+                // Limpar formulário após sucesso
+                document.getElementById('nome').value = ''
+                document.getElementById('email').value = ''
             }
         }
 
         // ===== SALVAR PAGAMENTO =====
-        async function pagamento() {
+        async function salvarPagamento() {
             const { data, error } = await supabase
                 .from('pagamentos')
                 .insert([{
@@ -1394,9 +1425,10 @@
                 }])
             
             if (error) {
-                alert('Erro: ' + error.message)
+                alert('Erro ao registrar pagamento: ' + error.message)
+                console.error('Erro Supabase:', error)
             } else {
-                alert('Pagamento registrado!')
+                alert('Pagamento registrado com sucesso!')
             }
         }
 
@@ -1406,11 +1438,9 @@
 
         // OU vincule aos seus botões/formulários
         document.getElementById('formCadastro')?.addEventListener('submit', (e) => {
-            e.preventDefault()
+            e.preventDefault() // Impede o recarregamento da página
             cadastrarCliente()
         })
-    </script>
-
-
+      </script>
 </body>
 </html>
