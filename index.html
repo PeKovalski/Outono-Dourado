@@ -1328,20 +1328,20 @@
         // Initialize Lucide icons
         lucide.createIcons();
     </script>
-h1>Cadastrar Novo Cliente</h1>
+  <h1>Cadastrar Novo Cliente</h1>
 
     <form id="formCadastro">
-        <label for="nome">Nome:</label>  
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-        <input type="text" id="nome" name="nome" required>  
-  
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
 
-        <label for="email">Email:</label>  
-
-        <input type="email" id="email" name="email" required>  
-  
-
+        <label for="telefone">Telefone (Opcional):</label>
+        <input type="tel" id="telefone" name="telefone">
 
         <button type="submit">Cadastrar Cliente</button>
     </form>
@@ -1351,7 +1351,7 @@ h1>Cadastrar Novo Cliente</h1>
     <!-- Seu script.js, se houver -->
     <script src="script.js"></script>
     <script>
-        // Initialize Lucide icons (se estiver usando )
+        // Initialize Lucide icons (se estiver usando)
         lucide.createIcons();
     </script>
 
@@ -1393,14 +1393,26 @@ h1>Cadastrar Novo Cliente</h1>
         async function cadastrarCliente() {
             const nome = document.getElementById('nome').value
             const email = document.getElementById('email').value
+            const senha = document.getElementById('senha').value // Novo campo
+            const telefone = document.getElementById('telefone').value // Novo campo (opcional)
+
+            // Crie um objeto com os dados a serem inseridos
+            const dadosCliente = {
+                nome: nome,
+                email: email,
+                senha: senha // Inclua a senha
+            }
+
+            // Adicione o telefone apenas se ele tiver um valor
+            if (telefone) {
+                dadosCliente.telefone = telefone
+            }
             
+            console.log('Dados a serem enviados para o Supabase:', dadosCliente);
+
             const { data, error } = await supabase
                 .from('clientes')
-                .insert([{
-                    nome: nome,
-                    email: email
-                    // adicione outros campos aqui
-                }])
+                .insert([dadosCliente]) // Use o objeto dadosCliente
             
             if (error) {
                 alert('Erro ao cadastrar cliente: ' + error.message)
@@ -1410,6 +1422,8 @@ h1>Cadastrar Novo Cliente</h1>
                 // Limpar formulário após sucesso
                 document.getElementById('nome').value = ''
                 document.getElementById('email').value = ''
+                document.getElementById('senha').value = ''
+                document.getElementById('telefone').value = ''
             }
         }
 
@@ -1441,6 +1455,6 @@ h1>Cadastrar Novo Cliente</h1>
             e.preventDefault() // Impede o recarregamento da página
             cadastrarCliente()
         })
-      </script>
+    </script>
 </body>
 </html>
