@@ -2375,7 +2375,7 @@ html {
 
 .mascot-bubble p {
     margin: 0;
-    color: var(#000text-primary);
+    color: var(#000 text-primary);
     font-size: 0.875rem;
     line-height: 1.5;
 }
@@ -2417,7 +2417,7 @@ html {
 
 .checkout-summary h4 {
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    color: var(#b8620a text-primary);
     font-size: 1.25rem;
 }
 
@@ -2456,18 +2456,18 @@ html {
 
 .checkout-item .item-name {
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(#b8620a text-primary);
     font-size: 0.875rem;
 }
 
 .checkout-item .item-quantity {
     font-size: 0.75rem;
-    color: var(--text-secondary);
+    color: var(#b8620a text-secondary);
 }
 
 .checkout-item .item-total {
     font-weight: 600;
-    color: var(--primary);
+    color: var(#b8620a primary);
 }
 
 .checkout-total {
@@ -2475,15 +2475,15 @@ html {
     justify-content: space-between;
     align-items: center;
     padding-top: 1rem;
-    border-top: 2px solid var(--primary);
+    border-top: 2px solid var(#b8620a primary);
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(#000 text-primary);
 }
 
 .payment-methods h4 {
     margin-bottom: 1.5rem;
-    color: var(--text-primary);
+    color: var(#000 text-primary);
     font-size: 1.25rem;
 }
 
