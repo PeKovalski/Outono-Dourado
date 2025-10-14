@@ -1408,7 +1408,8 @@ html {
 
 .rating-count {
     color: var(--text-muted);
-    font-size: 0.875rem;
+   rem;
+    display: -webkit-font-size: 0.875rem;
 }
 
 .product-footer {
@@ -2180,7 +2181,7 @@ html {
 
 .cart-item-name {
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(#b8620a  text-primary);
     margin-bottom: 0.5rem;
 }
 
@@ -2197,7 +2198,7 @@ html {
 }
 
 .quantity-btn {
-    background: var(--primary);
+    background: var(#000 primary);
     color: white;
     border: none;
     width: 2rem;
@@ -2211,7 +2212,7 @@ html {
 }
 
 .quantity-btn:hover {
-    background: var(--primary-dark);
+    background: var(#000 primary-dark);
 }
 
 .quantity-display {
@@ -3244,4 +3245,4 @@ html {
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-lg);
-}
+ }
