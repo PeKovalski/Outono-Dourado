@@ -1,3 +1,4 @@
+
 // Configuração do Supabase
 const supabaseUrl = 'https://khzrncdvwawmlmwfhoil.supabase.co'
 const supabaseKey = 'sua-chave-publica-aqui' // Cole sua chave pública
