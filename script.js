@@ -1,4 +1,7 @@
-
+// Configuração do Supabase
+const supabaseUrl = 'https://khzrncdvwawmlmwfhoil.supabase.co'
+const supabaseKey = 'sua-chave-publica-aqui' // Cole sua chave pública
+const supabase = supabase.createClient(supabaseUrl, supabaseKey)
 // Base de dados dos produtos
 const PRODUCTS_DATABASE = [
     {
