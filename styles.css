@@ -1431,7 +1431,8 @@ html {
     padding: 0.5rem;
     border-radius: var(--radius);
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background
+     0.2s ease;
 }
 
 .add-to-cart-btn:hover {
