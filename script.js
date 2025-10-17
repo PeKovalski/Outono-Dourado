@@ -1,13 +1,7 @@
-// ATENÇÃO: Se estiver usando módulos (Next.js, Vite, etc.), mantenha esta linha:
-// import { createClient } from '@supabase/supabase-js' 
-
-// ===================================
-// CONFIGURAÇÃO DO SUPABASE (CORRIGIDO)
-// ===================================
 
 const supabaseUrl = 'https://khzrncdvwawmlmwfhoil.supabase.co'
 // SUBSTITUA PELA SUA CHAVE ANON PÚBLICA REAL
-const supabaseKey = 'SUA_CHAVE_PUBLIC_AQUI' 
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtoenJuY2R2d2F3bWxtd2Zob2lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0OTg5ODQsImV4cCI6MjA3NTA3NDk4NH0.aA-ecvCZgllSRD6ANnZN6FetHqPixTXlMgmxow6a2BU' 
 
 // CORREÇÃO: Chama createClient da função importada (ou global)
 // Se você está usando módulos (import):
