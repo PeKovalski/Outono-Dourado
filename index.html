@@ -84,16 +84,12 @@
         }
 
 /* login novo  */
-        /* Estilos personalizados para complementar o Tailwind */
-        body {
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-@@ -91,13 +21,11 @@
+
+ /* Cores consistentes com o tema da página inicial */
         .theme-bg { background-color: #1a1a2e; }
         .theme-text { color: #e0e0e0; }
-
+        
         /* Estilos para o novo componente de autenticação */
-        /* Ajustado: A seção de autenticação agora é mais flexível para uso em um cabeçalho */
         .auth-section {
             position: relative;
             display: flex;
@@ -103,29 +99,67 @@
         }
 
         .login-btn, .user-profile-btn {
-@@ -126,7 +54,7 @@
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background-color: #0f3460;
+            color: #e94560;
+            border: 1px solid #e94560;
+        }
+
+        .login-btn:hover, .user-profile-btn:hover {
+            background-color: #e94560;
+            color: #1a1a2e;
+        }
+
+        .user-avatar {
+            background-color: #16213e;
+            padding: 0.5rem;
+            border-radius: 9999px;
         }
 
         .user-dropdown {
             display: none; /* Escondido por padrão */
-            display: none; 
             position: absolute;
             top: 110%;
             right: 0;
-@@ -140,7 +68,7 @@
+            background-color: #16213e;
+            border: 1px solid #0f3460;
+            border-radius: 0.5rem;
+            width: 200px;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
         .user-dropdown.active {
             display: block; /* Mostra o dropdown */
-            display: block;
         }
 
         .dropdown-item {
-@@ -162,59 +90,18 @@
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .dropdown-item:hover {
+            background-color: #0f3460;
+        }
+        .dropdown-divider {
+            height: 1px;
+            background-color: #0f3460;
+            margin: 0.25rem 0;
+        }
         .logout-item {
             color: #e94560;
         }
-
     </style>
 </head>
 <body class="theme-bg theme-text min-h-screen flex items-center justify-center p-4">
@@ -174,8 +208,7 @@
                 </nav>
 
                 <!-- login novo  -->
-                 <!-- Contêiner principal da aplicação -->
-    <div id="app" class="w-full max-w-md mx-auto text-center">
+                 <div id="app" class="w-full max-w-md mx-auto text-center">
 
         <!-- Cabeçalho da Página -->
         <header class="mb-8">
@@ -184,11 +217,39 @@
         </header>
         
         <!-- Seção de Autenticação (Novo Componente) -->
-        <!-- Seção de Autenticação movida para a barra de navegação -->
         <div class="auth-section" id="auth-section">
             <!-- Botão de Entrar (Não Logado) -->
             <div id="auth-buttons">
-@@ -251,1196 +138,30 @@
+                <button class="login-btn" id="login-btn">
+                    <i data-lucide="user"></i>
+                    <span class="login-text">Entrar</span>
+                </button>
+            </div>
+            
+            <!-- Menu do Usuário (Logado) -->
+            <div class="user-menu" id="user-menu" style="display: none;">
+                <button class="user-profile-btn" id="user-profile-btn">
+                    <div class="user-avatar">
+                        <i data-lucide="user"></i>
+                    </div>
+                    <span class="user-name" id="user-name">Usuário</span>
+                    <i data-lucide="chevron-down" class="dropdown-arrow"></i>
+                </button>
+                
+                <div class="user-dropdown" id="user-dropdown">
+                    <div class="dropdown-item">
+                        <i data-lucide="user"></i>
+                        <span>Meu Perfil</span>
+                    </div>
+                    <div class="dropdown-item">
+                        <i data-lucide="package"></i>
+                        <span>Meus Pedidos</span>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-item logout-item" id="logout-btn">
+                        <i data-lucide="log-out"></i>
+                        <span>Sair</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1382,13 +1443,11 @@
     
     <!-- Supabase Integration -->
     <script type="module">
- // --- CONFIGURAÇÃO DO SUPABASE ---
+ /
+         
+        // --- CONFIGURAÇÃO DO SUPABASE ---
         const SUPABASE_URL = 'https://whxlgangulxkmrrzoygu.supabase.co'; 
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndoeGxnYW5ndWx4a21ycnpveWd1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3MDU3MDcsImV4cCI6MjA3NjI4MTcwN30.j5mnEJN9If4QbB_okYEvWMzH_faQWgWg7B1MlqpuJrI';
-    <script>
-        // --- CONFIGURAÇÃO DO SUPABASE ---
-        const SUPABASE_URL = 'COLE_SUA_URL_AQUI'; 
-        const SUPABASE_ANON_KEY = 'COLE_SUA_CHAVE_ANON_AQUI';
 
         const { createClient } = supabase;
         const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1399,7 +1458,68 @@
         const authButtonsDiv = document.getElementById('auth-buttons');
         const loginBtn = document.getElementById('login-btn');
         const userMenuDiv = document.getElementById('user-menu');
-@@ -1451,67 +172,44 @@
+        const userNameSpan = document.getElementById('user-name');
+        const userProfileBtn = document.getElementById('user-profile-btn');
+        const userDropdown = document.getElementById('user-dropdown');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // --- LÓGICA DA PÁGINA ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Inicializa os ícones do Lucide
+            lucide.createIcons();
+            
+            // Verifica a sessão do usuário ao carregar
+            const { data: { session } } = await _supabase.auth.getSession();
+            updateUI(session);
+        });
+
+        // Atualiza a UI com base na existência de uma sessão
+        function updateUI(session) {
+            if (session && session.user) {
+                // Usuário está logado
+                authButtonsDiv.style.display = 'none';
+                userMenuDiv.style.display = 'block';
+                mainTitle.textContent = 'Bem-vindo(a) de volta!';
+                // Mostra o email do usuário no lugar do nome
+                userNameSpan.textContent = session.user.email;
+            } else {
+                // Usuário não está logado
+                authButtonsDiv.style.display = 'block';
+                userMenuDiv.style.display = 'none';
+                mainTitle.textContent = 'Bem-vindo(a)!';
+            }
+        }
+        
+        // Navega para a página de login ao clicar em "Entrar"
+        loginBtn.addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+
+        // Faz o logout do usuário
+        logoutBtn.addEventListener('click', async () => {
+            await _supabase.auth.signOut();
+            // Atualiza a UI para o estado deslogado
+            updateUI(null);
+            // Esconde o dropdown
+            userDropdown.classList.remove('active');
+        });
+
+        // Alterna a visibilidade do menu dropdown
+        userProfileBtn.addEventListener('click', (event) => {
+            event.stopPropagation(); // Impede que o clique feche o menu imediatamente
+            userDropdown.classList.toggle('active');
+        });
+
+        // Fecha o dropdown se o usuário clicar fora dele
+        window.addEventListener('click', () => {
+            if (userDropdown.classList.contains('active')) {
+                userDropdown.classList.remove('active');
+            }
+        });
+  
+    // --- até aqui o login da página ---
+
+
 
         // --- LÓGICA DA PÁGINA ---
         document.addEventListener('DOMContentLoaded', async () => {
