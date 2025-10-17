@@ -4,6 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>
+
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outono Dourado - Produtos Orgânicos e Sustentáveis</title>
+    <meta name="description" content="Outono Dourado - Sua loja de produtos orgânicos e sustentáveis em Araucária, Paraná. Descubra alimentos, verduras e legumes frescos e naturais.">
+    <meta name="keywords" content="produtos orgânicos, sustentáveis, Araucária, Paraná, alimentos naturais, verduras, legumes">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://outonodourado.com.br/">
+    <meta property="og:title" content="Outono Dourado - Produtos Orgânicos e Sustentáveis">
+    <meta property="og:description" content="Sua loja de produtos orgânicos e sustentáveis em Araucária, Paraná.">
+    <meta property="og:image" content="banner.png.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://outonodourado.com.br/">
+    <meta property="twitter:title" content="Outono Dourado - Produtos Orgânicos e Sustentáveis">
+    <meta property="twitter:description" content="Sua loja de produtos orgânicos e sustentáveis em Araucária, Paraná.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍂</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+
     <!-- Incluindo o Tailwind CSS para estilização rápida -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Incluindo a biblioteca do Supabase -->
@@ -91,6 +126,44 @@
         }
         .logout-item {
             color: #e94560;
+        }
+
+/* cores da página original */
+        .toaster {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .toast {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 8px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            min-width: 300px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .toast.success {
+            border-left: 4px solid #22c55e;
+        }
+        
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
