@@ -1,5 +1,3 @@
-
-
 // Base de dados dos produtos
 const PRODUCTS_DATABASE = [
     {
