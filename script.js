@@ -13,7 +13,7 @@ const defaultAlimentos = [
         descricao: "Alface orgânica fresca, cultivada sem agrotóxicos",
         preco: 3.50,
         categoria: "verduras",
-        imagem: "https://pin.it/5BQktFHXv",
+        imagem: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=400",
         tags: ["orgânico", "fresco", "local"]
     },
     {
