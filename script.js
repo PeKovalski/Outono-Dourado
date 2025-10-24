@@ -14,7 +14,7 @@ const defaultProducts = [
         description: "Alface orgânica fresca, cultivada sem agrotóxicos",
         price: 3.50,
         category: "verduras",
-        image: "https://pin.it/45J6v17Tz",
+        image: "alface.jpeg",
         tags: ["orgânico", "fresco", "local"]
     },
     {
