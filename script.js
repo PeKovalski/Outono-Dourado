@@ -1,287 +1,567 @@
-// script.js - Adicione este arquivo ou inclua no final do HTML
 
-// Configuração do Supabase
-const SUPABASE_URL = 'https://whxlgangulxkmrrzoygu.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndoeGxnYW5ndWx4a21ycnpveWd1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3MDU3MDcsImV4cCI6MjA3NjI4MTcwN30.j5mnEJN9If4QbB_okYEvWMzH_faQWgWg7B1MlqpuJrI';
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Base de dados dos produtos
+const PRODUCTS_DATABASE = [
+    {
 
-// Dados de produtos (fallback caso o Supabase não funcione)
-const defaultProducts = [
-    {
-        id: 1,
-        name: "Alface Crespa",
-        description: "Alface orgânica fresca, cultivada sem agrotóxicos",
-        price: 3.50,
-        category: "verduras",
-        image: "alface.jpeg",
-        tags: ["orgânico", "fresco", "local"]
+
+
+        id: "Milho",
+        name: "Milho Premium",
+        description: "Milho orgânico cultivado de forma sustentável, sem pesticidas, colhido fresquinho, Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico",
+        price: 24.90,
+        category: "Legumes",
+        image: "milho.jpeg",
+        rating: 4.8,
+        reviews: 127,
+        inStock: true,
+        tags: ["premium", "proteína", "vegano", "sem-glúten", "superfood",]
     },
     {
-        id: 2,
-        name: "Rúcula",
-        description: "Rúcula fresca com sabor característico",
-        price: 4.00,
-        category: "verduras", 
-        image: "https://images.unsplash.com/photo-1594282482151-1c4d8d4e6c7b?w=400",
-        tags: ["orgânico", "fresco"]
-    },
-    {
-        id: 3,
-        name: "Tomate",
-        description: "Tomates vermelhos maduros e suculentos",
-        price: 6.00,
-        category: "legumes",
-        image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400",
-        tags: ["orgânico", "maduro"]
-    },
-    {
-        id: 4,
-        name: "Cenoura",
-        description: "Cenouras crocantes e doces",
-        price: 5.50,
-        category: "legumes",
-        image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400",
-        tags: ["orgânico", "doce"]
-    },
-    {
-        id: 5,
-        name: "Maçã Verde",
-        description: "Maçãs verdes crocantes e refrescantes",
-        price: 7.00,
-        category: "frutas",
-        image: "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=400",
-        tags: ["orgânico", "crocante"]
-    },
-    {
-        id: 6, 
-        name: "Banana Prata",
-        description: "Bananas maduras e doces",
+        id: "alface-organica-crespa-002",
+        name: "Alface Orgânica Crespa Verde",
+        description: "Alface crespa fresca cultivada sem pesticidas em estufa climatizada, colhida diariamente para garantir máximo frescor e crocância. Rica em vitaminas A e K.",
         price: 4.50,
-        category: "frutas",
-        image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400",
-        tags: ["orgânico", "doce"]
+        category: "Verduras",
+        image: "alface.jpeg",
+        rating: 4.6,
+        reviews: 89,
+        inStock: true,
+        tags: ["fresco", "verduras", "hidropônico", "vitaminas", "baixa-caloria", "crocante", "Verduras"]
     },
     {
-        id: 7,
-        name: "Laranja Pera",
-        description: "Laranjas suculentas e doces",
-        price: 5.00,
-        category: "frutas", 
-        image: "https://images.unsplash.com/photo-1547514701-42782101795e?w=400",
-        tags: ["orgânico", "suculenta"]
+        id: "Tomate",
+        name: "Tomate Orgânico Fresco",
+        description: "Tomates orgânicos da variedade italiana cultivados ao ar livre, suculentos e aromáticos. Perfeitos para saladas, molhos e conservas caseiras.",
+        price: 8.90,
+        category: "Frutas",
+        image: "tomate.jpeg",
+        rating: 4.7,
+        reviews: 156,
+        inStock: true,
+        tags: ["italiano", "suculento", "molhos", "antioxidante", "licopeno"]
     },
     {
-        id: 8,
-        name: "Morango",
-        description: "Morangos vermelhos e doces",
-        price: 8.50,
+        id: "Abóbora Orgânica Premium",
+        name: "Abóbora Orgânica Premium",
+        description: "Abóboras orgânicas selecionadas, cultivadas sem agrotóxicos, ideais para receitas saudáveis. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico.",
+        price: 12.90,
+        category: "Legumes",
+        image: "abobora.jpeg",
+        rating: 4.5,
+        reviews: 203,
+        inStock: true,
+        tags: ["tradicional", "fibras", "complexo-b", "energético", "versátil"]
+    },
+    {
+        id: "Castanhas Orgânicas Premium-005",
+        name: "Castanhas Orgânicas Premium",
+        description: "Castanhas doces e saborosas, colhidas no outono, ricas em nutrientes e energia. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
+        price: 6.90,
+        category: "Frutas",
+        image: "castanha.jpeg",
+        rating: 4.9,
+        reviews: 78,
+        inStock: true,
+        tags: ["baby-leaves", "ferro", "ácido-fólico", "gourmet", "antioxidante"]
+    },
+    {
+        id: "Cenoura Premium",
+        name: "Cenoura Orgânica Nantes Doce",
+        description: "Cenouras orgânicas da variedade Nantes, doces e crocantes com formato cilíndrico perfeito. Ricas em betacaroteno e fibras. Ideais para sucos e pratos infantis.",
+        price: 5.90,
+        category: "Verduras",
+        image: "cenouras.jpeg",
+        rating: 4.6,
+        reviews: 142,
+        inStock: true,
+        tags: ["doce", "verduras", "betacaroteno", "crocante", "infantil", "sucos"]
+    },
+    {
+        id: "Uvas Orgânicas Premium-007",
+        name: "Uvas Orgânicas Premium",
+        description: " Uvas selecionadas de vinhedos orgânicos, doces e suculentas, ricas em antioxidantes. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico",
+        price: 9.90,
+        category: "Frutas",
+        image: "uva.jpeg",
+        rating: 4.4,
+        reviews: 167,
+        inStock: true,
+        tags: ["tradicional", "proteína-vegetal", "antioxidantes", "brasileiro", "nutritivo"]
+    },
+    {
+        id: "Laranjas Orgânicas Premium-008",
+        name: "Laranjas Orgânicas Premium",
+        description: "Laranjas suculentas e doces, cultivadas organicamente, ricas em vitamina C. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
+        price: 5.50,
         category: "frutas",
-        image: "https://images.unsplash.com/photo-1464454709131-ffd692591ee5?w=400",
-        tags: ["orgânico", "doce"]
+        image: "laranja.jpeg",
+        rating: 4.7,
+        reviews: 92,
+        inStock: true,
+        tags: ["picante", "aromática", "gourmet", "pizza", "sofisticada"]
+    },
+    {
+        id: "Brócolis Orgânico Fresco-009",
+        name: "Brócolis Orgânico Fresco",
+        description: "Brócolis orgânico fresco, rico em vitaminas e minerais, cultivado sem agrotóxicos. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
+        price: 7.90,
+        category: "legumes",
+        image: "brocolis.jpeg",
+        rating: 4.5,
+        reviews: 118,
+        inStock: true,
+        tags: ["italiana", "baixa-caloria", "versátil", "casca-comestível", "tenra"]
+    },
+    {
+        id: "Batata Orgânicas Premium-010",
+        name: "Batata Orgânicas Premium",
+        description: "Batatas orgânicas frescas, cultivadas naturalmente sem agrotóxicos, ideais para diversos pratos. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
+        price: 18.90,
+        category: "legumes",
+        image: "batata.jpeg",
+        rating: 4.8,
+        reviews: 189,
+        inStock: true,
+        tags: ["artesanal", "crocante", "energia", "mel", "café-da-manhã"]
+    },
+    {
+        id: "Batata Doce Premim-011",
+        name: "Batata Doce Orgânica Premium",
+        description: "Batata doce orgânica naturalmente doce, rica em vitaminas e fibras, cultivada sem pesticidas. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico.",
+        price: 4.90,
+        category: "Legumes",
+        image: "batatadoce.jpeg",
+        rating: 4.6,
+        reviews: 134,
+        inStock: true,
+        tags: ["tradicional", "folhas-grandes", "refogado", "cálcio", "ferro"]
+    },
+    {
+        id: "Maçã Orgânica Premium-012",
+        name: "Maçã Orgânica Premium",
+        description: "Maçãs vermelhas selecionadas, cultivadas organicamente, doces e crocantes. Nossos produtos são cultivados com técnicas sustentáveis e orgânicas, garantindo a máxima qualidade nutricional e sabor autêntico. ",
+        price: 6.50,
+        category: "Frutas",
+        image: "maça.jpeg",
+        rating: 4.4,
+        reviews: 108,
+        inStock: true,
+        tags: ["detroit", "antioxidantes", "nitrato", "doce", "redonda"]
     }
 ];
 
-// Variáveis globais
-let allProducts = [];
+// Estado da aplicação
+let cart = [];
 let currentFilter = 'all';
-let currentSearch = '';
+let searchQuery = '';
+let selectedProduct = null;
+let detailQuantity = 1;
+
+// Estado de autenticação
+let currentUser = null;
+let isLoggedIn = false;
+let isAdmin = false;
+
+// Credenciais de administrador (em um sistema real, isso seria validado no servidor)
+const ADMIN_CREDENTIALS = {
+    email: 'admin@outonodourado.com.br',
+    password: 'admin123'
+};
+
+// Estado do mascote
+let mascotMessages = [
+  "Olá! Eu sou o Milhito🌽!",
+  "Sou primo do verdeco! Nossas empressas são socias! 🥬",
+  "NOSSOS PRODUTOS SÃO PREMIUNSSSSSS!!!!JURO!!",
+  "E você ainda pensa em comprar do concorrente 🙄",
+  "Vou ali pegar um regador🚿, tá? É que seu raciocínio é tão lento que é preciso regar para ver se cresce.🌝",
+  "Algumas pessoas me inspiram tanto a nunca ser como elas! Juro!",
+  "Grandes batalhas só são dadas a grandes guerreiros.Vulgo os trabalhadores da Outono♻️",
+  "Não Deu Valor? Desculpa, Mais Não Sou A Globo, Tenho Certeza Que Nossa História Não Vale A Pena Ver De Novo🌞(ex-socios)",
+];
+
+let currentMascotMessage = 0;
+let mascotText = document.getElementById("mascot-text");
+let mascotMessageBox = document.getElementById("mascot-message");
+
+function toggleMascotMessage() {
+  mascotText.textContent = mascotMessages[currentMascotMessage];
+  mascotMessageBox.style.display = "block"; // abre balão
+
+  // prepara próxima mensagem
+  currentMascotMessage = (currentMascotMessage + 1) % mascotMessages.length;
+
+  // fecha depois de 10 segundos
+  setTimeout(() => {
+    mascotMessageBox.style.display = "none";
+  }, 10000);
+}
+
+function closeMascotMessage() {
+  mascotMessageBox.style.display = "none"; // fecha no X
+}
+// Banco de dados de pedidos simulado
+let userOrders = [];
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
     loadProducts();
-    initializeEventListeners();
+    updateCartBadge();
+    initializeMascot();
+
+    // Load cart from localStorage
+    const savedCart = localStorage.getItem('outono-dourado-cart');
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+        updateCartBadge();
+    }
+
+    // Load user from localStorage
+    const savedUser = localStorage.getItem('outono-dourado-user');
+    if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        isLoggedIn = true;
+        isAdmin = currentUser.isAdmin || false;
+        updateAuthUI();
+        loadUserOrders();
+    }
+
+    // Load user orders from localStorage
+    const savedOrders = localStorage.getItem('outono-dourado-orders');
+    if (savedOrders) {
+        userOrders = JSON.parse(savedOrders);
+    }
+
+    // Welcome message
+    setTimeout(() => {
+        if (isLoggedIn) {
+            showToast(`Bem-vindo de volta, ${currentUser.name}!`, 'Que bom ter você aqui novamente.', 'success');
+        } else {
+            showToast('Bem-vindo à Outono Dourado!', 'Descubra nossos produtos orgânicos frescos.', 'success');
+        }
+    }, 1000);
 });
 
-// Carrega produtos do Supabase ou usa os padrões
-async function loadProducts() {
-    try {
-        const { data: products, error } = await supabase
-            .from('products')
-            .select('*')
-            .order('name');
+// ========================
+// MASCOT FUNCTIONALITY
+// ========================
 
-        if (error) throw error;
+function initializeMascot() {
+    // Mascot appears with animation after page load
+    setTimeout(() => {
+        const mascot = document.getElementById('mascot');
+        mascot.style.opacity = '1';
+        mascot.style.transform = 'translateY(0)';
+    }, 2000);
 
-        if (products && products.length > 0) {
-            allProducts = products;
-        } else {
-            allProducts = defaultProducts;
+    // Auto show mascot message periodically
+    setInterval(() => {
+        if (!document.getElementById('mascot-message').style.display || 
+            document.getElementById('mascot-message').style.display === 'none') {
+            showRandomMascotMessage();
         }
-        
-        displayProducts(allProducts);
-        
-    } catch (error) {
-        console.error('Erro ao carregar produtos:', error);
-        allProducts = defaultProducts;
-        displayProducts(allProducts);
+    }, 30000); // Show message every 30 seconds
+}
+
+function toggleMascotMessage() {
+    const messageDiv = document.getElementById('mascot-message');
+    if (messageDiv.style.display === 'none' || !messageDiv.style.display) {
+        showRandomMascotMessage();
+    } else {
+        closeMascotMessage();
     }
 }
 
-// Exibe os produtos na grade
-function displayProducts(products) {
-    const productsGrid = document.getElementById('products-grid');
-    
-    if (!productsGrid) {
-        console.error('Elemento products-grid não encontrado');
-        return;
-    }
+function showRandomMascotMessage() {
+    const messageDiv = document.getElementById('mascot-message');
+    const textElement = document.getElementById('mascot-text');
 
-    if (products.length === 0) {
-        productsGrid.innerHTML = `
-            <div class="no-products">
-                <i data-lucide="search-x"></i>
-                <h3>Nenhum produto encontrado</h3>
-                <p>Tente ajustar os filtros ou termos de busca</p>
-            </div>
-        `;
-        lucide.createIcons();
-        return;
-    }
+    // Cycle through messages
+    textElement.textContent = mascotMessages[currentMascotMessage];
+    currentMascotMessage = (currentMascotMessage + 1) % mascotMessages.length;
 
-    productsGrid.innerHTML = products.map(product => `
-        <div class="product-card" data-category="${product.category}">
-            <div class="product-image">
-                <img src="${product.image}" 
-                     alt="${product.name}" 
-                     loading="lazy"
-                     onerror="this.src='https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400'">
-                <button class="quick-view-btn" onclick="openProductDetail(${product.id})">
-                    <i data-lucide="eye"></i>
-                </button>
-            </div>
-            <div class="product-info">
-                <h3 class="product-name">${product.name}</h3>
-                <p class="product-description">${product.description}</p>
-                <div class="product-price">R$ ${product.price.toFixed(2)}</div>
-                <div class="product-category-badge">${getCategoryLabel(product.category)}</div>
-                <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
-                    <i data-lucide="shopping-cart"></i>
-                    Adicionar
-                </button>
-            </div>
-        </div>
-    `).join('');
+    messageDiv.style.display = 'block';
 
-    lucide.createIcons();
+    // Auto hide after 5 seconds
+    setTimeout(() => {
+        closeMascotMessage();
+    }, 5000);
 }
 
-// Filtra produtos por categoria
-function filterProducts(category) {
-    currentFilter = category;
-    
-    // Atualiza botões ativos
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    applyFilters();
+function closeMascotMessage() {
+    const messageDiv = document.getElementById('mascot-message');
+    messageDiv.style.display = 'none';
 }
 
-// Busca produtos
-function searchProducts() {
-    currentSearch = document.getElementById('product-search').value.toLowerCase();
-    applyFilters();
-}
-
-// Aplica filtros e busca
-function applyFilters() {
-    let filteredProducts = allProducts;
-    
-    // Aplica filtro de categoria
-    if (currentFilter !== 'all') {
-        filteredProducts = filteredProducts.filter(product => 
-            product.category === currentFilter
-        );
-    }
-    
-    // Aplica busca
-    if (currentSearch) {
-        filteredProducts = filteredProducts.filter(product =>
-            product.name.toLowerCase().includes(currentSearch) ||
-            product.description.toLowerCase().includes(currentSearch) ||
-            product.tags.some(tag => tag.toLowerCase().includes(currentSearch))
-        );
-    }
-    
-    displayProducts(filteredProducts);
-}
-
-// Retorna label da categoria
-function getCategoryLabel(category) {
-    const labels = {
-        'verduras': '🥬 Verdura',
-        'legumes': '🥕 Legume', 
-        'frutas': '🍎 Fruta',
-        'alimentos': '🛒 Alimento'
-    };
-    return labels[category] || category;
-}
-
-// Inicializa event listeners
-function initializeEventListeners() {
-    // Busca em tempo real
-    const searchInput = document.getElementById('product-search');
-    if (searchInput) {
-        searchInput.addEventListener('input', searchProducts);
-    }
-}
-
-// Funções do carrinho (simplificadas)
-let cart = [];
-
-function addToCart(productId) {
-    const product = allProducts.find(p => p.id === productId);
-    if (product) {
-        const existingItem = cart.find(item => item.id === productId);
-        
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({
-                ...product,
-                quantity: 1
-            });
-        }
-        
-        updateCartBadge();
-        showToast(`${product.name} adicionado ao carrinho!`, 'success');
-    }
-}
-
-function updateCartBadge() {
-    const badge = document.getElementById('cart-badge');
-    if (badge) {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        badge.textContent = totalItems;
-    }
-}
-
-function showToast(message, type = 'success') {
+// Utility functions
+function showToast(title, message, type = 'info') {
     const toaster = document.getElementById('toaster');
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     toast.innerHTML = `
-        <div class="toast-content">
-            <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}"></i>
-            <span>${message}</span>
-        </div>
+        <div style="font-weight: 600; margin-bottom: 4px;">${title}</div>
+        <div style="font-size: 14px; color: #6b7280;">${message}</div>
     `;
-    
+
     toaster.appendChild(toast);
-    lucide.createIcons();
-    
+
     setTimeout(() => {
         toast.remove();
-    }, 3000);
+    }, 5000);
 }
 
-// Modal do produto (simplificado)
-function openProductDetail(productId) {
-    const product = allProducts.find(p => p.id === productId);
-    if (product) {
-        // Implemente a abertura do modal de detalhes
-        showToast(`Visualizando ${product.name}`, 'success');
+function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+    closeMobileMenu();
+}
+
+function toggleMobileMenu() {
+    const mobileNav = document.getElementById('mobile-nav');
+    mobileNav.classList.toggle('open');
+}
+
+function closeMobileMenu() {
+    const mobileNav = document.getElementById('mobile-nav');
+    mobileNav.classList.remove('open');
+}
+
+// Product functions
+function loadProducts() {
+    const grid = document.getElementById('products-grid');
+    if (!grid) return;
+
+    const filteredProducts = PRODUCTS_DATABASE.filter(product => {
+        const matchesFilter = currentFilter === 'all' || 
+            product.category.toLowerCase() === currentFilter.toLowerCase();
+        const matchesSearch = searchQuery === '' || 
+            product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+
+        return matchesFilter && matchesSearch;
+    });
+
+    if (filteredProducts.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                <p style="color: rgba(0, 0, 0, 1); font-size: 1.125rem;">Nenhum produto encontrado</p>
+                <button class="btn-primary" onclick="clearFilters()" style="margin-top: 1rem;">
+                    Limpar Filtros
+                </button>
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = filteredProducts.map(product => `
+        <div class="product-card fade-in" onclick="openProductDetail('${product.id}')">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" loading="lazy">
+                <div class="product-badges">
+                    <div class="product-badge">
+                        <i data-lucide="leaf"></i>
+                        Orgânico
+                    </div>
+                </div>
+            </div>
+            <div class="product-content">
+                <div class="product-category">${getCategoryName(product.category)}</div>
+                <h3 class="product-name">${product.name}</h3>
+                <p class="product-description">${product.description}</p>
+                <div class="product-rating">
+                    <div class="stars">
+                        ${generateStars(product.rating)}
+                    </div>
+                    <span class="rating-count">(${product.reviews})</span>
+                </div>
+                <div class="product-footer">
+                    <div class="product-price">R$ ${product.price.toFixed(2)}</div>
+                    <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('${product.id}')">
+                        <i data-lucide="shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    // Re-initialize Lucide icons for new content
+    lucide.createIcons();
+}
+
+function getCategoryName(category) {
+    const categoryNames = {
+        'alimentos': 'Alimentos',
+        'verduras': 'Verduras',
+        'legumes': 'Legumes',
+        'frutas': 'Frutas'
+    };
+    return categoryNames[category.toLowerCase()] || category;
+}
+
+function generateStars(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            stars += '<span class="star">★</span>';
+        } else {
+            stars += '<span class="star" style="color: #000000ff;">★</span>';
+        }
+    }
+    return stars;
+}
+
+function filterProducts(category) {
+    currentFilter = category;
+
+    // Update active filter button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    event.target.classList.add('active');
+
+    loadProducts();
+}
+
+function searchProducts() {
+    const searchInput = document.getElementById('product-search');
+    searchQuery = searchInput.value;
+    loadProducts();
+}
+
+function clearFilters() {
+    currentFilter = 'all';
+    searchQuery = '';
+
+    document.getElementById('product-search').value = '';
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector('.filter-btn').classList.add('active');
+
+    loadProducts();
+}
+
+// Cart functions
+function addToCart(productId) {
+    const product = PRODUCTS_DATABASE.find(p => p.id === productId);
+    if (!product) return;
+
+    const existingItem = cart.find(item => item.id === productId);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+        showToast('Produto Atualizado!', `${product.name} - Quantidade atualizada no carrinho`, 'success');
+    } else {
+        cart.push({ ...product, quantity: 1 });
+        showToast('Produto Adicionado!', `${product.name} foi adicionado ao carrinho`, 'success');
+    }
+
+    updateCartBadge();
+    saveCartToStorage();
+}
+
+function updateCartBadge() {
+    const badge = document.getElementById('cart-badge');
+    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    badge.textContent = itemCount;
+    badge.style.display = itemCount > 0 ? 'flex' : 'none';
+}
+
+function saveCartToStorage() {
+    localStorage.setItem('outono-dourado-cart', JSON.stringify(cart));
+}
+
+function openCart() {
+    const modal = document.getElementById('cart-modal');
+    modal.style.display = 'flex';
+    loadCartItems();
+}
+
+function closeCart() {
+    const modal = document.getElementById('cart-modal');
+    modal.style.display = 'none';
+}
+
+function loadCartItems() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `
+            <div class="empty-cart">
+                <i data-lucide="shopping-cart"></i>
+                <p>Seu carrinho está vazio</p>
+                <button class="btn-primary" onclick="closeCart()">
+                    Continuar Comprando
+                </button>
+            </div>
+        `;
+        cartTotal.style.display = 'none';
+        lucide.createIcons();
+        return;
+    }
+
+    cartItemsContainer.innerHTML = cart.map(item => `
+        <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-info">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">R$ ${item.price.toFixed(2)}</div>
+                <div class="cart-item-controls">
+                    <button class="quantity-btn" onclick="updateCartQuantity('${item.id}', ${item.quantity - 1})">-</button>
+                    <span class="quantity-display">${item.quantity}</span>
+                    <button class="quantity-btn" onclick="updateCartQuantity('${item.id}', ${item.quantity + 1})">+</button>
+                    <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remover</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    document.getElementById('total-amount').textContent = `R$ ${total.toFixed(2)}`;
+    cartTotal.style.display = 'block';
+}
+
+function updateCartQuantity(productId, newQuantity) {
+    if (newQuantity < 1) {
+        removeFromCart(productId);
+        return;
+    }
+
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        item.quantity = newQuantity;
+        updateCartBadge();
+        saveCartToStorage();
+        loadCartItems();
     }
 }
+
+function removeFromCart(productId) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        cart = cart.filter(item => item.id !== productId);
+        showToast('Produto Removido', `${item.name} foi removido do carrinho`, 'success');
+        updateCartBadge();
+        saveCartToStorage();
+        loadCartItems();
+    }
+}
+
+function checkout() {
+    if (cart.length === 0) return;
+
+    if (!isLoggedIn) {
+        showToast('Login necessário', 'Faça login para finalizar seu pedido', 'error');
+        openLoginModal();
+        return;
+    }
+
+    // Create order
+    const order = {
+        id: 'ORD-' + Date
